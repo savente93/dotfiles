@@ -1,0 +1,41 @@
+[user]
+	name = Sam Vente
+	email = savente93@proton.me
+[include]
+	path = ~/.gitconfig.signingkey
+[pull]
+	rebase = true
+	default = current
+[core]
+	excludesfile = ~/.gitignore
+	pager = delta
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[push]
+	autoSetupRemote = true
+	default = current
+[pull]
+	autoSetupRemote = true
+	default = current
+[pager]
+	branch = false
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+    navigate = true
+    light = false
+	side-by-side = true
+	line-numbers = true
+[merge]
+    conflictstyle = diff3
+[diff]
+	colorMoved = default
+[gpg]
+	format = ssh
+[alias]
+	up = "!git remote update -p; git merge --ff-only @{u}"
+	unwip = reset HEAD^
+	wip = "!f(){ git add -A && git commit -m \"[no ci] WIP\" --no-verify && git push;};f"
+	patch = !git --no-pager diff --no-color

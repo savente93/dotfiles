@@ -1,0 +1,8 @@
+tmp
+.vscode
+.pytest_cache
+.mypy
+__pycache__
+.direnv
+nushell/history.*
+history.txt

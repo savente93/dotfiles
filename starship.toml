@@ -1,0 +1,56 @@
+format = """
+[░▒▓](light_blue)\
+$directory\
+[](fg:light_blue bg:slate_blue )\
+$git_state\
+$git_branch\
+$git_status\
+[](fg:slate_blue bg:dark_blue )\
+$python\
+$conda\
+[](fg:dark_blue)\
+\n$character"""
+
+palette = "current"
+
+[directory]
+style = "fg:navy bg:light_blue"
+format = "[ $path ]($style)"
+truncation_symbol = ".../"
+
+[git_branch]
+symbol = ""
+style = "fg:light_blue bg:slate_blue"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "fg:light_blue bg:slate_blue"
+format = '[(($conflicted )($stashed )($deleted )($renamed )($modified )($staged )($untracked )$ahead_behind )]($style)'
+ahead = '⇡$count'
+diverged = '⇕⇡$ahead_count ⇣$behind_count'
+behind = '⇣$count'
+untracked = '?$count'
+modified = '!$count'
+stashed = '*$count'
+staged = '+$count'
+conflicted = "=$count"
+deleted = "✘$count"
+renamed = "»$count"
+
+[python]
+symbol = "\ue73c "
+style = "fg:light_blue bg:dark_blue"
+version_format = 'v$major.$minor'
+format = '[ $symbol( $virtualenv )\($version\) ]($style)'
+
+[conda]
+symbol = "🐍 "
+
+[palettes.current]
+black = "#000000"
+white_blue = "#e3e5e5"
+light_blue = "#91b6ff"
+slate_blue = "#394260"
+dark_blue = "#212736"
+navy = "#1d2230"
+grey = "#a0a9cb"

@@ -1,0 +1,51 @@
+matches:
+  - trigger: ":eur"
+    replace: €
+  - trigger: ":shrug"
+    replace: ¯\_(ツ)_/¯
+  - trigger: ":flipt"
+    replace: (╯°□°)╯︵ ┻━┻
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%d/%m/%Y"
+  - trigger: ":isodate"
+    replace: "{{isodate}}"
+    vars:
+      - name: isodate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ":eyes"
+    replace: 👀
+  - trigger: ":music"
+    replace: 🎵
+  - trigger: ":small"
+    replace: 🤏
+  - trigger: ":think"
+    replace: 🤔
+  - trigger: ":imp"
+    replace: 😈
+  - trigger: ":sparkle"
+    replace: ✨
+  - trigger: ":skull"
+    replace: 💀
+  - trigger: ":sweat"
+    replace: 😅
+  - trigger: ":scream"
+    replace: 😱
+  - trigger: "deg C"
+    replace: "°C"
+  - trigger: ":ez"
+    replace: "hx ~/.zshrc && source ~/.zshrc"
+  - trigger: "git unwip"
+    replace: "git reset HEAD^"
+  - trigger: "helene"
+    replace: "Hélène"
+  - trigger: "Helene"
+    replace: "Hélène"
+  - trigger: :hmt
+    replace: HydroMT
