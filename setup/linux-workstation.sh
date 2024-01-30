@@ -151,7 +151,7 @@ function setup_security() {
 	echo "$(op item get "$(hostname) [ssh]" --fields "public key")" >>~/.ssh/$key_type.pub
 	chmod 644 ~/.ssh/$key_type.pub
 
-	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal)" >>~/.ssh/$key_type
+	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | sed -r '/^\s*$/d')" >>~/.ssh/$key_type
 	chmod 600 ~/.ssh/$key_type
 
 	# ssh connections only allowed through non root key based auth
