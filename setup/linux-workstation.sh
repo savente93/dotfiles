@@ -148,10 +148,11 @@ function setup_security() {
 
 	key_type=$(op item get "$(hostname) [ssh]" --fields "key type")
 
-	echo "$(op item get "$(hostname) [ssh]" --fields "public key")" >>~/.ssh/$key_type.pub
+	echo "$(op item get "$(hostname) [ssh]" --fields "public key")" >~/.ssh/$key_type.pub
 	chmod 644 ~/.ssh/$key_type.pub
 
-	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | sed -r '/^\s*$/d')" >>~/.ssh/$key_type
+	# wooooooow libcrypto is a fussy bitch
+	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/$key_type
 	chmod 600 ~/.ssh/$key_type
 
 	# ssh connections only allowed through non root key based auth

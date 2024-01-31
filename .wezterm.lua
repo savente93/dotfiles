@@ -5,19 +5,20 @@ local mux = wezterm.mux
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	default_prog = { "wsl", "~" }
 	file_sep = "\\"
-	dotfile_path = os.getenv("DOTFILES")
-	project_path = os.getenv("PROJECTS")
-	work_path = os.getenv("WORK")
-	base_path = os.getenv("HOME")
+	dotfile_path = "C:\\Users\\Vente\\dotfiles"
+	project_path = nil
+	work_path = "C:\\Users\\Vente\\hydromt"
+	base_path = "C:\\Users\\Vente"
 end
 
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
 	file_sep = "/"
-	dotfile_path = os.getenv("DOTFILES")
-	project_path = os.getenv("PROJECTS")
-	work_path = os.getenv("WORK")
-	base_path = os.getenv("HOME")
+	dotfile_path = "/home/sam/Documents/dotfiles"
+	project_path = "/home/sam/Documents/projects"
+	work_path = "/home/sam/Documents/work/hydromt"
+	base_path = "/home/sam"
 end
+
 
 function find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
