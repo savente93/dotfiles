@@ -26,10 +26,12 @@ function setup_package_managers() {
 
 	# homebrew
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
 
 	# mise en place
 	curl https://mise.jdx.dev/install.sh | sh
 	eval "$(~/.local/bin/mise activate zsh)"
+	echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zprofile
 
 	# pixi
 	curl -fsSL https://pixi.sh/install.sh | bash
@@ -204,9 +206,7 @@ function config_de() {
 }
 
 function config_dotfiles_and_dirs() {
-	git clone $DOTFILE_REPO $DOTFILES
-	git clone $SETUP_REPO $SETUPS
-	git clone $PRIVATE_REPO $PRIVATE
+	git clone ssh://github.com/savente93/dotfiles ~/Documents
 
 	#setup all dirs we'll need later
 	mkdir -p ~/.config/{helix,espanso}
