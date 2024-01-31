@@ -26,12 +26,12 @@ function setup_package_managers() {
 
 	# homebrew
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
+	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zprofile
 
 	# mise en place
 	curl https://mise.jdx.dev/install.sh | sh
 	eval "$(~/.local/bin/mise activate zsh)"
-	echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zprofile
+	echo 'eval "$(~/.local/bin/mise activate zsh)"' >>~/.zprofile
 
 	# pixi
 	curl -fsSL https://pixi.sh/install.sh | bash
@@ -132,7 +132,7 @@ function setup_security() {
 	sudo dpkg install 1password.deb
 	rm 1password.deb
 
-	mkdir -p $AUTOSTART
+	mkdir -p ~/.config/autostart
 	# autostart 1password at login
 	echo -e "[Desktop Entry]\nType=Application\nExec=/usr/bin/1password --silent\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_GB]=1Password\nName=1Password\nComment[en_GB]=\nComment=" >~/.config/autostart/1password.desktop
 
@@ -214,16 +214,16 @@ function config_dotfiles_and_dirs() {
 	mkdir -p ~/Documents/projects
 
 	# setup symlinks
-	ln -s $DOTFILES/helix/config.toml ~/.config/helix/config.toml
-	ln -s $DOTFILES/helix/languages.toml ~/.config/helix/languages.toml
-	ln -s $DOTFILES/.wezterm.lua ~/.wezterm.lua
-	ln -s $DOTFILES/.wezterm.sh ~/.wezterm.sh
-	ln -s $DOTFILES/.gitignore ~/.gitignore
-	ln -s $DOTFILES/.gitconfig ~/.gitconfig
-	ln -s $DOTFILES/starship.toml ~/.config/starship.toml
-	ln -s $DOTFILES/topgrade.toml ~/.config/topgrade.toml
-	ln -s $DOTFILES/espanso/config ~/.config/espanso/config
-	ln -s $DOTFILES/espanso/match ~/.config/espanso/match
+	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml
+	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml
+	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua
+	ln -s ~/Documents/dotfiles/.wezterm.sh ~/.wezterm.sh
+	ln -s ~/Documents/dotfiles/.gitignore ~/.gitignore
+	ln -s ~/Documents/dotfiles/.gitconfig ~/.gitconfig
+	ln -s ~/Documents/dotfiles/starship.toml ~/.config/starship.toml
+	ln -s ~/Documents/dotfiles/topgrade.toml ~/.config/topgrade.toml
+	ln -s ~/Documents/dotfiles/espanso/config ~/.config/espanso/config
+	ln -s ~/Documents/dotfiles/espanso/match ~/.config/espanso/match
 }
 
 function config_zsh() {
