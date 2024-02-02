@@ -144,6 +144,11 @@ source ~/.wezterm.sh
 # Key bindings
 bindkey "^n" _navi_widget
 
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval $(ssh-agent -s)
+  ssh-add
+fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/sam/.mamba/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
