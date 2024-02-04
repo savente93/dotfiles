@@ -157,6 +157,9 @@ function setup_security() {
 	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/id_$key_type
 	chmod 600 ~/.ssh/id_$key_type
 
+	echo "Host *" >~/.ssh/config
+	echo "IdentifyFile ~/.ssh/id_$key_type" >>~/.ssh/config
+
 	# ssh connections only allowed through non root key based auth
 	sudo sed -i -E "s/[#]?PasswordAuthentication (yes|no)/PasswordAuthentication no/;s/#?PubkeyAuthentication (yes|no)/PubkeyAuthentication yes/;s/#?PermitRootLogin (yes|no)/PermitRootLogin no/;s/#?AllowUsers .*/AllowUsers $USER/" /etc/ssh/sshd_config
 	sudo systemctl restart sshd.service
