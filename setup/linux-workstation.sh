@@ -150,12 +150,12 @@ function setup_security() {
 
 	key_type=$(op item get "$(hostname) [ssh]" --fields "key type")
 
-	echo "$(op item get "$(hostname) [ssh]" --fields "public key")" >~/.ssh/$key_type.pub
-	chmod 644 ~/.ssh/$key_type.pub
+	echo "$(op item get "$(hostname) [ssh]" --fields "public key")" >~/.ssh/id_$key_type.pub
+	chmod 644 ~/.ssh/id_$key_type.pub
 
 	# wooooooow libcrypto is a fussy bitch
-	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/$key_type
-	chmod 600 ~/.ssh/$key_type
+	echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/id_$key_type
+	chmod 600 ~/.ssh/id_$key_type
 
 	# ssh connections only allowed through non root key based auth
 	sudo sed -i -E "s/[#]?PasswordAuthentication (yes|no)/PasswordAuthentication no/;s/#?PubkeyAuthentication (yes|no)/PubkeyAuthentication yes/;s/#?PermitRootLogin (yes|no)/PermitRootLogin no/;s/#?AllowUsers .*/AllowUsers $USER/" /etc/ssh/sshd_config

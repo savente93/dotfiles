@@ -52,6 +52,7 @@ name = "jinja"
 auto-format = true
 file-types = [".html"]
 language-servers = [{ name = "jinja-lsp" }]
+formatter = { command = "djlint", args = ['--reformat', 'templates'] }
 
 [[language]]
 name = "julia"
