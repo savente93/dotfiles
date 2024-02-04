@@ -1,4 +1,5 @@
 # Zsh config
+export ZSH=$HOME/.zsh
 
 # history config
 export HISTFILE=$ZSH/.zsh_history
