@@ -146,12 +146,12 @@ source ~/.wezterm.sh
 bindkey "^n" _navi_widget
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval "$(ssh-agent -s)"
+  eval "$(ssh-agent -s)" > /dev/null
 fi
 
 ssh-add -l > /dev/null                        # check for keys
 if [ $? -ne 0 ] ; then
-	ssh-add > /dev/null
+	ssh-add 2>&1 > /dev/null
 fi
 
 # >>> conda initialize >>>
