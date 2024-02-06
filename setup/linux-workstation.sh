@@ -71,6 +71,7 @@ function setup_dev_stuff() {
 	pixi global install ruff-lsp
 	pixi global install grayskull
 	pixi global install quarto
+	pixi global install djlint
 
 	# LSPs
 	hx --grammar build
