@@ -18,9 +18,9 @@ repos:
   hooks:
     - id: stylua # or stylua-system / stylua-github
 - repo: https://github.com/gitleaks/gitleaks
-  rev: v8.18.0
+  rev: v8.18.2
   hooks:
-  - id: gitleaks
+  - id: gitleaks-system
 - repo: https://github.com/PrincetonUniversity/blocklint
   rev: v0.2.4
   hooks:

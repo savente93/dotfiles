@@ -123,7 +123,7 @@ alias gdm='git diff main'
 alias gmm='git merge main'
 alias gco='git checkout'
 alias glo="git log --graph --decorate --pretty=oneline --abbrev-commit"
-alias gbr="git branch -a --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]'"
+alias gbr="git branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]'"
 alias gbd="git branch -D"
 alias gfp="git fetch --all --prune"
 
@@ -136,14 +136,11 @@ alias ipy="ipython"
 
 # tool enviroment inits
 eval "$(zoxide init zsh)"
-eval "$(navi widget zsh)"
 eval "$(starship init zsh)"
 eval "$(pixi completion --shell zsh)"
 
 source ~/.wezterm.sh
 
-# Key bindings
-bindkey "^n" _navi_widget
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
   eval "$(ssh-agent -s)" > /dev/null

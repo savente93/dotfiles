@@ -1,11 +1,11 @@
 ﻿# Work won't let me have a linux machine. very sadge :(
 
-# install scoop 
+# install scoop
 iwr -useb get.scoop.sh | iex
 
 scoop install sudo
 sudo scoop install 7zip git openssh --global
-scoop install curl grep sed less touch clink helix topgrade vivaldi wezterm espanso fzf navi starship docker 
+scoop install curl grep sed less touch clink helix topgrade vivaldi wezterm espanso fzf navi starship docker
 
 # install pixi
 iwr -useb https://pixi.sh/install.ps1 | iex

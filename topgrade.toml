@@ -2,7 +2,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pip3", "pipx"]
+disable = ["pip3", "pipx", "shell"]
 
 # Ignore failures for these steps
 no_retry = true
@@ -23,6 +23,8 @@ self_update = true
 [git]
 max_concurrency = 5
 pull_predefined = true
+
+repos = ["~/Documents/projects/*/*"]
 
 
 [windows]
