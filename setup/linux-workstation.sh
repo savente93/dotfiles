@@ -146,6 +146,12 @@ function setup_creature_comforts() {
 		com.spotify.Client \
 		us.zoom.Zoom
 
+	# install espanso 
+	wget https://github.com/federico-terzi/espanso/releases/download/v2.2.1/espanso-debian-x11-amd64.deb
+	sudo apt install ./espanso-debian-x11-amd64.deb
+	rm ./espanso-debian-x11-amd64.deb
+	espanso service register
+	espanso start
 	install_fonts
 
 	config_de
