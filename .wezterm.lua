@@ -140,7 +140,7 @@ return {
 	-----------
 	-- Fonts --
 	-----------
-	font = wezterm.font("Fira Code"),
+	font = wezterm.font("FiraCode Nerd Font"),
 	font_size = 14.0,
 	-----------
 	-- Keys  --
