@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # setup_* are the top level funcs
-# TODO: Pixi is still not found, and op-ssh setup doesn't work yet for unknown reason
+# TODO: op-ssh setup doesn't work yet for unknown reason
 
 function setup_os() {
-
-	update_apt
 
 	if [ $(hostname) = 'pop-os' ]; then
 		# every machine being called "pop-os" is a little confusing
 		read -p "Enter new hostname: " hname </dev/tty
 		sudo hostnamectl set-hostname $hname
 	fi
+
+	update_apt
 
 	setup_security
 	setup_package_managers
@@ -75,7 +75,6 @@ function setup_dev_stuff() {
 
 	# mise
 	mise use nodejs@latest go@latest julia@latest --global -y
-	mise plugin install awscli -y
 	mise plugin install lua-language-server -y
 	eval "$(~/.local/bin/mise activate bash)"
 
@@ -96,6 +95,7 @@ function setup_dev_stuff() {
 
 	# pixi
 	/home/$USER/.pixi/bin/pixi global install pre-commit
+	/home/$USER/.pixi/bin/pixi global install awscli
 	/home/$USER/.pixi/bin/pixi global install ruff
 	/home/$USER/.pixi/bin/pixi global install mamba
 	/home/$USER/.pixi/bin/pixi global install ruff-lsp
@@ -146,7 +146,7 @@ function setup_creature_comforts() {
 		com.spotify.Client \
 		us.zoom.Zoom
 
-	# install espanso 
+	# install espanso
 	wget https://github.com/federico-terzi/espanso/releases/download/v2.2.1/espanso-debian-x11-amd64.deb
 	sudo apt install ./espanso-debian-x11-amd64.deb
 	rm ./espanso-debian-x11-amd64.deb
