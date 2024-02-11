@@ -2,7 +2,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pip3", "pipx", "shell"]
+disable = ["pip3", "pipx", "shell", "conda", "mamba"]
 
 # Ignore failures for these steps
 no_retry = true
