@@ -49,3 +49,15 @@ matches:
     replace: "Hélène"
   - trigger: :hmt
     replace: HydroMT
+  - trigger: "|pparam"
+    replace: |
+      @pytest.mark.parametrize(
+      "test_case",
+      [
+        {
+            "name": "aws_data",
+            "data": ,
+        },
+      ],
+      ids=lambda x: x["name"],
+      )

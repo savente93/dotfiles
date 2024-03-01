@@ -58,6 +58,7 @@ C = "change_selection_noyank"
 M = "join_selections"
 J = "copy_selection_on_next_line"
 K = "copy_selection_on_prev_line"
+r = "replace_with_yanked"
 "#" = "toggle_comments"
 Y = ":clipboard-yank-join"
 C-k = [
@@ -72,6 +73,9 @@ C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 minus = "trim_selections"
 "`" = "switch_case"
 
+[keys.normal."space"]
+t = "signature_help"
+
 [keys.normal."backspace"]
 s = "symbol_picker"
 "t" = [
@@ -82,6 +86,7 @@ s = "symbol_picker"
   ":toggle file-picker.hidden",
 ]
 "j" = "jumplist_picker"
+"a" = "code_action"
 
 [keys.normal."backspace".f]
 "r" = ":reload-all"
