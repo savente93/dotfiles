@@ -134,6 +134,7 @@ alias sai='sudo apt install'
 ## work
 alias ipy="ipython"
 alias pt="pixi run -e full-py39 test-lf"
+alias ptt="pixi run -e full-py39 test"
 alias pe="pixi run -e full-py39 hx ."
 
 # tool enviroment inits
