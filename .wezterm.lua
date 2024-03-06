@@ -164,14 +164,14 @@ return {
 		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
 		{
 			key = "p",
-			mods = "LEADER",
+			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				activate_pane_zoomed(win, pane, "Prev")
 			end),
 		},
 		{
 			key = "n",
-			mods = "LEADER",
+			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				activate_pane_zoomed(win, pane, "Next")
 			end),
@@ -184,15 +184,15 @@ return {
 		{ key = "J", mods = "LEADER", action = act({ AdjustPaneSize = { "Down", 5 } }) },
 		{ key = "K", mods = "LEADER", action = act({ AdjustPaneSize = { "Up", 5 } }) },
 		{ key = "L", mods = "LEADER", action = act({ AdjustPaneSize = { "Right", 5 } }) },
-		{ key = "1", mods = "LEADER", action = act({ ActivateTab = 0 }) },
-		{ key = "2", mods = "LEADER", action = act({ ActivateTab = 1 }) },
-		{ key = "3", mods = "LEADER", action = act({ ActivateTab = 2 }) },
-		{ key = "4", mods = "LEADER", action = act({ ActivateTab = 3 }) },
-		{ key = "5", mods = "LEADER", action = act({ ActivateTab = 4 }) },
-		{ key = "6", mods = "LEADER", action = act({ ActivateTab = 5 }) },
-		{ key = "7", mods = "LEADER", action = act({ ActivateTab = 6 }) },
-		{ key = "8", mods = "LEADER", action = act({ ActivateTab = 7 }) },
-		{ key = "9", mods = "LEADER", action = act({ ActivateTab = 8 }) },
+		{ key = "1", mods = "CTRL", action = act({ ActivateTab = 0 }) },
+		{ key = "2", mods = "CTRL", action = act({ ActivateTab = 1 }) },
+		{ key = "3", mods = "CTRL", action = act({ ActivateTab = 2 }) },
+		{ key = "4", mods = "CTRL", action = act({ ActivateTab = 3 }) },
+		{ key = "5", mods = "CTRL", action = act({ ActivateTab = 4 }) },
+		{ key = "6", mods = "CTRL", action = act({ ActivateTab = 5 }) },
+		{ key = "7", mods = "CTRL", action = act({ ActivateTab = 6 }) },
+		{ key = "8", mods = "CTRL", action = act({ ActivateTab = 7 }) },
+		{ key = "9", mods = "CTRL", action = act({ ActivateTab = 8 }) },
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
 		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },

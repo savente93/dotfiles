@@ -136,6 +136,8 @@ alias ipy="ipython"
 alias pt="pixi run -e full-py39 test-lf"
 alias ptt="pixi run -e full-py39 test"
 alias pe="pixi run -e full-py39 hx ."
+alias pi="pixi run -e full-py39 ipy"
+
 
 # tool enviroment inits
 eval "$(zoxide init zsh)"
