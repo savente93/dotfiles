@@ -211,18 +211,18 @@ function setup_security() {
 		rm githubKey
 
 		# get sshkeys from password manager
-		key_type=$(op item get "$(hostname) [ssh]" --fields "key type")
+		key_type=$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "key type")
 
 		if [ -z $key_type ]; then
 			echo "Could not determine key type..."
 			return 1
 		fi
 
-		echo "$(op item get "$(hostname) [ssh]" --fields "public key")" >~/.ssh/id_$key_type.pub
+		echo "$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >~/.ssh/id_$key_type.pub
 		chmod 644 ~/.ssh/id_$key_type.pub
 
 		# wooooooow libcrypto is a fussy bitch
-		echo "$(op item get "$(hostname) [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/id_$key_type
+		echo "$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/id_$key_type
 		chmod 600 ~/.ssh/id_$key_type
 
 		echo "Host *" >~/.ssh/config
@@ -240,7 +240,7 @@ function setup_security() {
 
 	# git by using the signing key each machine can have it's own key but still have a common gitconfig
 	echo "[user]" >~/.gitconfig.signingkey
-	echo "\tsigningkey = $(op item get "$(hostname) [ssh]" --fields "public key")" >>~/.gitconfig.signingkey
+	echo "\tsigningkey = $(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >>~/.gitconfig.signingkey
 
 	# aws cli
 	mkdir -p ~/.aws
