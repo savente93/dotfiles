@@ -17,6 +17,7 @@ if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
 	project_path = "/home/sam/Documents/projects"
 	work_path = "/home/sam/Documents/work/hydromt"
 	base_path = "/home/sam"
+	default_prog = { "/usr/bin/fish" }
 end
 
 function find_tab_index(win, name)
