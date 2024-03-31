@@ -1,8 +1,4 @@
 if status is-interactive
-    set fish_greeting
-
-    SHELL=fish keychain --eval --quiet -Q id_ed25519 | source
-
     starship init fish | source
     zoxide init fish | source
     pixi completion --shell fish | source
