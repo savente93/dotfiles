@@ -109,6 +109,7 @@ function gci() {
 
 # Aliasses, typing is for chumps
 alias up='topgrade -y --skip-notify --no-retry -c'
+alias hx='helix'
 
 ## files
 alias ls='eza'

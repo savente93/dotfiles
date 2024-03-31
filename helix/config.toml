@@ -72,6 +72,7 @@ C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 [keys.select]
 minus = "trim_selections"
 "`" = "switch_case"
+r = "replace_with_yanked"
 
 [keys.normal."space"]
 t = "signature_help"

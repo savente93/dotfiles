@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR EDITOR:helix
+SETUVAR --path HELIX_CONFIG_PATH:/home/sam/Documents/dotfiles/helix/config\x2etoml
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
