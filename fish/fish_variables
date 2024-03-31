@@ -2,6 +2,8 @@
 # VERSION: 3.0
 SETUVAR EDITOR:helix
 SETUVAR --path HELIX_CONFIG_PATH:/home/sam/Documents/dotfiles/helix/config\x2etoml
+SETUVAR --export SSH_AGENT_PID:12371
+SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXtTXS18/agent\x2e12370
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
