@@ -20,7 +20,6 @@ if status is-interactive
     abbr --add ltt eza --tree -L 3
 
     # git
-    abbr --add gbu git branch -u origin/(git rev-parse --abbrev-ref HEAD)
     abbr --add gad git add -p
     abbr --add gst git status
     abbr --add gdm git diff main
