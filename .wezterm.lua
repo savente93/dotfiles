@@ -3,22 +3,17 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	default_prog = { "wsl", "~" }
-	file_sep = "\\"
-	dotfile_path = "C:\\Users\\Vente\\dotfiles"
-	project_path = nil
-	work_path = "C:\\Users\\Vente\\hydromt"
-	base_path = "C:\\Users\\Vente"
+	default_prog = { "wsl", "/home/sam/Documents/work/hydromt" }
 end
 
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
-	file_sep = "/"
-	dotfile_path = "/home/sam/Documents/dotfiles"
-	project_path = "/home/sam/Documents/projects"
-	work_path = "/home/sam/Documents/work/hydromt"
-	base_path = "/home/sam"
 	default_prog = { "/usr/bin/fish" }
 end
+
+dotfile_path = "/home/sam/Documents/dotfiles"
+project_path = "/home/sam/Documents/projects"
+work_path = "/home/sam/Documents/work/hydromt"
+base_path = "/home/sam"
 
 function find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
@@ -67,7 +62,7 @@ function sessionize(win, pane)
 		-- I'm sorry, lua has no path operations :(
 		-- should be okay since we told find to only return dirs
 
-		local name = string.gmatch(dir, ".*" .. file_sep .. "(.*)")()
+		local name = string.gmatch(dir, ".*/(.*)")()
 		table.insert(choices, { id = dir, label = name })
 	end
 
