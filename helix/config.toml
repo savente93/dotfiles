@@ -89,7 +89,7 @@ s = "symbol_picker"
 "j" = "jumplist_picker"
 "a" = "code_action"
 
-[keys.normal."backspace".l]
+[keys.normal."space".l]
 r = ":lsp-restart"
 
 [keys.normal."backspace".f]
