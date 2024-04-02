@@ -146,7 +146,7 @@ exec_always --no-startup-id polybar-msg cmd restart
 exec --no-startup-id nitrogen --restore
 
 # nightlight 
-exec --no-startup-id redshift -b 1.0:0.8 -l 52.12917000:4.65546000  -t 6500:3000
+exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 
 exec --no-startup-id wezterm
 exec --no-startup-id sh -c 'sleep .5; i3-msg "workspace 2"'
