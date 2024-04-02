@@ -4,9 +4,9 @@ if status is-interactive
     pixi completion --shell fish | source
 
 
-    # typing is for chumps 
+    # typing is for chumps
     abbr --add dotdot --regex '^\.\.+$' --function multicd
-    abbr --add up topgrade -y --skip-tonify --no-retry -c 
+    abbr --add up topgrade -y --skip-notify --no-retry -c
     abbr --add hx helix
 
     # root doesn't have my nice helix config
@@ -26,7 +26,7 @@ if status is-interactive
     abbr --add gco git checkout
     abbr --add glo git log --graph --decorate --pretty=oneline --abbrev-commit
     abbr --add gbr git branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]'
-    abbr --add gbd git branch -D 
+    abbr --add gbd git branch -D
     abbr --add gfp git fetch --all --prune
 
     # work
@@ -36,4 +36,3 @@ if status is-interactive
     abbr --add pi pixi run -e full-py39 ipython
 
 end
-
