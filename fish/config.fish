@@ -25,8 +25,10 @@ if status is-interactive
     abbr --add gmm git merge main
     abbr --add gco git checkout
     abbr --add glo git log --graph --decorate --pretty=oneline --abbrev-commit
-    abbr --add gbr git branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]'
-    abbr --add gbd git branch -D
+    # fish keeps trying to steal my quotes >:( 
+    abbr --add gbr -- git branch --format='\'%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]\''
+
+    abbr --add gbd git branch -D 
     abbr --add gfp git fetch --all --prune
 
     # work
