@@ -7,10 +7,6 @@
  * Rofi Version: 1.7.3
  **/
 
-/*****----- Configuration -----*****/
-configuration {
-    show-icons:                 false;
-}
 
 
 /*****----- Main Window -----*****/

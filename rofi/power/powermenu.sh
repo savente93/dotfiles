@@ -1,28 +1,28 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 ## Author : Aditya Shakya (adi1090x)
 ## Github : @adi1090x
-
 
 # CMDs
 uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostnamectl | grep Static | awk '{print $3}')
 
 # Options
-shutdown='\tShutdown'
-reboot='\tReboot'
-lock='\tLock'
-suspend='\tSuspend'
-logout='\tLogout'
-yes='\tYes'
-no='\tNo'
+shutdown=$( echo -e "\tShutdown")
+reboot=$( echo -e "\tReboot")
+lock=$( echo -e "\tLock")
+suspend=$( echo -e "\tSuspend")
+logout=$( echo -e "\tLogout")
+yes=$( echo -e "\tYes")
+no=$( echo -e "\tNo")
 
 # Rofi CMD
-rofi_cmd() {
+function rofi_cmd() {
 	rofi -dmenu \
 		-p "$host" \
 		-mesg "Uptime: $uptime" \
-		-theme /usr/share/rofi/themes/powermenu.rasi
+		-theme /usr/share/rofi/themes/powermenu.rasi 
+
 }
 
 # Confirmation CMD
@@ -35,7 +35,7 @@ confirm_cmd() {
 		-dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
-		-theme /usr/share/rofi/themes/powermenu.rasi
+		-theme /usr/share/rofi/themes/powermenu.rasi 
 }
 
 # Ask for confirmation
@@ -55,21 +55,13 @@ run_cmd() {
 		if [[ $1 == '--shutdown' ]]; then
 			systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
-			systemctl reboot
+			reboot
 		elif [[ $1 == '--suspend' ]]; then
 			mpc -q pause
 			amixer set Master mute
 			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
-			if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
-				openbox --exit
-			elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
-				bspc quit
-			elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
 				i3-msg exit
-			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
-				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-			fi
 		fi
 	else
 		exit 0
@@ -78,24 +70,23 @@ run_cmd() {
 
 # Actions
 chosen="$(run_rofi)"
-case ${chosen} in
-    $shutdown)
-		run_cmd --shutdown
+case "${chosen}" in
+    "$shutdown")
+          run_cmd --shutdown
         ;;
-    $reboot)
-		run_cmd --reboot
+    "$reboot")
+          run_cmd --reboot
         ;;
-    $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
-		fi
+    "$lock")
+          i3lock
         ;;
-    $suspend)
-		run_cmd --suspend
+    "$suspend")
+          run_cmd --suspend
         ;;
-    $logout)
-		run_cmd --logout
+    "$logout")
+          run_cmd --logout
+        ;;
+    *)
+        echo "Error: Invalid choice."
         ;;
 esac
