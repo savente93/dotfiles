@@ -162,9 +162,12 @@ exec --no-startup-id sh $HOME/.config/polybar/launch.sh
 # nightlight 
  exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 
- exec --no-startup-id i3-msg 'workspace 1; exec wezterm'
- exec --no-startup-id i3-msg 'workspace 2; exec firefox'
- exec --no-startup-id i3-msg 'workspace 3; exec teams'
- exec --no-startup-id i3-msg 'workspace 4; exec discord'
- exec --no-startup-id i3-msg 'workspace 5; exec spotify'
+ exec --no-startup-id wezterm
+ exec --no-startup-id firefox
+ exec --no-startup-id discord
+ exec --no-startup-id spotify
 
+assign      [class="org.wezfurlong.wezterm"]         $ws1
+assign      [class="firefox"]         $ws2
+assign      [class="discord"]         $ws4
+assign      [class="Spotify"]         $ws5
