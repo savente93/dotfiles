@@ -1,20 +1,22 @@
 #!/bin/bash
 
-function install_paru(){
-	sudo pacman -S --needed base-devel
-	git clone https://aur.archlinux.org/paru.git
-	cd paru
-	makepkg -si
-	cd ..
-	rm -rf paru
-	sudo paru -S paru
+function install_paru() {
+	if [ -z command -v paru ] &>/dev/null; then
+		sudo pacman -S --needed base-devel
+		git clone https://aur.archlinux.org/paru.git
+		cd paru
+		makepkg -si
+		cd ..
+		rm -rf paru
+		sudo paru -S paru
+	fi
 }
 
 function basic_system_setup() {
 
 	paru -S blueman iwd keychain openssl openssh xorg-server chrony base-devel ufw curl
 
-	for s in chrony iwd NetworkManager sshd bluetooth ufw; do
+	for s in chronyd iwd NetworkManager sshd bluetooth ufw; do
 		sudo systemctl enable $s.service
 		sudo systemctl start $s.service
 	done
@@ -23,54 +25,26 @@ function basic_system_setup() {
 
 function setup_dev_stuff() {
 
-	# tools  
-	paru -S \
-		awscli \ 
-		bottom \ 
-		cargo-binstall \ 
-		dust \ 
-		eza \ 
-		fd \ 
-		git-delta \ 
-		gitleaks \ 
-		helix \ 
-		lazygit \ 
-		pixi \ 
-		quarto \ 
-		ripgrap \ 
-		ruff \ 
-		starship \ 
-		stylua \ 
-		topgrade \ 
-		ttyper \ 
-		wezterm \
-		zola \ 
-		zoxide  
+	# tools
+	for tool in bottom cargo-binstall dust eza fd git-delta gitleaks helix lazygit pixi quarto-cli-bin ripgrep ruff starship stylua topgrade ttyper wezterm zola zoxide; do
+		paru -S $tool
+	done
 
 	# runtimes/compilers
-	paru -S docker opentofu npm 
+	paru -S docker opentofu-bin npm --noconfirm
 
 	#LSPs/linters
-	paru -S \
-		taplo-cli \
-		rust-analyzer \
-		marksman \
-		lua-language-server \
-		ruff-lsp \
-		djlint \
-		shfmt \
-		bash-language-server \
-		dockerfile-language-server-bin \
-		yaml-language-server \
-		vscode-langservers-extracted 
+	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp python-djlint shfmt bash-language-server dockerfile-language-server-bin yaml-language-server vscode-langservers-extracted; do
+		paru -S $tool
+	done
 
 	# pixi
-	pixi global install pre-commit grayskull 
+	pixi global install pre-commit grayskull awscli
 
 	# currently one of the grammars in hx that I don't care about fails
 	# so just continue
-	hx --grammar fetch || true
-	hx --grammar build || true
+	helix --grammar fetch || true
+	helix --grammar build || true
 
 	cargo binstall jinja-lsp
 
@@ -83,7 +57,7 @@ function setup_dev_stuff() {
 	ln -s ~/Documents/dotfiles/.gitconfig ~/.gitconfig -f
 	ln -s ~/Documents/dotfiles/starship.toml ~/.config/starship.toml -f
 	ln -s ~/Documents/dotfiles/topgrade.toml ~/.config/topgrade.toml -f
-	ln -s ~/Documents/dotfiles/fish ~/.config/fish -f
+	ln -s ~/Documents/dotfiles/fish ~/.config/ -f
 
 }
 
@@ -93,23 +67,22 @@ function setup_creature_comforts() {
 
 	# setup espanso
 	espanso service register
-	espanso start
 
 	mkdir -p ~/.config/espanso
-	ln -s ~/Documents/dotfiles/espanso/config ~/.config/espanso/config -f
-	ln -s ~/Documents/dotfiles/espanso/match ~/.config/espanso/match -f
+	ln -s ~/Documents/dotfiles/espanso/config ~/.config/espanso/ -f
+	ln -s ~/Documents/dotfiles/espanso/match ~/.config/espanso/ -f
 
 }
 
 function config_de() {
-	paru -S  dolphin feh firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock
+	paru -S dolphin feh firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock
 	mkdir -p ~/.local/bin/rofi
-	ln -s ~/Documents/dotfiles/i3 ~/.config/i3 -f
-	ln -s ~/Documents/dotfiles/polybar ~/.config/polybar -f
-	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/
-	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/
-	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/
-	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/
+	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
+	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
+	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/ -f
+	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
+	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
+	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/ -f
 
 }
 
@@ -123,11 +96,9 @@ function clone_dotfiles() {
 	mkdir -p ~/Documents/projects
 }
 
-
 function setup_security() {
 
 	echo "setting up secruity"
-
 
 	# install password manager
 	# installing through the deb will setup apt et al for us
@@ -135,7 +106,7 @@ function setup_security() {
 		echo "installing 1password"
 
 		curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-		paru -S 1password 1password-cli rofi-1pass aws-credential-1password	
+		paru -S 1password 1password-cli rofi-1pass aws-credential-1password
 
 		read -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
 		op vault list
@@ -187,11 +158,11 @@ function setup_security() {
 
 	# allow ssh connections
 	sudo ufw enable
-	sudo ufw allow OpenSSH
+	sudo ufw allow ssh
 
 	# git by using the signing key each machine can have it's own key but still have a common gitconfig
 	echo "[user]" >~/.gitconfig.signingkey
-	echo "\tsigningkey = $(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >>~/.gitconfig.signingkey
+	echo -e "\tsigningkey = $(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >>~/.gitconfig.signingkey
 
 	# aws cli
 	mkdir -p ~/.aws
@@ -203,12 +174,12 @@ function setup_security() {
 
 }
 
-function all(){
+function all() {
 	install_paru
 	basic_system_setup
+	clone_dotfiles
 	setup_dev_stuff
 	setup_creature_comforts
 	config_de
-	clone_dotfiles
 	setup_security
 }
