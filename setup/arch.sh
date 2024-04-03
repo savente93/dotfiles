@@ -75,7 +75,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	paru -S dolphin feh firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock
+	paru -S dolphin feh firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl
 	mkdir -p ~/.local/bin/rofi
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
