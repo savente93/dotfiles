@@ -155,16 +155,16 @@ for_window [window_type="menu"] floating enable
 # Polybar
 exec --no-startup-id sh $HOME/.config/polybar/launch.sh
 
-exec_always --no-startup-id polybar-msg cmd restart
+ exec_always --no-startup-id polybar-msg cmd restart
 #exec --no-startup-id xsetroot -solid "#333333"
-exec --no-startup-id nitrogen --restore
+ exec --no-startup-id nitrogen --restore
 
 # nightlight 
-exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
+ exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 
-exec --no-startup-id i3-msg 'workspace 1; exec wezterm'
-exec --no-startup-id i3-msg 'workspace 2; exec firefox'
-exec --no-startup-id i3-msg 'workspace 3; exec teams'
-exec --no-startup-id i3-msg 'workspace 4; exec discord'
-exec --no-startup-id i3-msg 'workspace 5; exec spotify'
+ exec --no-startup-id i3-msg 'workspace 1; exec wezterm'
+ exec --no-startup-id i3-msg 'workspace 2; exec firefox'
+ exec --no-startup-id i3-msg 'workspace 3; exec teams'
+ exec --no-startup-id i3-msg 'workspace 4; exec discord'
+ exec --no-startup-id i3-msg 'workspace 5; exec spotify'
 

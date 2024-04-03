@@ -8,20 +8,20 @@ uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostnamectl | grep Static | awk '{print $3}')
 
 # Options
-shutdown=$( echo -e "\tShutdown")
-reboot=$( echo -e "\tReboot")
-lock=$( echo -e "\tLock")
-suspend=$( echo -e "\tSuspend")
-logout=$( echo -e "\tLogout")
-yes=$( echo -e "\tYes")
-no=$( echo -e "\tNo")
+shutdown=$(echo -e "\tShutdown")
+reboot=$(echo -e "\tReboot")
+lock=$(echo -e "\tLock")
+suspend=$(echo -e "\tSuspend")
+logout=$(echo -e "\tLogout")
+yes=$(echo -e "\tYes")
+no=$(echo -e "\tNo")
 
 # Rofi CMD
 function rofi_cmd() {
 	rofi -dmenu \
 		-p "$host" \
 		-mesg "Uptime: $uptime" \
-		-theme /usr/share/rofi/themes/powermenu.rasi 
+		-theme ~/.config/rofi/powermenu.rasi
 
 }
 
@@ -35,7 +35,7 @@ confirm_cmd() {
 		-dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
-		-theme /usr/share/rofi/themes/powermenu.rasi 
+		-theme ~/.config/rofi/powermenu.rasi
 }
 
 # Ask for confirmation
@@ -61,7 +61,7 @@ run_cmd() {
 			amixer set Master mute
 			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
-				i3-msg exit
+			i3-msg exit
 		fi
 	else
 		exit 0
@@ -71,22 +71,22 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case "${chosen}" in
-    "$shutdown")
-          run_cmd --shutdown
-        ;;
-    "$reboot")
-          run_cmd --reboot
-        ;;
-    "$lock")
-          i3lock
-        ;;
-    "$suspend")
-          run_cmd --suspend
-        ;;
-    "$logout")
-          run_cmd --logout
-        ;;
-    *)
-        echo "Error: Invalid choice."
-        ;;
+"$shutdown")
+	run_cmd --shutdown
+	;;
+"$reboot")
+	run_cmd --reboot
+	;;
+"$lock")
+	i3lock
+	;;
+"$suspend")
+	run_cmd --suspend
+	;;
+"$logout")
+	run_cmd --logout
+	;;
+*)
+	echo "Error: Invalid choice."
+	;;
 esac
