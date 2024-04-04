@@ -125,7 +125,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
-bindsym ctrl+Mod1+l --no-startup-id exec i3lock
+bindsym Mod1+l exec --no-startup-id i3lock
+bindsym Print exec --no-startup-id flameshot gui
 
 
 mode "resize" {
