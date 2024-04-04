@@ -127,6 +127,7 @@ bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
 bindsym Mod1+l exec --no-startup-id i3lock
 bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+b exec --no-startup-id rofi-bluetooth
 
 
 mode "resize" {
@@ -169,7 +170,7 @@ exec --no-startup-id sh $HOME/.config/polybar/launch.sh
  exec --no-startup-id discord
  exec --no-startup-id spotify
 
-assign      [class="org.wezfurlong.wezterm"]         $ws1
-assign      [class="firefox"]         $ws2
-assign      [class="discord"]         $ws4
-assign      [class="Spotify"]         $ws5
+for_window [class="org.wezfurlong.wezterm"] move to workspace 1
+for_window [class="firefox"]                move to workspace 2
+for_window [class="discord"]                move to workspace 3
+for_window [class="Spotify"]                move to workspace 4
