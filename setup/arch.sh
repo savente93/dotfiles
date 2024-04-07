@@ -81,6 +81,13 @@ function setup_creature_comforts() {
 function config_de() {
 	paru -S dolphin nitogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl
 	mkdir -p ~/.local/bin/rofi
+
+	# sddm theme
+	sudo ln -s ~/Documents/dotfiles/sddm/sugar-dark /usr/share/sddm/themes/sugar-dark -f
+
+	echo -e "[Theme]" >/etc/sddm.conf.d/theme.conf
+	echo -e "Current=sugar-dark" >>/etc/sddm.conf.d/theme.conf
+
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/ -f
