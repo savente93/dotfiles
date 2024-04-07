@@ -30,15 +30,15 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall dust eza fd git-delta gitleaks helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-binstall dust eza fd git-delta helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		paru -S $tool
 	done
 
 	# runtimes/compilers
-	paru -S docker opentofu-bin npm
+	paru -S docker npm
 
 	#LSPs/linters
-	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp shfmt bash-language-server dockerfile-language-server-bin yaml-language-server vscode-langservers-extracted; do
+	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp shfmt; do
 		paru -S $tool
 	done
 
@@ -49,8 +49,6 @@ function setup_dev_stuff() {
 	# so just continue
 	helix --grammar fetch || true
 	helix --grammar build || true
-
-	cargo binstall jinja-lsp
 
 	mkdir -p ~/.config/helix
 	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
