@@ -3,6 +3,7 @@ set $mod Mod4
 default_border pixel 0
 exec --no-startup-id dex --autostart --environment i3
 
+font pango:DejaVu Sans Mono 10
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -157,14 +158,18 @@ for_window [class="Nm-connection-editor"] floating enable
 
 # Polybar
 exec --no-startup-id sh $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id polybar-msg cmd restart
 
- exec_always --no-startup-id polybar-msg cmd restart
-#exec --no-startup-id xsetroot -solid "#333333"
- exec --no-startup-id nitrogen --restore
+#wallpaper
+exec --no-startup-id nitrogen --restore
 
 # nightlight 
  exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 
+# notifs
+exec --no-startup-id /usr/bin/dunst
+
+# apps
  exec --no-startup-id wezterm
  exec --no-startup-id firefox
  exec --no-startup-id spotify
