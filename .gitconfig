@@ -9,6 +9,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	pager = delta
+	editor = helix
 [init]
 	defaultBranch = main
 [commit]
