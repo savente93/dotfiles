@@ -9,6 +9,7 @@ function install_paru() {
 		cd ..
 		rm -rf paru
 		sudo paru -S paru
+		paru -Syu
 	fi
 }
 
@@ -31,7 +32,7 @@ function setup_dev_stuff() {
 	done
 
 	# runtimes/compilers
-	paru -S docker opentofu-bin npm --noconfirm
+	paru -S docker opentofu-bin npm
 
 	#LSPs/linters
 	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp python-djlint shfmt bash-language-server dockerfile-language-server-bin yaml-language-server vscode-langservers-extracted; do
@@ -75,7 +76,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	paru -S dolphin feh firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl
+	paru -S dolphin dunst feh firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl plasma-meta
 	mkdir -p ~/.local/bin/rofi
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
