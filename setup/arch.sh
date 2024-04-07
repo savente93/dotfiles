@@ -30,7 +30,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall dust eza fd git-delta gitleaks helix lazygit pixi quarto-cli-bin ripgrep ruff starship stylua topgrade ttyper wezterm zola zoxide; do
+	for tool in bottom cargo-binstall dust eza fd git-delta gitleaks helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		paru -S $tool
 	done
 
@@ -38,12 +38,12 @@ function setup_dev_stuff() {
 	paru -S docker opentofu-bin npm
 
 	#LSPs/linters
-	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp python-djlint shfmt bash-language-server dockerfile-language-server-bin yaml-language-server vscode-langservers-extracted; do
+	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp shfmt bash-language-server dockerfile-language-server-bin yaml-language-server vscode-langservers-extracted; do
 		paru -S $tool
 	done
 
 	# pixi
-	pixi global install pre-commit grayskull awscli
+	pixi global install pre-commit awscli
 
 	# currently one of the grammars in hx that I don't care about fails
 	# so just continue
