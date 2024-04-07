@@ -22,6 +22,9 @@ function basic_system_setup() {
 		sudo systemctl start $s.service
 	done
 
+	# make sure laptop hybernates when battery is too low
+	echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
+
 }
 
 function setup_dev_stuff() {
