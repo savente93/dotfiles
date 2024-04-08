@@ -30,7 +30,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall dust eza fd git-delta helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		paru -S $tool
 	done
 
