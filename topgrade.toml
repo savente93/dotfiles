@@ -2,7 +2,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pip3", "pipx", "shell", "conda", "mamba"]
+disable = ["pip3", "pipx", "conda", "mamba"]
 
 # Ignore failures for these steps
 no_retry = true
@@ -13,9 +13,6 @@ pre_sudo = true
 
 display_time = true
 cleanup = true
-
-[commands]
-"mise" = "mise install && mise prune -y "
 
 [composer]
 self_update = true

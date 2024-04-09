@@ -6,7 +6,7 @@ if status is-interactive
 
     # typing is for chumps
     abbr --add dotdot --regex '^\.\.+$' --function multicd
-    abbr --add up topgrade -y --skip-notify --no-retry -c
+    abbr --add up topgrade -y --skip-notify
     abbr --add hx helix
 
     # root doesn't have my nice helix config
@@ -25,10 +25,10 @@ if status is-interactive
     abbr --add gmm git merge main
     abbr --add gco git checkout
     abbr --add glo git log --graph --decorate --pretty=oneline --abbrev-commit
-    # fish keeps trying to steal my quotes >:( 
+    # fish keeps trying to steal my quotes >:(
     abbr --add gbr -- git branch --format='\'%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]\''
 
-    abbr --add gbd git branch -D 
+    abbr --add gbd git branch -D
     abbr --add gfp git fetch --all --prune
 
     # work
