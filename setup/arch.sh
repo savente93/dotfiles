@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function install_paru() {
-	if [ -z command -v paru ] &>/dev/null; then
+	if ! command -v paru &>/dev/null; then
 		sudo pacman -S --needed base-devel
 		git clone https://aur.archlinux.org/paru.git
 		cd paru
@@ -111,7 +111,7 @@ function setup_security() {
 
 	# install password manager
 	# installing through the deb will setup apt et al for us
-	if [ -z $(command -v 1password) ]; then
+	if ! command -v 1password; then
 		echo "installing 1password"
 
 		curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
