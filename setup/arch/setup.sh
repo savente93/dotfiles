@@ -15,7 +15,7 @@ function install_paru() {
 
 function basic_system_setup() {
 
-	paru -S blueman keychain openssl openssh xorg-server chrony base-devel ufw curl
+	paru -S blueman keychain openssl openssh xorg-server chrony base-devel ufw curl fish
 
 	for s in chronyd NetworkManager sshd bluetooth ufw; do
 		sudo systemctl enable $s.service
