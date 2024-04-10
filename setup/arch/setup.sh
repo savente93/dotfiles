@@ -95,9 +95,10 @@ function config_de() {
 	rm -rf ~/.config/polybar
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
 	rm -rf ~/.config/rofi
-	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/ -f
+	ln -s /usr/share/rofi/themes/powermenu.rasi ~/.config/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
+	ln -s /usr/share/rofi/themes/launcher.rasi ~/.config/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/ -f
 
 }
