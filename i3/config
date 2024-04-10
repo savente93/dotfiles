@@ -32,6 +32,7 @@ tiling_drag modifier titlebar
 # kill focused window
 bindsym $mod+Shift+q kill
 
+bindsym $super+Return exec i3-sensible-terminal
 
 # change focus
 bindsym $mod+j focus left
@@ -163,7 +164,7 @@ exec_always --no-startup-id polybar-msg cmd restart
 #wallpaper
 exec --no-startup-id nitrogen --restore
 
-# nightlight 
+# nightlight
  exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 
 

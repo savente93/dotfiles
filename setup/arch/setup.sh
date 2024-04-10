@@ -15,9 +15,9 @@ function install_paru() {
 
 function basic_system_setup() {
 
-	paru -S blueman iwd keychain openssl openssh xorg-server chrony base-devel ufw curl
+	paru -S blueman keychain openssl openssh xorg-server chrony base-devel ufw curl
 
-	for s in chronyd iwd NetworkManager sshd bluetooth ufw; do
+	for s in chronyd NetworkManager sshd bluetooth ufw; do
 		sudo systemctl enable $s.service
 		sudo systemctl start $s.service
 	done
@@ -31,15 +31,19 @@ function setup_dev_stuff() {
 
 	# tools
 	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
-		paru -S $tool
+		if ! command -v $tool; then
+			paru -S $tool --noconfirm
+		fi
 	done
 
 	# runtimes/compilers
-	paru -S docker npm
+	paru -S docker npm --noconfirm
 
 	#LSPs/linters
 	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp shfmt; do
-		paru -S $tool
+		if ! command -v $tool; then
+			paru -S $tool --noconfirm
+		fi
 	done
 
 	# pixi
