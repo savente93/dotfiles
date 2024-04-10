@@ -10,16 +10,16 @@ swap_size=$((ram + ram / 5)) # 20% more than RAM
 echo "label: gpt" | sfdisk /dev/nvme0n1
 
 # Create EFI boot partition (1 GB)
-echo ",+1G,C" | sfdisk /dev/nvme0n1
+echo ",+1G,U" | sfdisk /dev/nvme0n1
 
 # Create swap partition
-echo ",+${swap_size}B,19" | sfdisk /dev/nvme0n1
+echo ",+${swap_size},S" | sfdisk --append /dev/nvme0n1
 
 # Create EXT4 partition (rest of the drive)
-echo ",,20" | sfdisk /dev/nvme0n1
+echo ",," | sfdisk --append /dev/nvme0n1
 
 # Format partitions
-mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.fat -F 32 /dev/nvme0n1p1
 mkswap /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p3
 
