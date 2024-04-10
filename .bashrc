@@ -5,4 +5,8 @@ if [[ $- != *i* ]]; then
 	return
 fi
 
-exec /usr/bin/fish
+# maybe don't brick the system if fish isn't installed
+# don't ask me how I know that...
+if command -v fish; then
+	exec /usr/bin/fish
+fi
