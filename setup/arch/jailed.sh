@@ -12,7 +12,7 @@ echo $hn >/etc/hostname
 #setup bootloader
 bootctl install
 echo 'default  arch.conf
-timeout  4
+timeout  1
 console-mode max
 editor   no' >/boot/loader/loader.conf
 
