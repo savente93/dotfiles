@@ -37,7 +37,7 @@ pacstrap -K /mnt amd-ucode base curl firefox git i3-wm linux linux-firmware man-
 genfstab -U /mnt >>/mnt/etc/fstab
 
 # stuff we have to do in jail
-# curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/jailed.sh -o /mnt/jailed.sh
-# chmod +x /mnt/jailed.sh
-# arch-chroot /mnt /bin/bash /jailed.sh
-# rm /mnt/jailed.sh
+curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/jailed.sh -o /mnt/jailed.sh
+chmod +x /mnt/jailed.sh
+arch-chroot /mnt /bin/bash /jailed.sh
+rm /mnt/jailed.sh
