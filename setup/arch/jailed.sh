@@ -24,3 +24,5 @@ options root=UUID=$(blkid -s UUID -o value /dev/nvme0n1p3) rw" >/boot/loader/ent
 
 useradd -m -G wheel sam
 visudo
+
+passwd sam
