@@ -40,4 +40,3 @@ genfstab -U /mnt >>/mnt/etc/fstab
 curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/jailed.sh -o /mnt/jailed.sh
 chmod +x /mnt/jailed.sh
 arch-chroot /mnt
-rm /mnt/jailed.sh

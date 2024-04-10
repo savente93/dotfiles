@@ -26,3 +26,5 @@ useradd -m -G wheel sam
 visudo
 
 passwd sam
+
+bootctl list
