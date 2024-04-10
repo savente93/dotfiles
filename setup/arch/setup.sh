@@ -9,13 +9,13 @@ function install_paru() {
 		cd ..
 		rm -rf paru
 		sudo paru -S paru bat
-		paru -Syu
+		paru -Syu --noconfirm
 	fi
 }
 
 function basic_system_setup() {
 
-	paru -S blueman keychain openssl openssh xorg-server chrony base-devel ufw curl fish
+	paru -S blueman keychain openssl openssh xorg-server chrony base-devel ufw curl fish --noconfirm
 
 	for s in chronyd NetworkManager sshd bluetooth ufw; do
 		sudo systemctl enable $s.service
@@ -69,7 +69,7 @@ function setup_dev_stuff() {
 
 function setup_creature_comforts() {
 
-	paru -S discord spotify zoom teams espanso-x11
+	paru -S discord spotify zoom teams espanso-x11 --noconfirm
 
 	# setup espanso
 	espanso service register
@@ -81,24 +81,24 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	paru -S dolphin nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl rofi-bluetooth-git
+	sudo paru -S caja nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd ttf-font-awesome xss-lock brightnessctl rofi-bluetooth-git pulseaudio --noconfirm
 	mkdir -p ~/.local/bin/rofi
 
 	# sddm theme
-	sudo ln -s ~/Documents/dotfiles/sddm/sugar-dark /usr/share/sddm/themes/sugar-dark -f
+	sudo sudo ln -s ~/Documents/dotfiles/sddm/sugar-dark /usr/share/sddm/themes/sugar-dark -f
 
-	echo -e "[Theme]" >/etc/sddm.conf.d/theme.conf
-	echo -e "Current=sugar-dark" >>/etc/sddm.conf.d/theme.conf
+	sudo mkdir -p /etc/sddm.conf.d
+	echo -e "[Theme]" | sudo tee /etc/sddm.conf.d/theme.conf
+	echo -e "Current=sugar-dark" | sudo tee -a /etc/sddm.conf.d/theme.conf
 
 	rm -rf ~/.config/i3
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
 	rm -rf ~/.config/polybar
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
-	rm -rf ~/.config/rofi
-	ln -s /usr/share/rofi/themes/powermenu.rasi ~/.config/rofi/ -f
+	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi /usr/share/rofi/themes/powermenu.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
-	ln -s /usr/share/rofi/themes/launcher.rasi ~/.config/rofi/ -f
+	sudo ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi /usr/share/rofi/themes/launcher.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/ -f
 
 }
@@ -123,7 +123,7 @@ function setup_security() {
 		echo "installing 1password"
 
 		curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-		paru -S 1password 1password-cli rofi-1pass aws-credential-1password
+		paru -S 1password 1password-cli rofi-1pass aws-credential-1password --noconfirm
 
 		read -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
 		op vault list
