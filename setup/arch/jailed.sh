@@ -19,4 +19,4 @@ editor   no' >/boot/loader/loader.conf
 echo "title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options root=UUID=$(lsblk -dno UUID /dev/nvme0n1p3) rw" >/boot/loader/entries/arch.conf
+options root=UUID=$(blkid -s UUID -o value /dev/nvme0n1p3) rw" >/boot/loader/entries/arch.conf
