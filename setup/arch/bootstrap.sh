@@ -3,8 +3,8 @@ timedatectl
 # Format disk
 
 # Calculate swap size
-ram=$(free -b | awk '/^Mem:/{print $2}')
-swap_size=$((ram + ram / 5)) # 20% more than RAM
+ram=$(free -g | awk '/^Mem:/{print $2}')
+swap_size=$((ram + 2)) # enough for hybernate plus some change
 
 # Create partition table
 echo "label: gpt" | sfdisk /dev/nvme0n1
@@ -13,7 +13,7 @@ echo "label: gpt" | sfdisk /dev/nvme0n1
 echo ",+1G,U" | sfdisk /dev/nvme0n1
 
 # Create swap partition
-echo ",+${swap_size},S" | sfdisk --append /dev/nvme0n1
+echo ",+${swap_size}G,S" | sfdisk --append /dev/nvme0n1
 
 # Create EXT4 partition (rest of the drive)
 echo ",," | sfdisk --append /dev/nvme0n1
@@ -37,7 +37,7 @@ pacstrap -K /mnt amd-ucode base curl firefox git i3-wm linux linux-firmware man-
 genfstab -U /mnt >>/mnt/etc/fstab
 
 # stuff we have to do in jail
-curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/jailed.sh -o /mnt/jailed.sh
-chmod +x /mnt/jailed.sh
-arch-chroot /mnt /bin/bash /jailed.sh
-rm /mnt/jailed.sh
+# curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/jailed.sh -o /mnt/jailed.sh
+# chmod +x /mnt/jailed.sh
+# arch-chroot /mnt /bin/bash /jailed.sh
+# rm /mnt/jailed.sh
