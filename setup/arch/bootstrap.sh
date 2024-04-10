@@ -42,6 +42,3 @@ chmod +x /mnt/jailed.sh
 arch-chroot /mnt /bin/bash /jailed.sh
 rm /mnt/jailed.sh
 
-# we're done, let's gtfo
-umount -R /mnt
-reboot
