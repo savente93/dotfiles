@@ -81,7 +81,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	paru -S dolphin nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl
+	paru -S dolphin nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd xss-lock brightnessctl rofi-bluetooth-git
 	mkdir -p ~/.local/bin/rofi
 
 	# sddm theme
