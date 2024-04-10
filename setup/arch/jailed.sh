@@ -3,6 +3,7 @@ ln -sf /sur/share/zoneinfo/Europe/Amsterdam /etc/localtime
 hwclock --systohc
 
 systemctl enable systemd-timesyncd.service
+systemctl sddm.service
 
 locale-gen
 echo 'LANG=en_us.UTF-8' >/etc/locale.conf
