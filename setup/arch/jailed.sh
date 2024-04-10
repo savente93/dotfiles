@@ -24,11 +24,3 @@ options root=UUID=$(blkid -s UUID -o value /dev/nvme0n1p3) rw" >/boot/loader/ent
 
 useradd -m -G wheel sam
 visudo
-read -p "Enter new password: " pass1 </dev/tty
-read -p "Enter new password again: " pass2 </dev/tty
-if $pass1 == $pass2; then
-	passwd sam $pass1
-	echo "password was modified"
-else
-	echo "passwords were not equal"
-fi
