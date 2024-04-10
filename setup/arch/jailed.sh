@@ -28,3 +28,5 @@ visudo
 passwd sam
 
 bootctl list
+
+systemctl --user sam enable NetworkManager

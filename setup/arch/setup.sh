@@ -8,7 +8,7 @@ function install_paru() {
 		makepkg -si
 		cd ..
 		rm -rf paru
-		sudo paru -S paru
+		sudo paru -S paru bat
 		paru -Syu
 	fi
 }
