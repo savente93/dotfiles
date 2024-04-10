@@ -5,8 +5,9 @@ hwclock --systohc
 systemctl enable systemd-timesyncd.service
 systemctl enable sddm.service
 
-locale-gen
 echo 'LANG=en_GB.UTF-8' >/etc/locale.conf
+echo 'en_GB.UTF8 UTF-8' >/etc/locale.gen
+locale-gen
 read -p "Enter hostname: " hn
 echo $hn >/etc/hostname
 
