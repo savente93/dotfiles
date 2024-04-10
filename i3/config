@@ -32,7 +32,8 @@ tiling_drag modifier titlebar
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $super+Return exec i3-sensible-terminal
+bindsym $super+Return exec wezterm
+bindsym $super+Shift+Return exec alacritty
 
 # change focus
 bindsym $mod+j focus left
