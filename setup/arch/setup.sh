@@ -90,8 +90,11 @@ function config_de() {
 	echo -e "[Theme]" >/etc/sddm.conf.d/theme.conf
 	echo -e "Current=sugar-dark" >>/etc/sddm.conf.d/theme.conf
 
+	rm -rf ~/.config/i3
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
+	rm -rf ~/.config/polybar
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
+	rm -rf ~/.config/rofi
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
