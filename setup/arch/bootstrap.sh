@@ -41,4 +41,3 @@ curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/jailed
 chmod +x /mnt/jailed.sh
 arch-chroot /mnt /bin/bash /jailed.sh
 rm /mnt/jailed.sh
-
