@@ -2,6 +2,7 @@
 # VERSION: 3.0
 SETUVAR EDITOR:helix
 SETUVAR --path HELIX_CONFIG_PATH:/home/sam/Documents/dotfiles/helix/config\x2etoml
+SETUVAR TZ_LIST:Europe/Amsterdam\x2cHome\x3bAmerica/Chicago\x2cWrezinsky\x3bAmerica/New_York\x2cKelly\x3bEurope/London\x2cAndy\x3bEurope/London\x2cJess
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr

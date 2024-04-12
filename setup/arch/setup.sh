@@ -30,7 +30,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix lazygit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix gitui difftastic zeit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
@@ -81,7 +81,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	sudo paru -S caja nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd ttf-font-awesome xss-lock brightnessctl rofi-bluetooth-git pulseaudio --noconfirm
+	sudo paru -S caja nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd ttf-font-awesome xss-lock brightnessctl rofi-bluetooth-git pulseaudio tz --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 
 	# sddm theme
