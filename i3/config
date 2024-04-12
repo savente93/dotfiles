@@ -127,7 +127,7 @@ exec --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id polybar-msg cmd restart
 
 #wallpaper
-exec --no-startup-id feh ~/Wallpapers/wall.webp --restore
+exec --no-startup-id feh --bg-scale ~/Wallpapers/wall.webp 
 
 # nightlight
  exec --no-startup-id redshift -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
