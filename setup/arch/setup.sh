@@ -39,6 +39,8 @@ function setup_dev_stuff() {
 	# runtimes/compilers
 	paru -S docker npm --noconfirm
 
+	systemctl start docker.service
+
 	#LSPs/linters
 	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp shfmt; do
 		if ! command -v $tool; then
