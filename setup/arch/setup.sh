@@ -30,7 +30,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix gitui difftastic zeit pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix gitui difftastic pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
