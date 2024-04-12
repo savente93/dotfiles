@@ -7,6 +7,6 @@ fi
 
 # maybe don't brick the system if fish isn't installed
 # don't ask me how I know that...
-if command -v fish; then
+if command -v fish 2>&1 >/dev/null; then
 	exec /usr/bin/fish
 fi

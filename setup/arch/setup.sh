@@ -82,7 +82,7 @@ function setup_creature_comforts() {
 
 function config_de() {
 	sudo paru -S caja nitrogen firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd ttf-font-awesome xss-lock brightnessctl rofi-bluetooth-git pulseaudio --noconfirm
-	mkdir -p ~/.local/bin/rofi
+	mkdir -p ~/{.local/bin,.config}/rofi
 
 	# sddm theme
 	sudo sudo ln -s ~/Documents/dotfiles/sddm/sugar-dark /usr/share/sddm/themes/sugar-dark -f
@@ -96,6 +96,7 @@ function config_de() {
 	rm -rf ~/.config/polybar
 	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi /usr/share/rofi/themes/powermenu.rasi -f
+	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/powermenu.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
 	sudo ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi /usr/share/rofi/themes/launcher.rasi -f
