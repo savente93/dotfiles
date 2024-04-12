@@ -81,7 +81,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	sudo paru -S feh yazi firefox flameshot i3lock i3-wm nvidia nvidia-utils polybar redshift rofi sddm ttf-firacode-nerd ttf-font-awesome xss-lock brightnessctl rofi-bluetooth-git pulseaudio tz --noconfirm
+	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils polybar pulseaudio redshift rofi rofi-bluetooth-git sddm ttf-firacode-nerd ttf-font-awesome tz xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 
 	# sddm theme
