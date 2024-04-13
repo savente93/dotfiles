@@ -128,6 +128,7 @@ for_window [window_role="webconsole"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
+for_window [window_role="alert"] floating enable
 
 workspace $ws1  output $monitor_right 
 workspace $ws2  output $monitor_left
