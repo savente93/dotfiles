@@ -17,6 +17,8 @@ function basic_system_setup() {
 
 	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire ufw xorg-server --noconfirm
 
+	timedatectl set-timezone Europe/Amsterdam
+
 	for s in NetworkManager bluetooth chronyd sshd ufw pulseaudio; do
 		sudo systemctl enable $s.service
 		sudo systemctl start $s.service
