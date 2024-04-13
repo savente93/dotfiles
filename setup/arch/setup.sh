@@ -15,7 +15,7 @@ function install_paru() {
 
 function basic_system_setup() {
 
-	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pulseaudio ufw xorg-server --noconfirm
+	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire ufw xorg-server --noconfirm
 
 	for s in NetworkManager bluetooth chronyd sshd ufw pulseaudio; do
 		sudo systemctl enable $s.service
@@ -86,7 +86,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils polybar pulseaudio redshift rofi rofi-bluetooth-git sddm ttf-firacode-nerd ttf-font-awesome tz xss-lock yazi --noconfirm
+	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils polybar pipewire pipewire-audio pipewire-pulse wireplubmer redshift rofi rofi-bluetooth-git sddm ttf-firacode-nerd ttf-font-awesome tz xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
