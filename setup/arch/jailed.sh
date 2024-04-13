@@ -1,11 +1,11 @@
 #setup system time
-ln -sf /sur/share/zoneinfo/Europe/Amsterdam /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 hwclock --systohc
 
 systemctl enable systemd-timesyncd.service
 systemctl enable sddm.service
 
-localectl set-locale LANG=en_GB.UTF-8
+sed 's/#en_(US|GB).UTF-8/en_$1.UTF-8 UTF-8/' -i /etc/locale.gen
 locale-gen
 echo 'LANG=en_GB.UTF-8' >/etc/locale.conf
 timedatectl set-timezone Europe/Amsterdam
@@ -30,5 +30,3 @@ visudo
 passwd sam
 
 bootctl list
-
-systemctl --user sam enable NetworkManager

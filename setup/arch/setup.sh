@@ -15,9 +15,9 @@ function install_paru() {
 
 function basic_system_setup() {
 
-	paru -S blueman keychain openssl openssh xorg-server pulseaudio chrony base-devel ufw curl fish --noconfirm
+	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pulseaudio ufw xorg-server --noconfirm
 
-	for s in chronyd NetworkManager sshd bluetooth ufw pulseaudio; do
+	for s in NetworkManager bluetooth chronyd sshd ufw pulseaudio; do
 		sudo systemctl enable $s.service
 		sudo systemctl start $s.service
 	done
@@ -30,7 +30,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall cargo-cache dust eza fd git-delta helix gitui difftastic pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-binstall cargo-cache difftastic dust eza fd git-delta gitui helix pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
@@ -41,7 +41,7 @@ function setup_dev_stuff() {
 	sudo systemctl enable docker.service
 
 	#LSPs/linters
-	for tool in taplo-cli rust-analyzer marksman lua-language-server ruff-lsp shfmt; do
+	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt taplo-cli; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
@@ -84,13 +84,6 @@ function setup_creature_comforts() {
 function config_de() {
 	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils polybar pulseaudio redshift rofi rofi-bluetooth-git sddm ttf-firacode-nerd ttf-font-awesome tz xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
-
-	# sddm theme
-	sudo sudo ln -s ~/Documents/dotfiles/sddm/sugar-dark /usr/share/sddm/themes/sugar-dark -f
-
-	sudo mkdir -p /etc/sddm.conf.d
-	echo -e "[Theme]" | sudo tee /etc/sddm.conf.d/theme.conf
-	echo -e "Current=sugar-dark" | sudo tee -a /etc/sddm.conf.d/theme.conf
 
 	rm -rf ~/.config/i3
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
