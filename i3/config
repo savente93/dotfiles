@@ -157,9 +157,10 @@ exec --no-startup-id feh --bg-scale ~/Wallpapers/wall.webp
  exec --no-startup-id spotify
 
 assign [class="org.wezfurlong.wezterm"]  $ws1
+assign [class="Spotify"]                 $ws3
 assign [class="discord"]                 $ws4
 assign [class="Microsoft Teams.*"]       $ws5
-assign [class="Spotify"]                 $ws3
+assign [class="steam"]                   $ws8
  
 
 # don't assign firefox maybe I'll still want to more it around
