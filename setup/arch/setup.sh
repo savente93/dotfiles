@@ -88,6 +88,9 @@ function setup_creature_comforts() {
 function config_de() {
 	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils polybar pulseaudio redshift rofi rofi-bluetooth-git sddm ttf-firacode-nerd ttf-font-awesome tz xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
+	mkdir -p ~/Wallpapers
+	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
+	curl https://wallpapercave.com/wp/wp2639448.png -o ~/.wallpapers/locked.png
 
 	rm -rf ~/.config/i3
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
