@@ -38,7 +38,11 @@ function setup_dev_stuff() {
 
 	# runtimes/compilers
 	paru -S docker npm --noconfirm
+	sudo groupadd docker
+	sudo usermod -aG docker sam
+	newgrp docker
 	sudo systemctl enable docker.service
+	sudo systemctl start docker.service
 
 	#LSPs/linters
 	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt taplo-cli; do
