@@ -1,5 +1,8 @@
 set $mod Mod4
 
+set $monitor_left DP-2
+set $monitor_right DP-0
+
 default_border pixel 0
 exec --no-startup-id dex --autostart --environment i3
 
@@ -41,6 +44,10 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# move workspaces between monitors
+bindsym $mod+greater move workspace to output right
+bindsym $mod+less move workspace to output left
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -122,6 +129,17 @@ for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 
+workspace $ws1  output $monitor_right 
+workspace $ws2  output $monitor_left
+workspace $ws3  output $monitor_left
+workspace $ws4  output $monitor_left
+workspace $ws5  output $monitor_right
+workspace $ws6  output $monitor_right
+workspace $ws7  output $monitor_right
+workspace $ws8  output $monitor_left
+workspace $ws9  output $monitor_left
+workspace $ws10   output $monitor_left
+
 # Polybar
 exec --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id polybar-msg cmd restart
@@ -138,6 +156,13 @@ exec --no-startup-id feh --bg-scale ~/Wallpapers/wall.webp
  exec --no-startup-id firefox
  exec --no-startup-id spotify
 
-for_window [class="org.wezfurlong.wezterm"] move to workspace 1
-for_window [class="firefox"]                move to workspace 2
-for_window [class="Spotify"]                move to workspace 3
+assign [class="org.wezfurlong.wezterm"]  $ws1
+assign [class="discord"]                 $ws4
+assign [class="Microsoft Teams.*"]       $ws5
+assign [class="Spotify"]                 $ws3
+ 
+
+# don't assign firefox maybe I'll still want to more it around
+# entertainment goes to 10 everything else to 2
+for_window [class="firefox" title=".*(?!YouTube|Netflix).*"]   move to workspace $ws2
+for_window [class="firefox" title=".*(YouTube|Netflix).*"]     move to workspace $ws10
