@@ -1,63 +1,47 @@
 matches:
-  - trigger: ":eur"
+  - trigger: ";eur"
     replace: €
-  - trigger: ":shrug"
+  - trigger: ";shrug"
     replace: ¯\_(ツ)_/¯
-  - trigger: ":flipt"
+  - trigger: ";flipt"
     replace: (╯°□°)╯︵ ┻━┻
-  - trigger: ":date"
+  - trigger: ";date"
     replace: "{{mydate}}"
     vars:
       - name: mydate
         type: date
         params:
           format: "%d/%m/%Y"
-  - trigger: ":isodate"
+  - trigger: ";isodate"
     replace: "{{isodate}}"
     vars:
       - name: isodate
         type: date
         params:
           format: "%Y-%m-%d"
-  - trigger: ":eyes"
+  - trigger: ";eyes"
     replace: 👀
-  - trigger: ":music"
+  - trigger: ";music"
     replace: 🎵
-  - trigger: ":small"
+  - trigger: ";small"
     replace: 🤏
-  - trigger: ":think"
+  - trigger: ";think"
     replace: 🤔
-  - trigger: ":imp"
+  - trigger: ";imp"
     replace: 😈
-  - trigger: ":sparkle"
+  - trigger: ";sparkle"
     replace: ✨
-  - trigger: ":skull"
+  - trigger: ";skull"
     replace: 💀
-  - trigger: ":sweat"
+  - trigger: ";sweat"
     replace: 😅
-  - trigger: ":scream"
+  - trigger: ";scream"
     replace: 😱
   - trigger: "deg C"
     replace: "°C"
-  - trigger: ":ez"
-    replace: "hx ~/.zshrc && source ~/.zshrc"
-  - trigger: "git unwip"
-    replace: "git reset HEAD^"
   - trigger: "helene"
     replace: "Hélène"
   - trigger: "Helene"
     replace: "Hélène"
-  - trigger: :hmt
+  - trigger: ;hmt
     replace: HydroMT
-  - trigger: "|pparam"
-    replace: |
-      @pytest.mark.parametrize(
-      "test_case",
-      [
-        {
-            "name": "aws_data",
-            "data": ,
-        },
-      ],
-      ids=lambda x: x["name"],
-      )

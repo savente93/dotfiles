@@ -25,6 +25,9 @@ if status is-interactive
     abbr --add gmm git merge main
     abbr --add gco git checkout
     abbr --add glo git log --graph --decorate --pretty=oneline --abbrev-commit
+    abbr --add gu gitui
+
+
     # fish keeps trying to steal my quotes >:(
     abbr --add gbr -- git branch --format='\'%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]\''
 
@@ -32,9 +35,9 @@ if status is-interactive
     abbr --add gfp git fetch --all --prune
 
     # work
-    abbr --add pt pixi run -e full-py39 test-lf
-    abbr --add ptt pixi run -e full-py39 test
-    abbr --add pe pixi run -e full-py39 hx .
-    abbr --add pi pixi run -e full-py39 ipython
+    abbr --add pt pixi run -e default test-lf
+    abbr --add ptt pixi run -e default test
+    abbr --add pe pixi run -e default helix .
+    abbr --add pi pixi run -e default ipython
 
 end
