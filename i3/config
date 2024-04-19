@@ -168,3 +168,4 @@ assign [class="steam"]                   $ws8
 # entertainment goes to 10 everything else to 2
 for_window [class="firefox" title=".*(?!YouTube|Netflix).*"]   move to workspace $ws2
 for_window [class="firefox" title=".*(YouTube|Netflix).*"]     move to workspace $ws10
+for_window [class="freetube" ]     move to workspace $ws10
