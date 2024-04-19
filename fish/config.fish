@@ -27,7 +27,6 @@ if status is-interactive
     abbr --add glo git log --graph --decorate --pretty=oneline --abbrev-commit
     abbr --add gu gitui
 
-
     # fish keeps trying to steal my quotes >:(
     abbr --add gbr -- git branch --format='\'%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:blue)(%(committerdate:short)) [%(authorname)]\''
 
