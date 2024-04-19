@@ -2,6 +2,21 @@
 
 polybar-msg cmd quit
 
+HOSTNAME=$(hostnamectl | grep hostname | awk '{print$3}')
+
+POLYBAR_MODULES='time sep date sep bluetooth sep audio '
+
+if [ $(upower -e | grep BAT) ]; then
+	POLYBAR_MODULES+=' sep battery'
+fi
+
+if [ $(nmcli device | grep wifi | wc -l) ]; then
+	POLYBAR_MODULES+=' sep wifi'
+fi
+
+echo $POLYBAR_MODULES
+export POLYBAR_MODULES
+
 xinput | grep Touchpad
 export HAS_TOUCHPAD=$?
 
