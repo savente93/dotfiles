@@ -19,7 +19,7 @@ fi
 
 export POLYBAR_MODULES
 
-xinput | grep Touchpad 2 /dev/null &>1
+xinput | grep Touchpad >/dev/null
 export HAS_TOUCHPAD=$?
 
 if type "xrandr"; then
