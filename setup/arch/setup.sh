@@ -90,7 +90,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils pipewire pipewire-audio pipewire-pulse polybar redshift rofi rofi-bluetooth-git sddm ttf-firacode-nerd ttf-font-awesome tz wireplubmer xorg-xinput xss-lock yazi --noconfirm
+	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils pipewire pipewire-audio pipewire-pulse polybar redshift rofi rofi-bluetooth-git sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplubmer xorg-xinput xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
@@ -106,6 +106,7 @@ function config_de() {
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
 	sudo ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi /usr/share/rofi/themes/launcher.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/ -f
+	sudo ln -s ~/Documents/dotfiles/sddm.conf /etc/
 
 }
 
