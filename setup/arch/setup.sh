@@ -47,7 +47,7 @@ function setup_dev_stuff() {
 	sudo systemctl start docker.service
 
 	#LSPs/linters
-	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt taplo-cli; do
+	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server taplo-cli; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
