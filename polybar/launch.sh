@@ -10,16 +10,16 @@ if [ $(upower -e | grep BAT) ]; then
 	POLYBAR_MODULES+=' sep battery'
 fi
 
-if [ $(nmcli device | grep ethernet | wc -l) ]; then
+if [ $(nmcli device | grep ethernet | wc -l) -gt 0 ]; then
 	POLYBAR_MODULES+=' sep eth'
-elif [ $(nmcli device | grep wifi | wc -l) ]; then
+elif [ $(nmcli device | grep wifi | wc -l) -gt 0 ]; then
 	POLYBAR_MODULES+=' sep wifi'
+
 fi
 
-echo $POLYBAR_MODULES
 export POLYBAR_MODULES
 
-xinput | grep Touchpad
+xinput | grep Touchpad 2 /dev/null &>1
 export HAS_TOUCHPAD=$?
 
 if type "xrandr"; then
