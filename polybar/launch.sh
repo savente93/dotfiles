@@ -19,9 +19,13 @@ fi
 
 export POLYBAR_MODULES
 
-xinput | grep Touchpad >/dev/null
-export HAS_TOUCHPAD=$?
+if [ $(xinput | grep Touchpad | wc -l) -gt 0 ]; then
+	HAS_TOUCHPAD=1
+else
+	HAS_TOUCHPAD=0
+fi
 
+export HAS_TOUCHPAD
 if type "xrandr"; then
 	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
 		MONITOR=$m polybar main 2>&1 | tee -a /tmp/polybar.log &
