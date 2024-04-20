@@ -10,7 +10,9 @@ if [ $(upower -e | grep BAT) ]; then
 	POLYBAR_MODULES+=' sep battery'
 fi
 
-if [ $(nmcli device | grep wifi | wc -l) ]; then
+if [ $(nmcli device | grep ethernet | wc -l) ]; then
+	POLYBAR_MODULES+=' sep eth'
+elif [ $(nmcli device | grep wifi | wc -l) ]; then
 	POLYBAR_MODULES+=' sep wifi'
 fi
 
