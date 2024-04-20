@@ -15,7 +15,7 @@ function install_paru() {
 
 function basic_system_setup() {
 
-	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire ufw xorg-server --noconfirm
+	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire ufw nm-connection-editor xorg-server --noconfirm
 
 	timedatectl set-timezone Europe/Amsterdam
 
