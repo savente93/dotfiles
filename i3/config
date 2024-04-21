@@ -162,10 +162,10 @@ assign [class="Spotify"]                 $ws3
 assign [class="discord"]                 $ws4
 assign [class="Microsoft Teams.*"]       $ws5
 assign [class="steam"]                   $ws8
+assign [class="freetube"]                   $ws10
  
 
 # don't assign firefox maybe I'll still want to more it around
 # entertainment goes to 10 everything else to 2
-for_window [class="firefox" title=".*(?!YouTube|Netflix).*"]   move to workspace $ws2
-for_window [class="firefox" title=".*(YouTube|Netflix).*"]     move to workspace $ws10
-for_window [class="freetube" ]     move to workspace $ws10
+for_window [class="firefox" title=".*(?!Netflix).*"]   move to workspace $ws2
+for_window [class="firefox" title=".*(Netflix).*"]     move to workspace $ws10
