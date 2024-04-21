@@ -90,7 +90,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils pipewire pipewire-audio pipewire-pulse pulsemixer polybar qpwgraph redshift rofi rofi-bluetooth-git sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplubmer xorg-xinput xss-lock yazi --noconfirm
+	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock nvidia nvidia-utils pipewire pipewire-audio pipewire-pulse pulsemixer polybar qpwgraph redshift rofi rofi-bluetooth-git sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplumber xorg-xinput xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
