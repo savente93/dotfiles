@@ -18,8 +18,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 bindsym $mod+Shift+q kill
-bindsym $super+Return exec wezterm
-bindsym $super+Shift+Return exec alacritty
+bindsym $mod+Return exec wezterm
+bindsym $mod+Shift+Return exec alacritty
 
 # change focus
 bindsym $mod+j focus left
