@@ -13,7 +13,7 @@ function install_paru() {
 	fi
 }
 
-function basic_system_setup() {
+function setup_basic_system() {
 
 	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire ufw nm-connection-editor xorg-server --noconfirm
 
@@ -32,7 +32,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall cargo-cache cargo-audit cargo-tarpaulin cargo-update rustup difftastic dust eza fd git-delta gitui helix pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitui helix pixi ripgrep ruff rustup starship stylua topgrade wezterm zola zoxide; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
@@ -93,7 +93,7 @@ function setup_creature_comforts() {
 
 }
 
-function config_de() {
+function setup_de() {
 	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock mesa pipewire pipewire-audio pipewire-pulse pulsemixer polybar qpwgraph redshift rofi sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplumber xorg-xinput xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
@@ -114,7 +114,7 @@ function config_de() {
 
 }
 
-function clone_dotfiles() {
+function setup_dotfiles() {
 	if [ ! -d ~/Documents/dotfiles ]; then
 		git clone https://github.com/savente93/dotfiles.git ~/Documents/dotfiles
 		pushd ~/Documents/dotfiles
@@ -204,10 +204,10 @@ function setup_security() {
 
 function all() {
 	install_paru
-	basic_system_setup
-	clone_dotfiles
+	setup_basic_system
+	setup_dotfiles
 	setup_dev_stuff
 	setup_creature_comforts
-	config_de
+	setup_de
 	setup_security
 }
