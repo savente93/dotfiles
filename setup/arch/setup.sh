@@ -19,7 +19,7 @@ function basic_system_setup() {
 
 	timedatectl set-timezone Europe/Amsterdam
 
-	for s in NetworkManager bluetooth chronyd sshd ufw pulseaudio; do
+	for s in NetworkManager bluetooth chronyd sshd ufw pipewire; do
 		sudo systemctl enable $s.service
 		sudo systemctl start $s.service
 	done
@@ -32,7 +32,7 @@ function basic_system_setup() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-binstall cargo-cache difftastic dust eza fd git-delta gitui helix pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-binstall cargo-cache cargo-audit cargo-tarpaulin cargo-update rustup difftastic dust eza fd git-delta gitui helix pixi ripgrep ruff starship stylua topgrade wezterm zola zoxide; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
@@ -78,7 +78,11 @@ function setup_dev_stuff() {
 
 function setup_creature_comforts() {
 
-	paru -S discord spotify zoom teams espanso-x11 --noconfirm
+	paru -S discord spotify zoom teams espanso-x11 cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+
+	# printer stuff
+	systemctl enable --now cups.service
+	sudo systemctl enable --now cups
 
 	# setup espanso
 	espanso service register
@@ -90,7 +94,7 @@ function setup_creature_comforts() {
 }
 
 function config_de() {
-	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock mesa pipewire pipewire-audio pipewire-pulse pulsemixer polybar qpwgraph redshift rofi rofi-bluetooth-git sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplumber xorg-xinput xss-lock yazi --noconfirm
+	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock mesa pipewire pipewire-audio pipewire-pulse pulsemixer polybar qpwgraph redshift rofi sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplumber xorg-xinput xss-lock yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
