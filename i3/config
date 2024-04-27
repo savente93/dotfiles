@@ -101,7 +101,7 @@ bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
 bindsym Mod1+l exec --no-startup-id i3lock  -i ~/Wallpapers/locked.png 
 bindsym Print exec --no-startup-id flameshot gui
-bindsym $mod+b exec --no-startup-id rofi-bluetooth
+bindsym $mod+b exec --no-startup-id bash -c "[ -z $(bluetoothctl devices Connected) ] && bluetoothctl connect 88:C9:E8:E5:F9:E4 || bluetoothctl disconnect 88:C9:E8:E5:F9:E4"
 
 
 mode "resize" {
