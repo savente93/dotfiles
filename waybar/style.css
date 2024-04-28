@@ -1,21 +1,35 @@
+
+
+@define-color bg #11111b;
+@define-color text #cdd6f4;
+@define-color bg-btn #313244;
+@define-color text-focus #268bd2;
+@define-color battery #a6e3a1;
+@define-color purple #30304A;
+@define-color sky #89dceb;
+@define-color sapphire #74c7ec;
+
+
 * {
 	font-size: 20px;
 	font-family: monospace;
 }
 
 window#waybar {
-	background: #292b2e;
-	color: #fdf6e3;
+	background: @bg;
+	color: @text;
 }
 
 #custom-right-arrow-dark,
 #custom-left-arrow-dark {
-	color: #1a1a1a;
+	color: @bg-btn;
+	font-size: 2rem;
 }
 #custom-right-arrow-light,
 #custom-left-arrow-light {
-	color: #292b2e;
-	background: #1a1a1a;
+	font-size: 2rem;
+	color: @bg;
+	background: @bg-btn;
 }
 
 #workspaces,
@@ -28,40 +42,30 @@ window#waybar {
 #battery,
 #disk,
 #tray {
-	background: #1a1a1a;
+	background: @bg-btn;
 }
 
 #workspaces button {
-	padding: 0 2px;
-	color: #fdf6e3;
+	color: @text;
 }
 #workspaces button.focused {
-	color: #268bd2;
+	color: @text-focus;
 }
 #workspaces button:hover {
 	box-shadow: inherit;
 	text-shadow: inherit;
 }
 #workspaces button:hover {
-	background: #1a1a1a;
-	border: #1a1a1a;
+	background: @bg-btn;
+	border: @bg-btn;
 	padding: 0 3px;
 }
 
 #wireplumber {
-	color: #268bd2;
-}
-#memory {
-	color: #2aa198;
-}
-#cpu {
-	color: #6c71c4;
+	color: @sapphire;
 }
 #battery {
-	color: #859900;
-}
-#disk {
-	color: #b58900;
+	color: @battery;
 }
 
 #clock,

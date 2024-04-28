@@ -8,11 +8,9 @@
 	],
 	"modules-center": [
 		"custom/left-arrow-dark",
-		"clock#1",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
 		"clock#2",
-		"custom/right-arrow-dark",
+		"custom/left-arrow-light",
+		"custom/space",
 		"custom/right-arrow-light",
 		"clock#3",
 		"custom/right-arrow-dark"
@@ -28,6 +26,10 @@
 		"tray"
 	],
 
+	"custom/space": {
+		"format": " ",
+		"tooltip": false
+	},
 	"custom/left-arrow-dark": {
 		"format": "",
 		"tooltip": false
@@ -49,34 +51,20 @@
 		"disable-scroll": true,
 		"format": "{name}"
 	},
-
-	"clock#1": {
-		"format": "{:%a}",
-		"tooltip": false
-	},
 	"clock#2": {
 		"format": "{:%H:%M}",
 		"tooltip": false
 	},
 	"clock#3": {
-		"format": "{:%m-%d}",
+		"format": "{:%a %m/%d}",
 		"tooltip": false
 	},
 
 	"wireplumber": {
-		"format": "{icon} {volume:2}%",
-		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
-		"format-icons": {
-			"headphones": "",
-			"default": [
-				"",
-				""
-			]
-		},
-		"scroll-step": 5,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
+	    "format": "{volume}% {icon}",
+	    "format-muted": "",
+	    "on-click": "qpwgraph",
+	    "format-icons": [" ", " ", " "]
 	},
 	"battery": {
 		"states": {
