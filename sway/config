@@ -1,0 +1,151 @@
+set $mod Mod4
+set $monitor_left DP-2
+set $monitor_right DP-0
+
+default_border none 
+titlebar_border_thickness 0
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym XF86Search exec bemenu-run
+
+floating_modifier $mod
+
+bindsym $mod+Shift+q kill
+
+# in case configs get borked
+bindsym $mod+Return exec wezterm
+bindsym $mod+Shift+Return exec alacritty
+
+# change focus
+bindsym $mod+j focus up
+bindsym $mod+k focus down
+bindsym $mod+l focus right
+bindsym $mod+h focus left
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+j move up
+bindsym $mod+Shift+l move right
+
+# move workspaces between monitors
+bindsym $mod+greater move workspace to output right
+bindsym $mod+less move workspace to output left
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload config
+bindsym $mod+Shift+r reload 
+
+# launchers
+bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
+bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
+
+# lockscreen
+bindsym ctrl+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png 
+exec swayidle -w \
+	timeout 600 'swaylock -f --ignore-empty-password -i ~/Wallpapers/locked.png ' \
+	timeout 605 'swaymsg "output * power off"' \
+	resume 'swaymsg "output * power on"' \
+    before-sleep 'playerctl pause'\
+    before-sleep 'swaylock --ignore-empty-password -i ~/Wallpapers/locked.png '
+
+# screenshots
+bindsym Print exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
+
+
+workspace $ws1   output $monitor_right 
+workspace $ws2   output $monitor_left
+workspace $ws3   output $monitor_left
+workspace $ws4   output $monitor_left
+workspace $ws5   output $monitor_right
+workspace $ws6   output $monitor_right
+workspace $ws7   output $monitor_right
+workspace $ws8   output $monitor_right
+workspace $ws9   output $monitor_left
+workspace $ws10  output $monitor_left
+
+# some stuff is allowed to float
+for_window [window_role="About"]          floating enable
+for_window [window_role="Organizer"]      floating enable
+for_window [window_role="Preferences"]    floating enable
+for_window [window_role="bubble"]         floating enable
+for_window [window_role="page-info"]      floating enable
+for_window [window_role="pop-up"]         floating enable
+for_window [window_role="task_dialog"]    floating enable
+for_window [window_role="toolbox"]        floating enable
+for_window [window_role="webconsole"]     floating enable
+for_window [window_type="dialog"]         floating enable
+for_window [window_type="menu"]           floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [window_role="alert"]          floating enable
+
+# make sure apps stay where I like them
+assign [class="org.wezfurlong.wezterm"]  $ws1
+assign [class="firefox"]                 $ws2
+assign [class="Spotify"]                 $ws3
+assign [class="discord"]                 $ws4
+assign [class="Microsoft Teams.*"]       $ws5
+assign [class="steam"]                   $ws8
+assign [class="freetube"]                $ws10
+ 
+# waybar
+exec_always --no-startup-id sh $HOME/.config/waybar/launch.sh
+
+# wallpaper
+output "*" bg $HOME/Wallpapers/wall.webp  fill
+
+# nightlight
+ exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
+
+# starup apps
+exec --no-startup-id wezterm
+exec --no-startup-id firefox
+exec --no-startup-id spotify
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+

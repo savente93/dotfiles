@@ -15,7 +15,7 @@ function install_paru() {
 
 function setup_basic_system() {
 
-	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire ufw nm-connection-editor xorg-server --noconfirm
+	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire sway ufw nm-connection-editor --noconfirm
 
 	timedatectl set-timezone Europe/Amsterdam
 
@@ -78,7 +78,7 @@ function setup_dev_stuff() {
 
 function setup_creature_comforts() {
 
-	paru -S spotify zoom flatpak espanso-x11 cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+	paru -S discord spotify zoom teams espanso-wayland cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
 
 	flatpak install teams
 	flatpak install discord
@@ -98,7 +98,7 @@ function setup_creature_comforts() {
 }
 
 function setup_de() {
-	sudo paru -S brightnessctl feh firefox flameshot i3-wm i3lock mesa pipewire pipewire-audio pipewire-pulse pulsemixer polybar qpwgraph redshift rofi sddm sddm-catppuccin-git ttf-firacode-nerd ttf-font-awesome tz wireplumber xorg-xinput xss-lock yazi --noconfirm
+	sudo paru -S brightnessctl firefox gammastep grim grim mesa pipewire pipewire-audio pipewire-pulse pulsemixer qpwgraph rofi sddm sddm-catppuccin-git slurp swaybg swaylock swayidle swappy ttf-firacode-nerd ttf-font-awesome tz webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal-wlr yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
@@ -106,10 +106,10 @@ function setup_de() {
 
 	systemctl --user --now enable wireplumber
 
-	rm -rf ~/.config/i3
-	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
-	rm -rf ~/.config/polybar
-	ln -s ~/Documents/dotfiles/polybar ~/.config/ -f
+	rm -rf ~/.config/sway
+	ln -s ~/Documents/dotfiles/sway ~/.config/ -f
+	rm -rf ~/.config/waybar
+	ln -s ~/Documents/dotfiles/waybar ~/.config/ -f
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi /usr/share/rofi/themes/powermenu.rasi -f
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/powermenu.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
