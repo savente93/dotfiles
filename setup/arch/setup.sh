@@ -100,6 +100,8 @@ function setup_de() {
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
 	curl https://wallpapercave.com/wp/wp2639448.png -o ~/.wallpapers/locked.png
 
+	systemctl --user --now enable wireplumber
+
 	rm -rf ~/.config/i3
 	ln -s ~/Documents/dotfiles/i3 ~/.config/ -f
 	rm -rf ~/.config/polybar
