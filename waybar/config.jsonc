@@ -109,11 +109,11 @@
     "network":{
         "interface":"wlp2s0",
         "format-wifi":" ",
-        "format-ethernet":"{ipaddr}/{cidr} 󰊗",
-        "format-disconnected":"",
-        "tooltip-format":"{ifname} via {gwaddr} 󰊗",
+        "format-ethernet":"{ipaddr}/{cidr} 󰊗 ",
+        "format-disconnected":" ",
+        "tooltip-format":"{ifname} via {gwaddr} 󰊗 ",
         "tooltip-format-wifi":"{essid}",
-        "tooltip-format-ethernet":"{ifname} ",
+        "tooltip-format-ethernet":"{ifname}  ",
         "tooltip-format-disconnected":"D:",
         "max-length":50
     },

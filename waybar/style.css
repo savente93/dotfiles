@@ -68,7 +68,7 @@ window#waybar {
 
 #battery.good 
 {
-	color: @green;
+	color: @text;
 }
 #battery.full 
 {
