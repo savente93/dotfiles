@@ -4,7 +4,9 @@
 @define-color text #cdd6f4;
 @define-color bg-btn #313244;
 @define-color text-focus #268bd2;
-@define-color battery #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color red #f38ba8;
+@define-color green #a6e3a1;
 @define-color purple #30304A;
 @define-color sky #89dceb;
 @define-color sapphire #74c7ec;
@@ -33,14 +35,13 @@ window#waybar {
 }
 
 #workspaces,
-#clock.1,
-#clock.2,
-#clock.3,
+#clock,
 #wireplumber,
-#memory,
-#cpu,
+#bluetooth,
 #battery,
-#disk,
+#network,
+#backlight,
+#mpris,
 #tray {
 	background: @bg-btn;
 }
@@ -51,21 +52,41 @@ window#waybar {
 #workspaces button.focused {
 	color: @text-focus;
 }
-#workspaces button:hover {
-	box-shadow: inherit;
-	text-shadow: inherit;
-}
-#workspaces button:hover {
-	background: @bg-btn;
-	border: @bg-btn;
-	padding: 0 3px;
-}
 
 #wireplumber {
 	color: @sapphire;
 }
-#battery {
-	color: @battery;
+#wireplumber.muted {
+	color: @red;
+}
+#battery.normal {
+	color: @text;
+}
+#battery.charging {
+	color: @green;
+}
+
+#battery.good 
+{
+	color: @green;
+}
+#battery.full 
+{
+	color: @green;
+}
+
+#batter.low {
+	color: @yellow;
+}
+#battery.critical {
+	color: @red;
+}
+
+#network.wifi,#network.ethernet  {
+	color: @green;
+}
+#network.disconnected {
+	color: @red;
 }
 
 #clock,
@@ -73,6 +94,7 @@ window#waybar {
 #memory,
 #cpu,
 #battery,
-#disk {
+#mpris,
+#network {
 	padding: 0 10px;
 }
