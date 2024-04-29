@@ -12,7 +12,7 @@ no_retry = true
 pre_sudo = true
 
 display_time = true
-cleanup = true
+cleanup = false
 
 [composer]
 self_update = true
