@@ -5,7 +5,7 @@ set $monitor_right DP-0
 default_border none 
 titlebar_border_thickness 0
 
-bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5 && pulsemixer --max-volume 100 
+bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5 --max-volume 100 
 bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -5 
 bindsym XF86AudioMute exec pulsemixer --toggle-mute 
 bindsym XF86AudioMicMute exec pulsemixer --toggle-mute 
