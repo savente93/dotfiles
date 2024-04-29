@@ -124,7 +124,7 @@ for_window [window_role="alert"]          floating enable
 
 # make sure apps stay where I like them
 assign [class="org.wezfurlong.wezterm"]  $ws1
-assign [class="firefox"]                 $ws2
+assign [app_id="firefox"]                 $ws2
 assign [class="Spotify"]                 $ws3
 assign [class="discord"]                 $ws4
 assign [class="Microsoft Teams.*"]       $ws5
