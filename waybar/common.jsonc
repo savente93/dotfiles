@@ -12,21 +12,6 @@
         "clock#date",
         "custom/right-arrow-dark"
     ],
-    "modules-right":[
-        "custom/left-arrow-dark",
-        "mpris",
-        "custom/left-arrow-light",
-        "custom/left-arrow-dark",
-        "wireplumber",
-        "custom/left-arrow-light",
-        "custom/left-arrow-dark",
-        "battery",
-        "custom/left-arrow-light",
-        "custom/left-arrow-dark",
-        "network",
-        "custom/left-arrow-light",
-        "custom/left-arrow-dark"
-    ],
     "custom/space":{
         "format":" ",
         "tooltip":false
