@@ -107,7 +107,6 @@
         }
     },
     "network":{
-        "interface":"wlp2s0",
         "format-wifi":" ",
         "format-ethernet":"{ipaddr}/{cidr} 󰊗 ",
         "format-disconnected":" ",
