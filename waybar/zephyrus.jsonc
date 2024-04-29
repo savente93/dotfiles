@@ -1,6 +1,6 @@
 
 {
-  "include":["common.jsonc"],
+  "include":["~/.config/waybar/common.jsonc"],
   
     "modules-right":[
         "custom/left-arrow-dark",
