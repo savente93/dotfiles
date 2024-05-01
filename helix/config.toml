@@ -17,9 +17,9 @@ idle-timeout = 0
 completion-trigger-len = 1
 
 [editor.statusline]
-left = ["diagnostics", "spacer", "spinner", "spacer", "version-control"]
+left = ["spinner", "spacer", "diagnostics", "spacer", "file-name"]
 center = []
-right = ["position", "spacer", "file-type"]
+right = ["version-control", "spacer", "position"]
 separator = "│"
 
 [editor.lsp]
