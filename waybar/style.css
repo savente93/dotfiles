@@ -51,6 +51,7 @@ window#waybar {
 }
 #workspaces button.focused {
 	color: @text-focus;
+	/* border-bottom: 3px solid @text-focus; */
 }
 
 #wireplumber {
