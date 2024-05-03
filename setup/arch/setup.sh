@@ -78,7 +78,11 @@ function setup_dev_stuff() {
 
 function setup_creature_comforts() {
 
-	paru -S discord spotify zoom teams espanso-x11 cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+	paru -S spotify zoom flatpak espanso-x11 cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+
+	flatpak install teams
+	flatpak install discord
+	flatpak install steam
 
 	# printer stuff
 	systemctl enable --now cups.service
