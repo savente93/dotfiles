@@ -63,14 +63,12 @@ window#waybar {
 #battery.normal {
 	color: @text;
 }
-#battery.charging {
-	color: @green;
-}
-
 #battery.good 
 {
 	color: @text;
 }
+
+#battery.charging,
 #battery.full 
 {
 	color: @green;
