@@ -90,6 +90,10 @@ exec swayidle -w \
     before-sleep 'playerctl pause'\
     before-sleep 'swaylock --ignore-empty-password -i ~/Wallpapers/locked.png '
 
+for_window [class="steam_app*"] inhibit_idle focus
+for_window [class="zoom"] inhibit_idle focus
+for_window [app_id="firefox"] inhibit_idle fullscreen
+
 # screenshots
 bindsym Print exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
 
