@@ -51,7 +51,10 @@ window#waybar {
 }
 #workspaces button.focused {
 	color: @text-focus;
-	/* border-bottom: 3px solid @text-focus; */
+}
+#workspaces button.urgent {
+	color: @red;
+	border: solid @red 1px;
 }
 
 #wireplumber {
