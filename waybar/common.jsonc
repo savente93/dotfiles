@@ -115,8 +115,8 @@
             "firefox":" "
         },
         "status-icons":{
-            "paused":"",
-            "playing":"",
+            "playing":"",
+            "paused":"",
             "stopped":""
         }
     },
