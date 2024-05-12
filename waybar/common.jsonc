@@ -41,7 +41,7 @@
         "tooltip":false
     },
     "clock#date":{
-        "format":" {:%a %m/%d}",
+        "format":" {:%a %d/%m}",
         "tooltip-format":"<tt>{calendar}</tt>",
         "calendar":{
             "mode":"month",
