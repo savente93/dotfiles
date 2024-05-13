@@ -31,5 +31,6 @@ visudo
 passwd sam
 mkdir -p /home/sam/.config/sway
 cp /etc/sway/config /home/sam/.config/sway
+chown sam /home/sam/.config/sway
 
 bootctl list

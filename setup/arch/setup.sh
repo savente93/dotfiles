@@ -78,12 +78,12 @@ function setup_dev_stuff() {
 
 function setup_creature_comforts() {
 
-	paru -S flatpak espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+	paru -S flatpak steam-devices-git espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
 
-	flatpak install teams
-	flatpak install discord
-	flatpak install spotify
-	flatpak install zoom
+	flatpak install -y com.discordapp.Discord
+	flatpak install -y com.github.IsmaelMartinez.teams_for_linux
+	flatpak install -y com.spotify.Client
+	flatpak install -y com.valvesoftware.Steam
 
 	# printer stuff
 	systemctl enable --now cups.service
