@@ -32,7 +32,7 @@ swapon /dev/nvme0n1p2
 reflector
 
 #install what we'll need for system setup after reboot
-pacstrap -K /mnt amd-ucode base curl firefox git sway linux linux-firmware man-db man-pages networkmanager mesa openssl sddm sof-firmware sudo texinfo vim wezterm alacritty
+pacstrap -K /mnt amd-ucode base curl firefox git sway xorg-server-xwayland foot linux linux-firmware man-db man-pages networkmanager mesa openssl sddm sof-firmware sudo texinfo vim wezterm alacritty
 
 genfstab -U /mnt >>/mnt/etc/fstab
 

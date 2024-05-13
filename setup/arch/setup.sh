@@ -2,7 +2,7 @@
 
 function install_paru() {
 	if ! command -v paru &>/dev/null; then
-		sudo pacman -S --needed base-devel
+		sudo pacman -S --needed base-devel rustup
 		git clone https://aur.archlinux.org/paru.git
 		cd paru
 		makepkg -si
@@ -15,14 +15,15 @@ function install_paru() {
 
 function setup_basic_system() {
 
-	paru -S base-devel blueman chrony curl dmenu fish keychain openssh openssl pipewire sway ufw nm-connection-editor --noconfirm
+	paru -S base-devel blueman chrony curl wofi fish keychain openssh openssl pipewire pipewire-pulse sway ufw xorg-server-xwayland nm-connection-editor --noconfirm
 
 	timedatectl set-timezone Europe/Amsterdam
 
-	for s in NetworkManager bluetooth chronyd sshd ufw pipewire; do
-		sudo systemctl enable $s.service
-		sudo systemctl start $s.service
+	for s in NetworkManager bluetooth chronyd sshd ufw; do
+		sudo systemctl enable --now $s.service
 	done
+
+	systemctl enable --now --user pipewire-pulse
 
 	# make sure laptop hybernates when battery is too low
 	echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
@@ -40,11 +41,9 @@ function setup_dev_stuff() {
 
 	# runtimes/compilers
 	paru -S docker npm --noconfirm
-	sudo groupadd docker
 	sudo usermod -aG docker sam
 	newgrp docker
-	sudo systemctl enable docker.service
-	sudo systemctl start docker.service
+	sudo systemctl enable --now docker.service
 
 	#LSPs/linters
 	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server taplo-cli; do
@@ -72,13 +71,14 @@ function setup_dev_stuff() {
 	ln -s ~/Documents/dotfiles/topgrade.toml ~/.config/topgrade.toml -f
 	ln -s ~/Documents/dotfiles/fish ~/.config/ -f
 	ln -s ~/Documents/dotfiles/paru/ ~/.config/ -f
-	ln -s ~/Documents/dotfiles/pacman.conf /etc/pacman.conf -f
+	sudo rm /etc/pacman.conf
+	sudo ln -s ~/Documents/dotfiles/pacman.conf /etc/pacman.conf -f
 
 }
 
 function setup_creature_comforts() {
 
-	paru -S espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+	paru -S flatpak espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
 
 	flatpak install teams
 	flatpak install discord
@@ -99,7 +99,7 @@ function setup_creature_comforts() {
 }
 
 function setup_de() {
-	sudo paru -S brightnessctl firefox gammastep grim grim mesa pipewire pipewire-audio lxappearance qpwgraph rofi sddm sddm-catppuccin-git slurp swaybg swaylock swayidle swappy ttf-firacode-nerd ttf-font-awesome tz webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal-wlr yazi --noconfirm
+	sudo paru -S brightnessctl firefox gammastep grim grim mesa pipewire pipewire-audio lxappearance qpwgraph sddm sddm-catppuccin-git slurp swaybg swaylock swayidle swappy ttf-firacode-nerd ttf-font-awesome tz webp-pixbuf-loader waybar wireplumber xdg-desktop-portal xdg-desktop-portal-wlr yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp

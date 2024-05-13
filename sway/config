@@ -134,7 +134,7 @@ output "*" bg $HOME/Wallpapers/wall.webp  fill
 # starup apps
 exec --no-startup-id wezterm
 exec --no-startup-id firefox
-exec --no-startup-id spotify
+exec --no-startup-id flatpak run com.spotify.Client
 
 input type:touchpad {
     tap enabled
