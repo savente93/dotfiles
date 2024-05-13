@@ -78,11 +78,12 @@ function setup_dev_stuff() {
 
 function setup_creature_comforts() {
 
-	paru -S discord spotify zoom teams espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+	paru -S espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
 
 	flatpak install teams
 	flatpak install discord
-	flatpak install steam
+	flatpak install spotify
+	flatpak install zoom
 
 	# printer stuff
 	systemctl enable --now cups.service
@@ -98,7 +99,7 @@ function setup_creature_comforts() {
 }
 
 function setup_de() {
-	sudo paru -S brightnessctl firefox gammastep grim grim mesa pipewire pipewire-audio pipewire-pulse pulsemixer qpwgraph rofi sddm sddm-catppuccin-git slurp swaybg swaylock swayidle swappy ttf-firacode-nerd ttf-font-awesome tz webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal-wlr yazi --noconfirm
+	sudo paru -S brightnessctl firefox gammastep grim grim mesa pipewire pipewire-audio lxappearance qpwgraph rofi sddm sddm-catppuccin-git slurp swaybg swaylock swayidle swappy ttf-firacode-nerd ttf-font-awesome tz webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal-wlr yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
