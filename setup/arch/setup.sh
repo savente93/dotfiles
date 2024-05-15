@@ -71,6 +71,7 @@ function setup_dev_stuff() {
 	ln -s ~/Documents/dotfiles/topgrade.toml ~/.config/topgrade.toml -f
 	ln -s ~/Documents/dotfiles/fish ~/.config/ -f
 	ln -s ~/Documents/dotfiles/paru/ ~/.config/ -f
+	ln -s ~/Documents/dotfiles/wireplumber/ ~/.config/ -f
 	sudo rm /etc/pacman.conf
 	sudo ln -s ~/Documents/dotfiles/pacman.conf /etc/pacman.conf -f
 
