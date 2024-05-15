@@ -94,11 +94,11 @@
     },
     "network":{
         "format-wifi":" ",
-        "format-ethernet":"{ipaddr}/{cidr} 󰊗 ",
+        "format-ethernet":"",
         "format-disconnected":" ",
-        "tooltip-format":"{ifname} via {gwaddr} 󰊗 ",
-        "tooltip-format-wifi":"{essid}",
-        "tooltip-format-ethernet":"{ifname}  ",
+        "tooltip-format":"{ipaddr}",
+        "tooltip-format-wifi":"{essid}({ipaddr})",
+        "tooltip-format-ethernet":"{ipaddr} ",
         "tooltip-format-disconnected":"D:",
         "max-length":50
     },
