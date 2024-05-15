@@ -6,6 +6,7 @@ if [[ $- != *i* ]]; then
 fi
 
 export TZ_LIST="Europe/Amsterdam,Home;America/Chicago,Wrezinsky;America/New_York,Kelly;Europe/London,Andy;Europe/London,Hannah;Europe/London,Jess"
+export PATH="/home/sam/.pixi/bin:$PATH"
 # maybe don't brick the system if fish isn't installed
 # don't ask me how I know that...
 if command -v fish 2>&1 >/dev/null; then
