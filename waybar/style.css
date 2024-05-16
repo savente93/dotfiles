@@ -101,5 +101,5 @@ window#waybar {
 #battery,
 #mpris,
 #network {
-	padding: 0 10px;
+	padding: 0 1rem;
 }
