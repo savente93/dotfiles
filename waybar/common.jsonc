@@ -94,7 +94,7 @@
     },
     "network":{
         "format-wifi":" ",
-        "format-ethernet":"",
+        "format-ethernet":"  ",
         "format-disconnected":" ",
         "tooltip-format":"{ipaddr}",
         "tooltip-format-wifi":"{essid}({ipaddr})",
