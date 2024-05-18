@@ -1,0 +1,4 @@
+ignore-empty-password
+show-failed-attempts
+indicator-idle-visible
+indicator-radius=75
