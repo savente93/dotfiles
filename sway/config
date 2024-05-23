@@ -13,6 +13,9 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked $mod+i exec playerctl play-pause
+bindsym --locked $mod+o exec playerctl next
+bindsym --locked $mod+u exec playerctl previous
 bindsym XF86Search exec bemenu-run
 
 floating_modifier $mod

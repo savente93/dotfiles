@@ -38,5 +38,5 @@
 [alias]
 	up = "!git remote update -p; git merge --ff-only @{u}"
 	unwip = reset HEAD^
-	wip = "!f(){ git add -A && git checkout -b $( date +\"%Y%m%d%H%m\") && git commit -m \"[no ci] WIP\" --no-verify && git push;};f"
+	wip = "!f(){ git add -A && git checkout -b wip-$( date +\"%Y%m%d%H%m\") && git commit -m \"[no ci] WIP\" --no-verify && git push;};f"
 	patch = !git --no-pager diff --no-color
