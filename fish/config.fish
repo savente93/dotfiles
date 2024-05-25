@@ -20,6 +20,12 @@ if status is-interactive
     # clean up empty dirs
     abbr --add ced fd . -te -td -x rmdir
 
+    # cargo 
+    abbr --add ct cargo test
+    abbr --add cb cargo build
+    abbr --add cc cargo check
+    abbr --add b bacon
+
     # git
     abbr --add gad git add -p
     abbr --add gst git status
