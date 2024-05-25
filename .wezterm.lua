@@ -136,7 +136,7 @@ return {
 	-----------
 	-- Fonts --
 	-----------
-	font = wezterm.font("FiraCode Nerd Font"),
+	font = wezterm.font_with_fallback { 'FiraCode Nerd Font', 'Noto Color Emoji', "Noto Serif CJK" },
 	font_size = 14.0,
 	-----------
 	-- Keys  --
