@@ -21,7 +21,7 @@ if status is-interactive
     abbr --add ced fd . -te -td -x rmdir
 
     # cargo 
-    abbr --add ct cargo test
+    abbr --add ct cargo nextest run
     abbr --add cb cargo build
     abbr --add cc cargo check
     abbr --add b bacon
