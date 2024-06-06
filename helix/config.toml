@@ -44,22 +44,22 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
+[keys.select]
+minus = "trim_selections"
+"`" = "switch_case"
+r = "replace_with_yanked"
+
 [keys.normal]
 minus = "trim_selections"
 "`" = "switch_case"
 ";" = "flip_selections"
 "esc" = ["collapse_selection", "keep_primary_selection"]
-"$" = "extend_to_line_end"
-"^" = "extend_to_line_start"
-"{" = "goto_prev_paragraph"
-"}" = "goto_next_paragraph"
 D = "delete_selection_noyank"
 C = "change_selection_noyank"
 M = "join_selections"
 J = "copy_selection_on_next_line"
 K = "copy_selection_on_prev_line"
 r = "replace_with_yanked"
-"#" = "toggle_comments"
 Y = ":clipboard-yank-join"
 C-k = [
   "extend_to_line_bounds",
@@ -69,13 +69,19 @@ C-k = [
 ]
 C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 
-[keys.select]
-minus = "trim_selections"
-"`" = "switch_case"
-r = "replace_with_yanked"
 
 [keys.normal."space"]
 t = "signature_help"
+"r" = ":reload-all"
+"w" = ":wa"
+"c" = ":bc"
+
+[keys.normal."space".f]
+"f" = "file_picker"
+"r" = ":reload-all"
+"w" = ":wa"
+"c" = ":bc"
+"q" = ":bc"
 
 [keys.normal."backspace"]
 s = "symbol_picker"
@@ -83,7 +89,7 @@ s = "symbol_picker"
   ":toggle file-picker.parents",
   ":toggle file-picker.hidden",
   "file_picker",
-  ":toggle file-picker.parents",
+  ":toggle file-picker-.parents",
   ":toggle file-picker.hidden",
 ]
 "j" = "jumplist_picker"
@@ -94,7 +100,7 @@ r = ":lsp-restart"
 
 [keys.normal."backspace".f]
 "r" = ":reload-all"
-"f" = ":format"
+"f" = "file_picker"
 "w" = ":wa"
 "c" = ":bc"
 "q" = ":bc"
