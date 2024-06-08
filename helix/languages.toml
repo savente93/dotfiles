@@ -3,7 +3,7 @@ name = "python"
 roots = ["pyproject.toml"]
 auto-format = true
 language-servers = [{ name = 'ruff' }, { name = 'pyright' }]
-formatter = { command = "ruff", args = ["format", "-"] }
+formatter = { command = "ruff", args = ["format", "--check", "-"] }
 
 [[language]]
 name = "go"
