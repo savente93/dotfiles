@@ -62,6 +62,7 @@ J = "copy_selection_on_next_line"
 K = "copy_selection_on_prev_line"
 r = "replace_with_yanked"
 Y = ":clipboard-yank-join"
+C-b = "increment"
 C-k = [
   "extend_to_line_bounds",
   "delete_selection",
@@ -94,6 +95,16 @@ a = "code_action"
 s = "symbol_picker"
 "j" = "jumplist_picker"
 "a" = "code_action"
+
+[keys.normal."backspace".m]
+p = [
+  ":open ~/Documents/projects/helix-macros/python.hxm",
+  "extend_to_line_bounds",
+]
+r = [
+  ":open ~/Documents/projects/helix-macros/rust.hxm",
+  "extend_to_line_bounds",
+]
 
 [keys.normal."backspace".f]
 "r" = ":reload-all"
