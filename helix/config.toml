@@ -75,14 +75,14 @@ A-k = "half_page_up"
 "A-." = "goto_next_buffer"
 "A-," = "goto_previous_buffer"
 
-"!" = [":register-mark", "1"]
-"1" = [":goto-mark", "1"]
-"@" = [":register-mark", "2"]
-"2" = [":goto-mark", "2"]
-"#" = [":register-mark", "3"]
-"3" = [":goto-mark", "3"]
-"$" = [":register-mark", "4"]
-"4" = [":goto-mark", "4"]
+"!" = ":register-mark 1"
+"1" = ":goto-mark 1"
+"@" = ":register-mark 2"
+"2" = ":goto-mark 2"
+"#" = ":register-mark 3"
+"3" = ":goto-mark 3"
+"$" = ":register-mark 3"
+"4" = ":goto-mark 4"
 
 [keys.normal."space".a]
 t = "signature_help"
