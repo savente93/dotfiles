@@ -7,10 +7,9 @@ if status is-interactive
     # typing is for chumps
     abbr --add dotdot --regex '^\.\.+$' --function multicd
     abbr --add up topgrade -y --skip-notify
-    abbr --add hx helix
 
     # root doesn't have my nice helix config
-    abbr --add shx sudo helix --config $HELIX_CONFIG_PATH
+    abbr --add shx sudo hx --config $HELIX_CONFIG_PATH
 
     #files
     abbr --add ls eza

@@ -33,7 +33,7 @@ function setup_basic_system() {
 function setup_dev_stuff() {
 
 	# tools
-	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu helix pixi ripgrep ruff rustup starship stylua topgrade wezterm zola zoxide; do
+	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu pixi ripgrep ruff rustup starship stylua topgrade wezterm zola zoxide; do
 		if ! command -v $tool; then
 			paru -S $tool --noconfirm
 		fi
@@ -55,14 +55,6 @@ function setup_dev_stuff() {
 	# pixi
 	pixi global install pre-commit awscli
 
-	# currently one of the grammars in hx that I don't care about fails
-	# so just continue
-	helix --grammar fetch || true
-	helix --grammar build || true
-
-	mkdir -p ~/.config/helix
-	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
-	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
 	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
 	ln -s ~/Documents/dotfiles/.bashrc ~/.bashrc -f
 	ln -s ~/Documents/dotfiles/.gitignore ~/.gitignore -f
@@ -74,6 +66,22 @@ function setup_dev_stuff() {
 	ln -s ~/Documents/dotfiles/wireplumber/ ~/.config/ -f
 	sudo rm /etc/pacman.conf
 	sudo ln -s ~/Documents/dotfiles/pacman.conf /etc/pacman.conf -f
+
+}
+
+function install_helix_fork() {
+
+	mkdir -p ~/Documents/projects/rust
+	mkdir -p ~/.config/helix
+
+	cd ~/Documents/projects/rust
+	git clone git@github.com/savente93/helix
+	cd helix
+	cargo install --path helix-term --locked
+
+	ln -Ts $PWD/runtime ~/.config/helix/runtime
+	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
+	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
 
 }
 
