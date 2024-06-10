@@ -53,10 +53,10 @@ minus = "trim_selections"
 "`" = "switch_case"
 ";" = "flip_selections"
 "esc" = ["collapse_selection", "keep_primary_selection"]
-D = "delete_selection"
-C = "change_selection"
-d = "delete_selection_noyank"
-c = "change_selection_noyank"
+d = "delete_selection"
+c = "change_selection"
+D = "delete_selection_noyank"
+C = "change_selection_noyank"
 M = "join_selections"
 J = "copy_selection_on_next_line"
 K = "copy_selection_on_prev_line"
@@ -75,6 +75,14 @@ A-k = "half_page_up"
 "A-." = "goto_next_buffer"
 "A-," = "goto_previous_buffer"
 
+"!" = [":register-mark", "1"]
+"1" = [":goto-mark", "1"]
+"@" = [":register-mark", "2"]
+"2" = [":goto-mark", "2"]
+"#" = [":register-mark", "3"]
+"3" = [":goto-mark", "3"]
+"$" = [":register-mark", "4"]
+"4" = [":goto-mark", "4"]
 
 [keys.normal."space".a]
 t = "signature_help"
