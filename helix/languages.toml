@@ -89,3 +89,13 @@ config = { settings = { run = "onSave" } }
 [lanugage-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
+
+[[language]]
+name = "markdown"
+language-servers = [{ name = "ltex" }]
+file-types = ["md", "txt"]
+scope = "text.markdown"
+roots = []
+
+[language-server.ltex]
+command = "/usr/bin/ltex-ls"
