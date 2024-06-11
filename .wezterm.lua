@@ -3,7 +3,7 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	default_prog = { "wsl", "/home/sam/Documents/work/hydromt" }
+	default_prog = { "powershell" }
 end
 
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
