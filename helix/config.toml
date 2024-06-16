@@ -134,6 +134,7 @@ a = "code_action"
 s = "symbol_picker"
 S = "workspace_symbol_picker"
 d = "diagnostics_picker"
+D = "workspace_diagnostics_picker"
 
 [keys.normal."space".f]
 label = "File"
