@@ -15,9 +15,6 @@ bufferline = "multiple"
 idle-timeout = 0
 completion-trigger-len = 1
 
-end-of-line-diagnostics = "hint"
-[editor.inline-diagnostics]
-cursor-line = "warning"
 
 [editor.statusline]
 left = ["spinner", "spacer", "diagnostics", "spacer", "file-name"]
