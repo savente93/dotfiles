@@ -48,6 +48,7 @@ select = "underline"
 minus = "trim_selections"
 "`" = "switch_case"
 r = "replace_with_yanked"
+Y = ":clipboard-yank-join"
 
 [keys.normal]
 minus = "trim_selections"
