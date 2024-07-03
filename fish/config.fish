@@ -17,11 +17,12 @@ if status is-interactive
     abbr --add la eza -lah
     abbr --add lt eza --tree -L 2
     abbr --add ltt eza --tree -L 3
+
     # clean up empty dirs
     abbr --add ced fd . -te -td -x rmdir
 
     # cargo 
-    abbr --add ct cargo nextest run
+    abbr --add ct cargo nextest run --failure-output final --all-features
     abbr --add cb cargo build
     abbr --add cc cargo check
     abbr --add b bacon

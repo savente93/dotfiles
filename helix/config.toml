@@ -49,6 +49,15 @@ minus = "trim_selections"
 "`" = "switch_case"
 r = "replace_with_yanked"
 Y = ":clipboard-yank-join"
+A-j = "half_page_down"
+A-k = "half_page_up"
+"A-." = "goto_next_buffer"
+"A-," = "goto_previous_buffer"
+
+"!" = ":register-mark 1"
+"@" = ":register-mark 2"
+"#" = ":register-mark 3"
+"$" = ":register-mark 3"
 
 [keys.normal]
 minus = "trim_selections"
