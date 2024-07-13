@@ -23,8 +23,8 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 # in case configs get borked
-bindsym $mod+Return exec wezterm
-bindsym $mod+Shift+Return exec alacritty
+bindsym ctrl+Return exec wezterm
+bindsym ctrl+Shift+Return exec alacritty
 
 # change focus
 bindsym $mod+j focus up
@@ -82,6 +82,7 @@ bindsym $mod+Shift+r reload
 
 # launchers
 bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
+bindsym $mod+b exec blueman-manager
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
 
 # lockscreen
