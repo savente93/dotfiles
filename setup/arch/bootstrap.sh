@@ -31,6 +31,9 @@ swapon /dev/nvme0n1p2
 #update mirror list
 reflector
 
+#update keyring in case the iso is old
+pacman -Sy --needed archlinux-keyrin && pacman -Su
+
 #install what we'll need for system setup after reboot
 pacstrap -K /mnt amd-ucode base curl firefox git sway xorg-server-xwayland foot linux linux-firmware man-db man-pages networkmanager mesa openssl sddm sof-firmware sudo texinfo vim wezterm alacritty
 
