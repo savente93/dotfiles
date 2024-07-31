@@ -39,6 +39,8 @@ function setup_dev_stuff() {
 		fi
 	done
 
+	rustup default stable
+
 	# runtimes/compilers
 	paru -S docker npm --noconfirm
 	sudo usermod -aG docker sam
@@ -227,3 +229,11 @@ function all() {
 	setup_de
 	setup_security
 }
+
+# exit on error
+set -e
+
+#get sudo rights for when we need it
+sudo -v
+
+all
