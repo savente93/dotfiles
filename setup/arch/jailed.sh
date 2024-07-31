@@ -35,6 +35,6 @@ chown -R sam /home/sam/.config
 
 curl https://raw.githubusercontent.com/savente93/dotfiles/main/setup/arch/setup.sh -o /home/sam/setup.sh
 chmod +x /mnt/setup.sh
-chown sam /hoem/sam/setup.sh
+chown sam /home/sam/setup.sh
 
 bootctl list
