@@ -6,7 +6,7 @@ systemctl enable systemd-timesyncd.service
 systemctl enable sddm.service
 systemctl enable NetworkManager
 
-sed 's/#en_GB.UTF-8/en_GB.UTF-8 UTF-8/g' -i /etc/locale.gen
+sed 's/#en_GB.UTF-8.*/en_GB.UTF-8 UTF-8/g;s/#en_US.UTF-8.*/en_US.UTF-8 UTF-8/g' -i /etc/locale.gen
 locale-gen
 echo 'LANG=en_GB.UTF-8' >/etc/locale.conf
 timedatectl set-timezone Europe/Amsterdam
