@@ -81,7 +81,8 @@ function install_helix_fork() {
 	cd helix
 	cargo install --path helix-term --locked
 
-	mkdir ~/.config/helix/runtime
+	mkdir ~/.config/helix/{runtime,themes}
+	curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
 	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
 	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
 
