@@ -48,7 +48,7 @@ function setup_dev_stuff() {
 	sudo systemctl enable --now docker.service
 
 	#LSPs/linters
-	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server taplo-cli; do
+	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server bibtex-tidy texlab terraform-ls vscode-json-language-server typst-lsp svelteserver vscode-html-language-server vscode-css-language-server taplo-cli; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
@@ -80,8 +80,10 @@ function install_helix_fork() {
 	git clone git@github.com/savente93/helix
 	cd helix
 	cargo install --path helix-term --locked
+	ln -s $PWD/runtime ~/.config/helix/runtime
 
-	mkdir ~/.config/helix/{runtime,themes}
+	mkdir ~/.config/helix/themes
+	mkdir -p ~/.cargo/bin/runtime
 	curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
 	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
 	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
