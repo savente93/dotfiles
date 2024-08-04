@@ -95,6 +95,7 @@ exec swayidle -w \
 
 # screenshots
 bindsym Print exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+s exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
 
 
 # some stuff is allowed to float
