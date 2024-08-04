@@ -80,7 +80,9 @@ function install_helix_fork() {
 	git clone git@github.com/savente93/helix
 	cd helix
 	cargo install --path helix-term --locked
-	ln -s $PWD/runtime ~/.config/helix/runtime
+	# just in case
+	rm -rf ~/.config/helix/runtime
+	ln -s $PWD/runtime ~/.config/helix/ -f
 
 	mkdir ~/.config/helix/themes
 	mkdir -p ~/.cargo/bin/runtime
