@@ -15,7 +15,7 @@ function install_paru() {
 
 function setup_basic_system() {
 
-	paru -S base-devel blueman chrony curl wofi fish keychain openssh openssl pipewire pipewire-pulse sway ufw xorg-server-xwayland nm-connection-editor --noconfirm
+	paru -S base-devel blueman chrony curl fish wofi keychain openssh openssl pipewire pipewire-pulse sway ufw xorg-server-xwayland nm-connection-editor --noconfirm
 
 	timedatectl set-timezone Europe/Amsterdam
 
@@ -34,7 +34,7 @@ function setup_dev_stuff() {
 
 	# tools
 	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu pixi ripgrep ruff rustup starship stylua topgrade wikiman wezterm zola zoxide; do
-		if ! command -v $tool; then
+		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
 	done
@@ -49,7 +49,7 @@ function setup_dev_stuff() {
 
 	#LSPs/linters
 	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server taplo-cli; do
-		if ! command -v $tool; then
+		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
 	done
@@ -81,9 +81,12 @@ function install_helix_fork() {
 	cd helix
 	cargo install --path helix-term --locked
 
-	ln -Ts $PWD/runtime ~/.config/helix/runtime
+	mkdir ~/.config/helix/runtime
 	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
 	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
+
+	hx -g fetch
+	hx -g build
 
 }
 
@@ -97,13 +100,14 @@ function setup_creature_comforts() {
 	flatpak install -y com.valvesoftware.Steam
 
 	# printer stuff
-	systemctl enable --now cups.service
+	sudo systemctl enable --now cups.service
 	sudo systemctl enable --now cups
 
 	# setup espanso
 	espanso service register
 
 	mkdir -p ~/.config/espanso
+	rm -rf ~/.config/espanso/*
 	ln -s ~/Documents/dotfiles/espanso/config ~/.config/espanso/ -f
 	ln -s ~/Documents/dotfiles/espanso/match ~/.config/espanso/ -f
 
@@ -128,7 +132,7 @@ function setup_de() {
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
 	sudo ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi /usr/share/rofi/themes/launcher.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/ -f
-	sudo ln -s ~/Documents/dotfiles/sddm.conf /etc/
+	sudo ln -s ~/Documents/dotfiles/sddm.conf /etc/ -f
 
 }
 
