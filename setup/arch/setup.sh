@@ -1,21 +1,30 @@
 #!/bin/bash
 
 function install_paru() {
+	echo "Installing paru..."
 	if ! command -v paru &>/dev/null; then
 		sudo pacman -S --needed base-devel rustup
-		git clone https://aur.archlinux.org/paru.git
+		rustup default stable
+		if [ ! -d paru ]; then
+			git clone https://aur.archlinux.org/paru.git
+		fi
 		cd paru
 		makepkg -si
 		cd ..
 		rm -rf paru
-		sudo paru -S paru bat
+		paru -S paru bat
 		paru -Syu --noconfirm
 	fi
 }
 
 function setup_basic_system() {
+	echo "starting basic system setup..."
 
-	paru -S base-devel blueman chrony curl fish wofi keychain openssh openssl pipewire pipewire-pulse sway ufw xorg-server-xwayland nm-connection-editor --noconfirm
+	paru -S base-devel blueman chrony curl wofi keychain openssh openssl pipewire pipewire-pulse sway ufw xorg-server-xwayland nm-connection-editor --noconfirm
+
+	echo "installing fish"
+	# don't want fish to start when we install it so it get's handled seperately
+	sudo pacman -S --needed --noconfirm fish
 
 	timedatectl set-timezone Europe/Amsterdam
 
@@ -32,8 +41,9 @@ function setup_basic_system() {
 
 function setup_dev_stuff() {
 
+	echo "setting up dev tools"
 	# tools
-	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu pixi ripgrep ruff rustup starship stylua topgrade wikiman wezterm zola zoxide; do
+	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu pixi ripgrep ruff rustup starship stylua topgrade-bin wikiman wezterm zola zoxide; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
@@ -72,12 +82,13 @@ function setup_dev_stuff() {
 }
 
 function install_helix_fork() {
+	echo "installing helix" 
 
 	mkdir -p ~/Documents/projects/rust
 	mkdir -p ~/.config/helix
 
 	cd ~/Documents/projects/rust
-	git clone git@github.com/savente93/helix
+	git clone git@github.com:savente93/helix.git
 	cd helix
 	cargo install --path helix-term --locked
 	# just in case
@@ -97,16 +108,13 @@ function install_helix_fork() {
 
 function setup_creature_comforts() {
 
-	paru -S flatpak steam-devices-git espanso-wayland-git cups cups-pdf epson-inkjet-printer-escpr system-config-printer --noconfirm
+	echo "setting up creature comforts"
+	paru -S flatpak steam-devices-git espanso-wayland --noconfirm
 
 	flatpak install -y com.discordapp.Discord
 	flatpak install -y com.github.IsmaelMartinez.teams_for_linux
 	flatpak install -y com.spotify.Client
 	flatpak install -y com.valvesoftware.Steam
-
-	# printer stuff
-	sudo systemctl enable --now cups.service
-	sudo systemctl enable --now cups
 
 	# setup espanso
 	espanso service register
@@ -123,7 +131,7 @@ function setup_de() {
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
-	curl https://wallpapercave.com/wp/wp2639448.png -o ~/.wallpapers/locked.png
+	curl https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
 
 	systemctl --user --now enable wireplumber
 
@@ -131,6 +139,7 @@ function setup_de() {
 	ln -s ~/Documents/dotfiles/sway ~/.config/ -f
 	rm -rf ~/.config/waybar
 	ln -s ~/Documents/dotfiles/waybar ~/.config/ -f
+	sudo mkdir -p /usr/share/rofi/themes/ 
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi /usr/share/rofi/themes/powermenu.rasi -f
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/powermenu.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
