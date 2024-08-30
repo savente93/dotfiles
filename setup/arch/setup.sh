@@ -51,10 +51,9 @@ function setup_dev_stuff() {
 
 	rustup default stable
 
-
 	echo "setting up docker & npm"
 	# runtimes/compilers
-	sudo pacman -S --needed --noconfirm docker npm 
+	sudo pacman -S --needed --noconfirm docker npm
 	sudo usermod -aG docker sam
 	if [ -z $(getent group docker) ]; then
 		newgrp docker
@@ -74,7 +73,7 @@ function setup_dev_stuff() {
 	# pixi
 	pixi global install pre-commit awscli
 
-	echo "creating symlinks" 
+	echo "creating symlinks"
 	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
 	ln -s ~/Documents/dotfiles/.bashrc ~/.bashrc -f
 	ln -s ~/Documents/dotfiles/.gitignore ~/.gitignore -f
@@ -90,7 +89,7 @@ function setup_dev_stuff() {
 }
 
 function install_helix_fork() {
-	echo "installing helix" 
+	echo "installing helix"
 
 	mkdir -p ~/Documents/projects/rust
 	mkdir -p ~/.config/helix
@@ -98,6 +97,7 @@ function install_helix_fork() {
 	cd ~/Documents/projects/rust
 	git clone git@github.com:savente93/helix.git
 	cd helix
+	git checkout bin
 	cargo install --path helix-term --locked
 	# just in case
 	rm -rf ~/.config/helix/runtime
@@ -147,7 +147,7 @@ function setup_de() {
 	ln -s ~/Documents/dotfiles/sway ~/.config/ -f
 	rm -rf ~/.config/waybar
 	ln -s ~/Documents/dotfiles/waybar ~/.config/ -f
-	sudo mkdir -p /usr/share/rofi/themes/ 
+	sudo mkdir -p /usr/share/rofi/themes/
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi /usr/share/rofi/themes/powermenu.rasi -f
 	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/powermenu.rasi -f
 	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
