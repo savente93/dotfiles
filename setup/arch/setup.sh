@@ -251,6 +251,7 @@ function all() {
 	setup_basic_system
 	setup_dotfiles
 	setup_dev_stuff
+	install_helix_fork
 	setup_creature_comforts
 	setup_de
 	setup_security
