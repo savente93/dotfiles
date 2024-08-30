@@ -51,22 +51,30 @@ function setup_dev_stuff() {
 
 	rustup default stable
 
+
+	echo "setting up docker & npm"
 	# runtimes/compilers
-	paru -S docker npm --noconfirm
+	sudo pacman -S --needed --noconfirm docker npm 
 	sudo usermod -aG docker sam
-	newgrp docker
+	if [ -z $(getent group docker) ]; then
+		newgrp docker
+	fi
+
 	sudo systemctl enable --now docker.service
 
+	echo "setting up LSPs and linters"
 	#LSPs/linters
-	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server bibtex-tidy texlab terraform-ls vscode-json-language-server typst-lsp svelteserver vscode-html-language-server vscode-css-language-server taplo-cli; do
+	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server bibtex-tidy texlab terraform-ls typst-lsp taplo-cli; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
 	done
 
+	echo "setting up pixi"
 	# pixi
 	pixi global install pre-commit awscli
 
+	echo "creating symlinks" 
 	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
 	ln -s ~/Documents/dotfiles/.bashrc ~/.bashrc -f
 	ln -s ~/Documents/dotfiles/.gitignore ~/.gitignore -f
