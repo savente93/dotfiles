@@ -3,6 +3,8 @@ set $mod Mod4
 default_border none 
 titlebar_border_thickness 0
 
+output * scale 1.5
+
 bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5 --max-volume 100 
 bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -5 
 bindsym XF86AudioMute exec pulsemixer --toggle-mute 
