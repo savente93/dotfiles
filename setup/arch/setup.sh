@@ -117,7 +117,7 @@ function install_helix_fork() {
 function setup_creature_comforts() {
 
 	echo "setting up creature comforts"
-	paru -S flatpak steam-devices-git espanso-wayland --noconfirm
+	paru -S flatpak steam-devices-git espanso-wayland unzip --noconfirm
 
 	flatpak install -y com.discordapp.Discord
 	flatpak install -y com.github.IsmaelMartinez.teams_for_linux
