@@ -86,6 +86,11 @@ function activate_pane_zoomed(win, pane, direction)
 	win:perform_action(act.SetPaneZoomState(true), pane)
 end
 
+function spawn_git_pane(win, pane)
+	extra_pane = pane:split({ args = {"gitu"}})
+	win:perform_action(act.SetPaneZoomState(true), extra_pane)
+end
+
 wezterm.on("gui-attached", function(domain)
 	-- assume only one window exists at startup.
 	-- I know it's terrible but my terminal, my rules
@@ -170,6 +175,13 @@ return {
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				activate_pane_zoomed(win, pane, "Next")
+			end),
+		},
+		{
+			key = "g",
+			mods = "CTRL",
+			action = wezterm.action_callback(function(win, pane)
+				spawn_git_pane(win, pane)
 			end),
 		},
 		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
