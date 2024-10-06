@@ -87,7 +87,8 @@ function activate_pane_zoomed(win, pane, direction)
 end
 
 function spawn_git_pane(win, pane)
-	extra_pane = pane:split({ args = {"gitu"}})
+	-- extra_pane = pane:split({ args = {"gitu"}})
+	extra_pane = pane:split({ args = {"lazygit"}})
 	win:perform_action(act.SetPaneZoomState(true), extra_pane)
 end
 
