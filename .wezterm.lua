@@ -12,7 +12,7 @@ end
 
 dotfile_path = "/home/sam/Documents/dotfiles"
 project_path = "/home/sam/Documents/projects"
-work_path = "/home/sam/Documents/work/hydromt"
+work_path = "/home/sam/Documents/work"
 base_path = "/home/sam"
 
 function find_tab_index(win, name)
@@ -45,7 +45,7 @@ function spawn_or_activate_tab(win, pane, name, cwd)
 	end
 end
 
-function sessionize(win, pane)
+function sessionize_projects(win, pane)
 	local choices = {}
 	local success, stdout, stderr = wezterm.run_child_process({
 		"find",
@@ -54,6 +54,40 @@ function sessionize(win, pane)
 		"1",
 		"-maxdepth",
 		"2",
+		"-type",
+		"d",
+	})
+
+	for dir in string.gmatch(stdout, "[^\n]+") do
+		-- I'm sorry, lua has no path operations :(
+		-- should be okay since we told find to only return dirs
+
+		local name = string.gmatch(dir, ".*/(.*)")()
+		table.insert(choices, { id = dir, label = name })
+	end
+
+	win:perform_action(
+		act.InputSelector({
+			action = wezterm.action_callback(function(win, pane, id, label)
+				if id and label then
+					spawn_or_activate_tab(win:mux_window(), pane, label, id)
+				end
+			end),
+			fuzzy = true,
+			choices = choices,
+		}),
+		pane
+	)
+end
+function sessionize_work(win, pane)
+	local choices = {}
+	local success, stdout, stderr = wezterm.run_child_process({
+		"find",
+		work_path,
+		"-mindepth",
+		"1",
+		"-maxdepth",
+		"1",
 		"-type",
 		"d",
 	})
@@ -214,13 +248,13 @@ return {
 				spawn_or_activate_tab(win:mux_window(), pane, "dotfiles", dotfile_path)
 			end),
 		},
-		{
-			key = "w",
-			mods = "LEADER",
-			action = wezterm.action_callback(function(win, pane)
-				spawn_or_activate_tab(win:mux_window(), pane, "hydromt", work_path)
-			end),
-		},
+		-- {
+		-- 	key = "w",
+		-- 	mods = "LEADER",
+		-- 	action = wezterm.action_callback(function(win, pane)
+		-- 		spawn_or_activate_tab(win:mux_window(), pane, "hydromt", work_path)
+		-- 	end),
+		-- },
 		{
 			key = "b",
 			mods = "LEADER",
@@ -228,7 +262,8 @@ return {
 				spawn_or_activate_tab(win:mux_window(), pane, "base", base_path)
 			end),
 		},
-		{ key = "f", mods = "LEADER", action = wezterm.action_callback(sessionize) },
+		{ key = "f", mods = "LEADER", action = wezterm.action_callback(sessionize_projects) },
+		{ key = "w", mods = "LEADER", action = wezterm.action_callback(sessionize_work) },
 	},
 	--
 
