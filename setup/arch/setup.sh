@@ -43,12 +43,13 @@ function setup_dev_stuff() {
 
 	echo "setting up dev tools"
 	# tools
-	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu pixi ripgrep ruff rustup starship stylua topgrade-bin wikiman wezterm zola zoxide; do
+	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta gitu ripgrep ruff rustup starship stylua topgrade-bin wikiman wezterm zola zoxide; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
 	done
 
+	curl -fsSL https://pixi.sh/install.sh | bash
 	rustup default stable
 
 	echo "setting up docker & npm"
