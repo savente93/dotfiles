@@ -56,7 +56,7 @@ function setup_dev_stuff() {
 	# runtimes/compilers
 	sudo pacman -S --needed --noconfirm docker npm
 	sudo usermod -aG docker sam
-	if [ -z $(getent group docker) ]; then
+	if [ -z "$(getent group docker)" ]; then
 		newgrp docker
 	fi
 
@@ -102,7 +102,7 @@ function install_helix_fork() {
 	cargo install --path helix-term --locked
 	# just in case
 	rm -rf ~/.config/helix/runtime
-	ln -s $PWD/runtime ~/.config/helix/ -f
+	ln -s "$PWD"/runtime ~/.config/helix/ -f
 
 	mkdir ~/.config/helix/themes
 	mkdir -p ~/.cargo/bin/runtime
@@ -183,7 +183,7 @@ function setup_security() {
 		curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
 		paru -S 1password 1password-cli rofi-1pass aws-credential-1password --noconfirm
 
-		read -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
+		read -r -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
 		op vault list
 	fi
 
@@ -212,17 +212,17 @@ function setup_security() {
 	# get sshkeys from password manager
 	key_type=$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "key type")
 
-	if [ -z $key_type ]; then
+	if [ -z "$key_type" ]; then
 		echo "Could not determine key type..."
 		return 1
 	fi
 
-	echo "$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >~/.ssh/id_$key_type.pub
-	chmod 644 ~/.ssh/id_$key_type.pub
+	op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key" >"$HOME/.ssh/id_$key_type.pub"
+	chmod 644 "$HOME/.ssh/id_$key_type.pub"
 
 	# wooooooow libcrypto is a fussy bitch
-	echo "$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d')" >~/.ssh/id_$key_type
-	chmod 600 ~/.ssh/id_$key_type
+	op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "private key" --reveal | tr -d '"' | tr -d "\r" | sed -r '/^\s*$/d' >"$HOME/.ssh/id_$key_type"
+	chmod 600 "$HOME/.ssh/id_$key_type"
 
 	echo "Host *" >~/.ssh/config
 	echo "IdentityFile ~/.ssh/id_$key_type" >>~/.ssh/config
