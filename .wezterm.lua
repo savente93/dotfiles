@@ -14,6 +14,8 @@ dotfile_path = "/home/sam/Documents/dotfiles"
 project_path = "/home/sam/Documents/projects"
 work_path = "/home/sam/Documents/work"
 base_path = "/home/sam"
+git_client = "lazygit"
+editor = "/home/sam/.cargo/bin/hx"
 
 function find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
@@ -27,9 +29,10 @@ end
 function spawn_with_title(win, cwd, name)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
-	extra_pane = pane:split({ cwd = cwd })
-	-- extra_pane = pane:split({ args = { "hx", "." }, cwd = cwd })
-	win:gui_window():perform_action(act.SetPaneZoomState(true), extra_pane)
+	editor_pane = pane:split({ args = { editor, cwd }, cwd = cwd, direction = "Left" })
+	git_pane = pane:split({ args = { git_client}, cwd = cwd , direction='Bottom'})
+	win:gui_window():perform_action(act.ActivatePaneDirection('Left'), editor_pane )
+	win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane )
 end
 
 function spawn_or_activate_tab(win, pane, name, cwd)
