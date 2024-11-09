@@ -97,5 +97,13 @@ file-types = ["md", "txt"]
 scope = "text.markdown"
 roots = []
 
+[[language]]
+name = "typst"
+language-servers = [{ name = "typos" }]
+file-types = ["typ"]
+
+[language-server.typos]
+command = "/home/sam/.cargo/bin/typos-lsp"
+
 [language-server.ltex]
 command = "/usr/bin/ltex-ls"
