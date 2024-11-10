@@ -102,7 +102,7 @@ name = "typst"
 language-servers = [{ name = "typos" }, { name = "tinymist" }]
 file-types = ["typ"]
 auto-format = true
-formatter = { command = "typstfmt" }
+formatter = { command = "typstyle" }
 
 [language-server.typos]
 command = "/home/sam/.cargo/bin/typos-lsp"
