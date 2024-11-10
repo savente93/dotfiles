@@ -99,11 +99,16 @@ roots = []
 
 [[language]]
 name = "typst"
-language-servers = [{ name = "typos" }]
+language-servers = [{ name = "typos" }, { name = "tinymist" }]
 file-types = ["typ"]
+auto-format = true
+formatter = { command = "typstfmt" }
 
 [language-server.typos]
 command = "/home/sam/.cargo/bin/typos-lsp"
+
+[language-server.tinymist]
+command = "/home/sam/.cargo/bin/tinymist"
 
 [language-server.ltex]
 command = "/usr/bin/ltex-ls"
