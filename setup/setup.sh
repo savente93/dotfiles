@@ -50,6 +50,7 @@ function setup_dev_stuff() {
 	done
 
 	curl -fsSL https://pixi.sh/install.sh | bash
+	export PATH=$PATH:$HOME/.pixi/bin
 	rustup default stable
 
 	echo "setting up docker & npm"
@@ -64,7 +65,7 @@ function setup_dev_stuff() {
 
 	echo "setting up LSPs and linters"
 	#LSPs/linters
-	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server bibtex-tidy texlab terraform-ls typst-lsp taplo-cli; do
+	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server bibtex-tidy texlab terraform-ls taplo-cli typst-lsp-bin; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
@@ -254,10 +255,10 @@ function all() {
 	setup_basic_system
 	setup_dotfiles
 	setup_dev_stuff
-	install_helix_fork
 	setup_creature_comforts
 	setup_de
 	setup_security
+	install_helix_fork
 }
 
 # exit on error
