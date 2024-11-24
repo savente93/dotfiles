@@ -137,7 +137,7 @@ function setup_creature_comforts() {
 }
 
 function setup_de() {
-	paru -S brightnessctl evince firefox gammastep grim grim lxappearance mesa noto-fonts noto-fonts-emoji pipewire pipewire-audio qpwgraph sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock ttf-firacode-nerd ttf-font-awesome tz waybar webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr yazi --noconfirm
+	paru -S acpi brightnessctl cronie dunst evince firefox gammastep grim lxappearance mesa noto-fonts noto-fonts-emoji pipewire pipewire-audio qpwgraph sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock ttf-firacode-nerd ttf-font-awesome tz waybar webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr yazi --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
@@ -145,6 +145,7 @@ function setup_de() {
 
 	#set evince as defatul pdf application
 	xdg-mime default org.gnome.Evince.desktop application/pdf
+	gio mime application/pdf org.gnome.Evince.desktop
 	systemctl --user --now enable wireplumber
 
 	rm -rf ~/.config/sway
