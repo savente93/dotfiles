@@ -75,6 +75,8 @@ function setup_dev_stuff() {
 	# pixi
 	pixi global install pre-commit awscli
 
+	curl -Ssfo ~/.wezterm.sh https://raw.githubusercontent.com/wez/wezterm/refs/heads/main/assets/shell-integration/wezterm.sh
+
 	echo "creating symlinks"
 	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
 	ln -s ~/Documents/dotfiles/.bashrc ~/.bashrc -f
