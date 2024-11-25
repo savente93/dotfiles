@@ -30,7 +30,7 @@ function spawn_with_title(win, cwd, name)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
 	editor_pane = pane:split({ args = { editor, cwd }, cwd = cwd, direction = "Left" })
-	git_pane = pane:split({ args = { git_client }, cwd = cwd, direction = "Bottom" })
+	git_pane = pane:split({ args = { git_client }, cwd = cwd, direction = "Top" })
 	win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
 	win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
 end
