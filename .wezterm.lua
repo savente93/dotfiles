@@ -30,9 +30,9 @@ function spawn_with_title(win, cwd, name)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
 	editor_pane = pane:split({ args = { editor, cwd }, cwd = cwd, direction = "Left" })
-	git_pane = pane:split({ args = { git_client}, cwd = cwd , direction='Bottom'})
-	win:gui_window():perform_action(act.ActivatePaneDirection('Left'), editor_pane )
-	win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane )
+	git_pane = pane:split({ args = { git_client }, cwd = cwd, direction = "Bottom" })
+	win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
+	win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
 end
 
 function spawn_or_activate_tab(win, pane, name, cwd)
@@ -131,7 +131,7 @@ end
 
 function spawn_git_pane(win, pane)
 	-- extra_pane = pane:split({ args = {"gitu"}})
-	extra_pane = pane:split({ args = {"lazygit"}})
+	extra_pane = pane:split({ args = { "lazygit" } })
 	win:perform_action(act.SetPaneZoomState(true), extra_pane)
 end
 
@@ -185,7 +185,7 @@ return {
 	-----------
 	-- Fonts --
 	-----------
-	font = wezterm.font_with_fallback { 'FiraCode Nerd Font', 'Noto Color Emoji', "Noto Serif CJK" },
+	font = wezterm.font_with_fallback({ "FiraCode Nerd Font", "Noto Color Emoji", "Noto Serif CJK" }),
 	font_size = 14.0,
 	-----------
 	-- Keys  --
@@ -224,7 +224,9 @@ return {
 		{
 			key = "g",
 			mods = "CTRL",
-			action = wezterm.action_callback(function(win, pane) spawn_git_pane(win, pane) end),
+			action = wezterm.action_callback(function(win, pane)
+				spawn_git_pane(win, pane)
+			end),
 		},
 		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
 		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
@@ -243,15 +245,69 @@ return {
 		{ key = "7", mods = "CTRL", action = act({ ActivateTab = 6 }) },
 		{ key = "8", mods = "CTRL", action = act({ ActivateTab = 7 }) },
 		{ key = "9", mods = "CTRL", action = act({ ActivateTab = 8 }) },
-		{ key = "1", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,0 ) end), },
-		{ key = "2", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,1 ) end), },
-		{ key = "3", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,2 ) end), },
-		{ key = "4", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,3 ) end), },
-		{ key = "5", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,4 ) end), },
-		{ key = "6", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,5 ) end), },
-		{ key = "7", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,6 ) end), },
-		{ key = "8", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,7 ) end), },
-		{ key = "9", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,8 ) end), },
+		{
+			key = "1",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 0)
+			end),
+		},
+		{
+			key = "2",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 1)
+			end),
+		},
+		{
+			key = "3",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 2)
+			end),
+		},
+		{
+			key = "4",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 3)
+			end),
+		},
+		{
+			key = "5",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 4)
+			end),
+		},
+		{
+			key = "6",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 5)
+			end),
+		},
+		{
+			key = "7",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 6)
+			end),
+		},
+		{
+			key = "8",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 7)
+			end),
+		},
+		{
+			key = "9",
+			mods = "ALT",
+			action = wezterm.action_callback(function(win, pane)
+				activate_pane_by_index_zoomed(win, pane, 8)
+			end),
+		},
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
 		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
