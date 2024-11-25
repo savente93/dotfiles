@@ -54,7 +54,7 @@ gui:
     showBottomLine: false
     showPanelJumps: true
     showIcons: true
-    nerdFontsVersion: ""
+    nerdFontsVersion: "3"
     showFileIcons: true
     commitAuthorShortLength: 2
     commitAuthorLongLength: 17
