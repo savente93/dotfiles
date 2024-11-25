@@ -85,6 +85,7 @@ function setup_dev_stuff() {
 	ln -s ~/Documents/dotfiles/starship.toml ~/.config/starship.toml -f
 	ln -s ~/Documents/dotfiles/topgrade.toml ~/.config/topgrade.toml -f
 	ln -s ~/Documents/dotfiles/fish ~/.config/ -f
+	ln -s ~/Documents/dotfiles/lazygit ~/.config/ -f
 	ln -s ~/Documents/dotfiles/paru/ ~/.config/ -f
 	ln -s ~/Documents/dotfiles/wireplumber/ ~/.config/ -f
 	sudo rm /etc/pacman.conf
