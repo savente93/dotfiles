@@ -123,6 +123,12 @@ function activate_pane_zoomed(win, pane, direction)
 	win:perform_action(act.SetPaneZoomState(true), pane)
 end
 
+function activate_pane_by_index_zoomed(win, pane, index)
+	win:perform_action(act.SetPaneZoomState(false), pane)
+	win:perform_action(act.ActivatePaneByIndex(index), pane)
+	win:perform_action(act.SetPaneZoomState(true), pane)
+end
+
 function spawn_git_pane(win, pane)
 	-- extra_pane = pane:split({ args = {"gitu"}})
 	extra_pane = pane:split({ args = {"lazygit"}})
@@ -218,9 +224,7 @@ return {
 		{
 			key = "g",
 			mods = "CTRL",
-			action = wezterm.action_callback(function(win, pane)
-				spawn_git_pane(win, pane)
-			end),
+			action = wezterm.action_callback(function(win, pane) spawn_git_pane(win, pane) end),
 		},
 		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
 		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
@@ -239,6 +243,15 @@ return {
 		{ key = "7", mods = "CTRL", action = act({ ActivateTab = 6 }) },
 		{ key = "8", mods = "CTRL", action = act({ ActivateTab = 7 }) },
 		{ key = "9", mods = "CTRL", action = act({ ActivateTab = 8 }) },
+		{ key = "1", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,0 ) end), },
+		{ key = "2", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,1 ) end), },
+		{ key = "3", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,2 ) end), },
+		{ key = "4", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,3 ) end), },
+		{ key = "5", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,4 ) end), },
+		{ key = "6", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,5 ) end), },
+		{ key = "7", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,6 ) end), },
+		{ key = "8", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,7 ) end), },
+		{ key = "9", mods = "ALT", action = wezterm.action_callback(function(win, pane) activate_pane_by_index_zoomed(win, pane,8 ) end), },
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
 		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
