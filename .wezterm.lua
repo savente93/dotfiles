@@ -129,21 +129,6 @@ function activate_pane_by_index_zoomed(win, pane, index)
 	win:perform_action(act.SetPaneZoomState(true), pane)
 end
 
-function spawn_git_pane(win, pane)
-	-- extra_pane = pane:split({ args = {"gitu"}})
-	extra_pane = pane:split({ args = { "lazygit" } })
-	win:perform_action(act.SetPaneZoomState(true), extra_pane)
-end
-
-wezterm.on("gui-attached", function(domain)
-	-- assume only one window exists at startup.
-	-- I know it's terrible but my terminal, my rules
-
-	local window = mux.all_windows()[1]
-	window:gui_window():maximize()
-	tab = window:active_tab()
-	tab:set_title("base")
-end)
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local title = tab.tab_title
@@ -219,13 +204,6 @@ return {
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				activate_pane_zoomed(win, pane, "Next")
-			end),
-		},
-		{
-			key = "g",
-			mods = "CTRL",
-			action = wezterm.action_callback(function(win, pane)
-				spawn_git_pane(win, pane)
 			end),
 		},
 		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
