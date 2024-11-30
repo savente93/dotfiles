@@ -81,6 +81,7 @@ C-k = [
   "move_line_up",
   "paste_before",
 ]
+C-g = ":run-shell-command git pull"
 C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 A-j = "half_page_down"
 A-k = "half_page_up"
