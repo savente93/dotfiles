@@ -94,7 +94,7 @@ bindsym $mod+b exec blueman-manager
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
 
 # lockscreen
-# bindsym ctrl+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png 
+bindsym ctrl+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png 
 exec swayidle -w \
 	resume 'swaymsg "output * power on"' \
     before-sleep 'playerctl pause'\
