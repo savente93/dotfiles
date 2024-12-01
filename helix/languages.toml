@@ -101,6 +101,7 @@ roots = []
 name = "typst"
 language-servers = [{ name = "typos" }, { name = "tinymist" }]
 file-types = ["typ"]
+formatter = { command = "typstle" }
 
 [language-server.typos]
 command = "/home/sam/.cargo/bin/typos-lsp"
