@@ -136,6 +136,11 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	return " " .. index + 1 .. ": " .. title .. " "
 end)
 
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, win = mux.spawn_window(cmd or {})
+	tab:set_title("base")
+end)
+
 return {
 	check_for_updates = true,
 	term = "xterm-256color",
