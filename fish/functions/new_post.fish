@@ -4,7 +4,7 @@ function new_post
     set DIR (realpath (fd unpublished | head -n 1))
     set FILE_PATH "$DIR/INPUT_SAFE/index.md"
 
-    if test -d $DIR 
+    if test -d $DIR
         echo "could not find unpublished content folder. Are you in the correct root?"
         return 1
     end

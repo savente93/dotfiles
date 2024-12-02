@@ -22,7 +22,7 @@ if status is-interactive
     # clean up empty dirs
     abbr --add ced fd . -te -td -x rmdir
 
-    # cargo 
+    # cargo
     abbr --add ct cargo nextest run --failure-output final --all-features --no-fail-fast
     abbr --add cb cargo build
     abbr --add cc cargo check

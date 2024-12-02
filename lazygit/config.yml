@@ -287,4 +287,3 @@ keybinding:
         bulkMenu: b
     commitMessage:
         commitMenu: <c-o>
-

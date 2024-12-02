@@ -13,7 +13,7 @@
 
 
 * {
-	
+
   font-size: 20px;
 	font-family: monospace;
 }
@@ -69,13 +69,13 @@ window#waybar {
 #battery.normal {
 	color: @text;
 }
-#battery.good 
+#battery.good
 {
 	color: @text;
 }
 
 #battery.charging,
-#battery.full 
+#battery.full
 {
 	color: @green;
 }

@@ -2,7 +2,7 @@
 
 {
   "include":["~/.config/waybar/common.jsonc"],
-  
+
     "modules-right":[
         "custom/left-arrow-dark",
         "mpris",

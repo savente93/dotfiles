@@ -1,5 +1,5 @@
 function gci
-	if test -z $argv[1] 
+	if test -z $argv[1]
 		# if no extra argument open up last commit message in editor
 		git commit -e -F $(git rev-parse --git-dir)/COMMIT_EDITMSG
 	else
