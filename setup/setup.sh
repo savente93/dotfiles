@@ -63,6 +63,8 @@ function setup_dev_stuff() {
 
 	sudo systemctl enable --now docker.service
 
+	paru -S docker-compose --noconfirm
+
 	npm i -g dockerfile-language-server-nodejs
 	cargo install jinja-lsp
 
