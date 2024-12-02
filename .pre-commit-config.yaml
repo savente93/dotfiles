@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v5.0.0
   hooks:
   - id: check-yaml
   - id: check-toml
@@ -10,18 +10,18 @@ repos:
   - id: mixed-line-ending
   - id: trailing-whitespace
 - repo: https://github.com/scop/pre-commit-shfmt
-  rev: v3.7.0-4
+  rev: v3.10.0-2
   hooks:
     - id: shfmt
 - repo: https://github.com/JohnnyMorganz/StyLua
-  rev: v0.20.0
+  rev: v2.0.1
   hooks:
     - id: stylua # or stylua-system / stylua-github
 - repo: https://github.com/gitleaks/gitleaks
-  rev: v8.18.2
+  rev: v8.21.2
   hooks:
   - id: gitleaks-system
 - repo: https://github.com/PrincetonUniversity/blocklint
-  rev: v0.2.4
+  rev: v0.2.5
   hooks:
   - id: blocklint
