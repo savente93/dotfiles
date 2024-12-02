@@ -19,7 +19,6 @@ language-servers = [{ name = "lua-language-server" }]
 name = "bash"
 auto-format = true
 formatter = { command = "shfmt", args = ['-'] }
-language-servers = [{ name = "bash-language-server" }]
 
 
 [[language]]
@@ -64,6 +63,7 @@ name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
 auto-format = true
 language-servers = [{ name = "taplo" }]
+
 
 [lanugage-server.jinja-lsp]
 command = "jinja-lsp"

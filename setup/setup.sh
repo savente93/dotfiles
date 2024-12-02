@@ -63,9 +63,12 @@ function setup_dev_stuff() {
 
 	sudo systemctl enable --now docker.service
 
+	npm i -g dockerfile-language-server-nodejs
+	cargo install jinja-lsp
+
 	echo "setting up LSPs and linters"
 	#LSPs/linters
-	for tool in lua-language-server marksman ruff-lsp rust-analyzer shfmt yaml-language-server bash-language-server bibtex-tidy texlab terraform-ls taplo-cli typst-lsp-bin; do
+	for tool in bash-language-server bibtex-tidy jinja-lsp lua-language-server marksman pyright ruff-lsp rust-analyzer shellcheck shfmt stylua taplo-cli terraform-ls texlab yaml-language-server typst-lsp-bin; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
@@ -73,7 +76,7 @@ function setup_dev_stuff() {
 
 	echo "setting up pixi"
 	# pixi
-	pixi global install pre-commit awscli
+	pixi global install pre-commit awscli djlint
 
 	curl -Ssfo ~/.wezterm.sh https://raw.githubusercontent.com/wez/wezterm/refs/heads/main/assets/shell-integration/wezterm.sh
 
