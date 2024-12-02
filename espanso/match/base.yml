@@ -45,3 +45,7 @@ matches:
     replace: "Hélène"
   - trigger: ;hmt
     replace: HydroMT
+  - trigger: ;rd
+    replace: raison d'être
+  - trigger: umit
+    replace: Ümit
