@@ -32,7 +32,7 @@ bindsym $mod+Shift+q kill
 
 # in case configs get borked
 bindsym ctrl+Return exec wezterm
-bindsym ctrl+Shift+Return exec alacritty
+bindsym ctrl+Shift+Return exec foot
 
 # change focus
 bindsym $mod+j focus up
