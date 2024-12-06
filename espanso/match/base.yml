@@ -49,3 +49,5 @@ matches:
     replace: raison d'être
   - trigger: umit
     replace: Ümit
+  - trigger: ;dh
+    replace: ":dragon_heart:"
