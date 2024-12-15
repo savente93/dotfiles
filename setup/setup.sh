@@ -3,16 +3,16 @@
 function install_paru() {
 	echo "Installing paru..."
 	if ! command -v paru &>/dev/null; then
-		sudo pacman -S --needed base-devel rustup
+		sudo pacman -S --needed base-devel rustup --noconfirm
 		rustup default stable
 		if [ ! -d paru ]; then
 			git clone https://aur.archlinux.org/paru.git
 		fi
 		cd paru
-		makepkg -si
+		makepkg -si --noconfirm
 		cd ..
 		rm -rf paru
-		paru -S paru bat
+		paru -S paru bat --noconfirm
 		paru -Syu --noconfirm
 	fi
 }
@@ -65,12 +65,12 @@ function setup_dev_stuff() {
 
 	paru -S docker-compose --noconfirm
 
-	npm i -g dockerfile-language-server-nodejs
+	sudo npm i -g dockerfile-language-server-nodejs
 	cargo install jinja-lsp
 
 	echo "setting up LSPs and linters"
 	#LSPs/linters
-	for tool in bash-language-server bibtex-tidy jinja-lsp lua-language-server marksman pyright ruff-lsp rust-analyzer shellcheck shfmt stylua taplo-cli terraform-ls texlab yaml-language-server typst-lsp-bin; do
+	for tool in bash-language-server bibtex-tidy lua-language-server marksman pyright ruff-lsp rust-analyzer shellcheck shfmt stylua taplo-cli terraform-ls texlab yaml-language-server typst-lsp-bin; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
@@ -119,8 +119,8 @@ function install_helix_fork() {
 	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
 	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
 
-	hx -g fetch
-	hx -g build
+	~/.cargo/bin/hx -g fetch
+	~/.cargo/bin/hx -g build
 
 }
 
