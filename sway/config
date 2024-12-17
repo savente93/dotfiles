@@ -3,6 +3,7 @@ set $mod Mod4
 default_border none
 titlebar_border_thickness 0
 
+output * scale 1.25
 set $left h
 set $down j
 set $up k
