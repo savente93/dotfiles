@@ -10,8 +10,8 @@ sed 's/#en_GB.UTF-8.*/en_GB.UTF-8 UTF-8/g;s/#en_US.UTF-8.*/en_US.UTF-8 UTF-8/g' 
 locale-gen
 echo 'LANG=en_GB.UTF-8' >/etc/locale.conf
 timedatectl set-timezone Europe/Amsterdam
-read -p "Enter hostname: " hn
-echo $hn >/etc/hostname
+read -p -r "Enter hostname: " hn
+echo "$hn" >/etc/hostname
 
 #setup bootloader
 bootctl install

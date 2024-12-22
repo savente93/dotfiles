@@ -1,5 +1,10 @@
 #!/bin/bash
 
+function setup_internet() {
+	nmcli d wifi connect -a "$(nmcli -f SSID d wifi list | sort | uniq | grep -v SSID | fzf --header "Please select a wifi network")"
+
+}
+
 function install_paru() {
 	echo "Installing paru..."
 	if ! command -v paru &>/dev/null; then
@@ -260,6 +265,7 @@ function setup_security() {
 }
 
 function all() {
+	setup_internet
 	install_paru
 	setup_basic_system
 	setup_dotfiles
