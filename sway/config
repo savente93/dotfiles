@@ -144,7 +144,7 @@ bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 # starup apps
 exec --no-startup-id wezterm
 exec --no-startup-id firefox
-exec --no-startup-id flatpak run com.spotify.Client
+#exec --no-startup-id flatpak run com.spotify.Client
 
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
