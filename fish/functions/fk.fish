@@ -1,4 +1,4 @@
-function fkill
+function fk
 
     if ! test -n $argv[1]
         echo exiting
