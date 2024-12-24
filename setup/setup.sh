@@ -48,7 +48,7 @@ function setup_dev_stuff() {
 
 	echo "setting up dev tools"
 	# tools
-	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update difftastic dust eza fd git-delta lazygit ripgrep ruff rustup starship stylua topgrade-bin wikiman wezterm zola zoxide; do
+	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update d2 difftastic dust eza fd git-delta lazygit ripgrep ruff rustup starship stylua topgrade-bin wikiman wezterm zola zoxide; do
 		if ! command -v $tool &>/dev/null; then
 			paru -S $tool --noconfirm
 		fi
