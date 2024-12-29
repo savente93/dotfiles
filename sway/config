@@ -104,6 +104,8 @@ exec swayidle -w \
 # screenshots
 bindsym Print exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+s exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+Shift+e exec --no-startup-id /home/sam/.cargo/bin/eww close-all
+bindsym $mod+e exec --no-startup-id /home/sam/.cargo/bin/eww open-many background system clock uptime sleep reboot poweroff --restart
 
 
 # some stuff is allowed to float
