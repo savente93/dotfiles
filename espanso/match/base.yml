@@ -51,15 +51,3 @@ matches:
     replace: Ümit
   - trigger: ;dh
     replace: ":dragon_heart:"
-  # - trigger: nj
-  #   replace: ñ
-  - trigger: "''e"
-    replace: é
-  - trigger: "''i"
-    replace: í
-  - trigger: "''a"
-    replace: á
-  - trigger: "''o"
-    replace: ó
-  - trigger: "''u"
-    replace: ú
