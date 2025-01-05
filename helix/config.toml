@@ -46,7 +46,6 @@ select = "underline"
 
 [keys.select]
 minus = "trim_selections"
-"`" = "switch_case"
 r = "replace_with_yanked"
 Y = ":clipboard-yank-join"
 A-j = "half_page_down"
@@ -61,7 +60,6 @@ A-k = "half_page_up"
 
 [keys.normal]
 minus = "trim_selections"
-"`" = "switch_case"
 ";" = "flip_selections"
 "esc" = ["collapse_selection", "keep_primary_selection"]
 d = "delete_selection"
