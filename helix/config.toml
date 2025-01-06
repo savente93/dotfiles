@@ -15,6 +15,16 @@ bufferline = "multiple"
 idle-timeout = 0
 completion-trigger-len = 1
 
+# Minimum severity to show a diagnostic after the end of a line:
+end-of-line-diagnostics = "warning"
+
+[editor.inline-diagnostics]
+# Minimum severity to show a diagnostic on the primary cursor's line.
+# Note that `cursor-line` diagnostics are hidden in insert mode.
+cursor-line = "error"
+# Minimum severity to show a diagnostic on other lines:
+other-lines = "error"
+
 
 [editor.statusline]
 left = ["spinner", "spacer", "diagnostics", "spacer", "file-name"]
