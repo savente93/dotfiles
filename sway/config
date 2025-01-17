@@ -90,11 +90,10 @@ bindsym $mod+Alt+r exec --no-startup-id ironbar reload
 
 # launchers
 bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
-bindsym $mod+b exec blueman-manager
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
 
 # lockscreen
-bindsym ctrl+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png
+bindsym ctrl+Alt+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png
 exec swayidle -w \
 	resume 'swaymsg "output * power on"' \
     before-sleep 'playerctl pause'\
@@ -104,8 +103,6 @@ exec swayidle -w \
 # screenshots
 bindsym Print exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+s exec --no-startup-id grim -g "$(slurp)" - | swappy -f -
-bindsym $mod+Shift+e exec --no-startup-id /home/sam/.cargo/bin/eww close-all
-bindsym $mod+e exec --no-startup-id /home/sam/.cargo/bin/eww open dashboard
 
 
 # some stuff is allowed to float
@@ -130,7 +127,6 @@ assign [class="Spotify"]                 $ws3
 assign [class="discord"]                 $ws4
 assign [class="Microsoft Teams.*"]       $ws5
 assign [class="steam"]                   $ws8
-assign [class="freetube"]                $ws10
 
 # waybar
 exec_always --no-startup-id sh $HOME/.config/waybar/launch.sh
@@ -145,8 +141,6 @@ bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 
 # starup apps
 exec --no-startup-id wezterm
-exec --no-startup-id firefox
-#exec --no-startup-id flatpak run com.spotify.Client
 
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
