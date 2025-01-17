@@ -16,7 +16,7 @@ idle-timeout = 0
 completion-trigger-len = 1
 
 # Minimum severity to show a diagnostic after the end of a line:
-end-of-line-diagnostics = "warning"
+end-of-line-diagnostics = "hint"
 
 [editor.inline-diagnostics]
 # Minimum severity to show a diagnostic on the primary cursor's line.
