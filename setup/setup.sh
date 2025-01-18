@@ -3,7 +3,9 @@
 function install_pixi() {
 	if ! command -v pixi &>/dev/null; then
 		curl -fsSL https://pixi.sh/install.sh | bash
-		export PATH="$PATH:$HOME/.pixi/bin"
+		if [[ ":$PATH:" != *":$HOME/.pixi/bin:"* ]]; then
+			export PATH="$PATH:$HOME/.pixi/bin"
+		fi
 	else
 		return 0
 	fi
@@ -52,16 +54,16 @@ function is_installed() {
 
 	case "$manager" in
 	cargo)
-		cargo install --list | grep -q "$tool"
+		cargo install --list | grep -q "\b$tool\b"
 		;;
 	paru)
 		paru -Q "$tool"
 		;;
 	flatpak)
-		flatpak list | grep -q "$tool"
+		flatpak list | grep -q "\b$tool\b"
 		;;
 	pixi)
-		pixi global list | grep -q "$tool"
+		pixi global list | grep -q "\b$tool\b"
 		;;
 	*)
 		echo "Unknown package manager: $manager"
@@ -84,8 +86,6 @@ function install_tools() {
 	for t in "${tools[@]}"; do
 		# Check if the tool is already installed, based on the manager
 		if ! is_installed "$manager" "$t"; then
-			echo "$t already installed, skipping..."
-		else
 			# Perform the installation
 			case "$manager" in
 			cargo)
@@ -168,7 +168,9 @@ function setup_power_management() {
 
 function setup_wezterm() {
 
-	curl -Ssfo ~/.wezterm.sh https://raw.githubusercontent.com/wez/wezterm/refs/heads/main/assets/shell-integration/wezterm.sh
+	if [ ! -f ~/.wezterm.sh ]; then
+		curl -Ssfo ~/.wezterm.sh https://raw.githubusercontent.com/wez/wezterm/refs/heads/main/assets/shell-integration/wezterm.sh
+	fi
 	install_tools paru wezterm stylua lua-language-server
 
 }
@@ -182,7 +184,9 @@ function setup_terminal() {
 	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi
 
 	# don't want fish to start when we install it so it get's handled seperately
-	sudo pacman -S --needed --noconfirm fish
+	if ! command -v fish &>/dev/null; then
+		sudo pacman -S --needed --noconfirm fish
+	fi
 
 	echo "creating symlinks"
 	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
