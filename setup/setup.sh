@@ -6,8 +6,6 @@ function install_pixi() {
 		if [[ ":$PATH:" != *":$HOME/.pixi/bin:"* ]]; then
 			export PATH="$PATH:$HOME/.pixi/bin"
 		fi
-	else
-		return 0
 	fi
 }
 
@@ -18,8 +16,6 @@ function install_cargo() {
 		rustup default stable
 		cargo install cargo-binstall
 		cargo binstall cargo-cache cargo-update
-	else
-		return 0
 	fi
 
 }
@@ -79,7 +75,7 @@ function install_tools() {
 	local tools=("$@")
 
 	if [ "${#tools[@]}" -eq 0 ]; then
-		return 1
+		exit 1
 	fi
 
 	# Loop through each tool
@@ -99,7 +95,7 @@ function install_tools() {
 				;;
 			*)
 				echo "Unknown package manager: $manager"
-				return 1
+				exit 1
 				;;
 			esac
 		fi
@@ -115,7 +111,9 @@ function install_helix_fork() {
 	mkdir -p ~/projects/rust
 
 	pushd ~/projects/rust || exit 1
-	git clone git@github.com:savente93/helix.git
+	if [ ! -d helix ]; then
+		git clone git@github.com:savente93/helix.git
+	fi
 	pushd helix || exit 1
 	git checkout bin
 	cargo install --path helix-term --locked
@@ -125,13 +123,15 @@ function install_helix_fork() {
 	ln -s "$PWD"/runtime ~/.config/helix/ -f
 
 	# download theme
-	curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
+	if [ ! -f ~/.config/helix/themes/onedark.toml ]; then
+		curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
+	fi
 
 	~/.cargo/bin/hx -g fetch
 	~/.cargo/bin/hx -g build
 
-	popd || exit 1
-	popd || exit 1
+	popd
+	popd
 
 }
 
@@ -158,12 +158,10 @@ function setup_audio() {
 function setup_power_management() {
 
 	install_tools paru acpi
+
 	# make sure laptop hybernates when battery is too low
-	# ls | grep is fine in this case and the alternative is needlessly complicated
-	# shellcheck disable=SC2010
-	if ls /sys/class/power_supply | grep -q BAT; then
-		echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
-	fi
+	# this won't do anything if we don't have a battery so no checks necessary
+	echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
 }
 
 function setup_wezterm() {
@@ -188,17 +186,7 @@ function setup_terminal() {
 		sudo pacman -S --needed --noconfirm fish
 	fi
 
-	echo "creating symlinks"
-	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
-	ln -s ~/Documents/dotfiles/.bashrc ~/.bashrc -f
-	ln -s ~/Documents/dotfiles/.gitignore ~/.gitignore -f
-	ln -s ~/Documents/dotfiles/.gitconfig ~/.gitconfig -f
-	ln -s ~/Documents/dotfiles/starship.toml ~/.config/starship.toml -f
-	ln -s ~/Documents/dotfiles/topgrade.toml ~/.config/topgrade.toml -f
-	ln -s ~/Documents/dotfiles/fish ~/.config/ -f
-	ln -s ~/Documents/dotfiles/lazygit ~/.config/ -f
-	ln -s ~/Documents/dotfiles/paru/ ~/.config/ -f
-	ln -s ~/Documents/dotfiles/wireplumber/ ~/.config/ -f
+	# outside of home dir so stow won't manage these I think
 	sudo rm /etc/pacman.conf
 	sudo ln -s ~/Documents/dotfiles/pacman.conf /etc/pacman.conf -f
 
@@ -239,27 +227,21 @@ function setup_infra_tools() {
 function setup_espanso() {
 	install_tools paru espanso-wayland-git
 	espanso service register
-
-	mkdir -p ~/.config/espanso
-	rm -rf ~/.config/espanso/*
-	ln -s ~/Documents/dotfiles/espanso/config ~/.config/espanso/ -f
-	ln -s ~/Documents/dotfiles/espanso/match ~/.config/espanso/ -f
 }
 
 function setup_fonts() {
 	install_tools paru noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-firacode-nerd ttf-font-awesome
 	mkdir -p ~/.local/share/fonts{Clicker_Script,EB_Garmond}
-	curl -Ls -o ~/.local/share/fonts/Clicker_Script/ClickerScript-Regular.ttf https://raw.githubusercontent.com/google/fonts/main/ofl/clickerscript/ClickerScript-Regular.ttf
-	curl -Ls -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond%5Bwght%5D.ttf
-	curl -Ls -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond-Italic%5Bwght%5D.ttf
+	curl -Ls -c -o ~/.local/share/fonts/Clicker_Script/ClickerScript-Regular.ttf https://raw.githubusercontent.com/google/fonts/main/ofl/clickerscript/ClickerScript-Regular.ttf
+	curl -Ls -c -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond%5Bwght%5D.ttf
+	curl -Ls -c -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond-Italic%5Bwght%5D.ttf
 }
 
 function setup_de() {
 	paru -S brightnessctl cronie gammastep grim lxappearance sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr --noconfirm
-	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
-	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
-	curl https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
+	curl -Lsc https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
+	curl -Lsc https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
 
 }
 
@@ -279,21 +261,16 @@ function setup_dotfiles() {
 }
 
 function setup_1password() {
-	echo "setting up secruity"
 
 	if ! command -v 1password; then
-		echo "installing 1password"
-
-		curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
+		curl -LsS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
 		install_tools paru 1password 1password-cli rofi-1pass aws-credential-1password
 
 		read -r -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
 		op vault list || exit 1
 	fi
 
-	mkdir -p ~/.config/autostart
 	if [ ! -f ~/.config/autostart/1password.desktop ]; then
-		echo "creating 1password autostart"
 		mkdir -p ~/.config/autostart
 		# autostart 1password at login
 		echo -e "[Desktop Entry]\nType=Application\nExec=/usr/bin/1password --silent\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_GB]=1Password\nName=1Password\nComment[en_GB]=\nComment=" >~/.config/autostart/1password.desktop
@@ -302,13 +279,13 @@ function setup_1password() {
 
 function setup_ssh() {
 
-	paru -S wikiman base-devel --noconfirm
+	install_tools paru wikiman base-devel
 
 	install_tools paru keychain openssh openssl
 	sudo systemctl enable --now ufw.service
 	sudo systemctl enable --now sshd.service
+
 	# ssh
-	echo "setting up ssh identities"
 	mkdir -p ~/.ssh
 	chmod -R 700 ~/.ssh
 
@@ -326,7 +303,7 @@ function setup_ssh() {
 
 	if [ -z "$key_type" ]; then
 		echo "Could not determine key type..."
-		return 1
+		exit 1
 	fi
 
 	op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key" >"$HOME/.ssh/id_$key_type.pub"
@@ -439,6 +416,6 @@ source)
 	;;
 *)
 	echo "Unknown group: $group"
-	return 1
+	exit 1
 	;;
 esac
