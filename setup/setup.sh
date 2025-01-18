@@ -1,91 +1,188 @@
 #!/bin/bash
 
-function setup_internet() {
-	nmcli d wifi connect -a "$(nmcli -f SSID d wifi list | sort | uniq | grep -v SSID | grep -o '[^[:space:]].*[^[:space:]]' | fzf --header "Please select a wifi network")"
+function install_pixi() {
+	if ! command -v pixi &>/dev/null; then
+		curl -fsSL https://pixi.sh/install.sh | bash
+		export PATH="$PATH:$HOME/.pixi/bin"
+	else
+		return 0
+	fi
+}
+
+function install_cargo() {
+
+	if ! command -v cargo &>/dev/null; then
+		sudo pacman -S --needed base-devel rustup --noconfirm
+		rustup default stable
+		cargo install cargo-binstall
+		cargo binstall cargo-cache cargo-update
+	else
+		return 0
+	fi
 
 }
 
 function install_paru() {
-	echo "Installing paru..."
+
 	if ! command -v paru &>/dev/null; then
-		sudo pacman -S --needed base-devel rustup --noconfirm
-		rustup default stable
-		if [ ! -d paru ]; then
-			git clone https://aur.archlinux.org/paru.git
+		# because paru is in the AUR we can't install it from pacman
+		# but we want to be able to update itself so we'll
+		# install one version manually, then install paru through that
+		# and remove the version we just installed
+		if [ ! -d paru-bin ]; then
+			git clone https://aur.archlinux.org/paru-bin.git
 		fi
-		cd paru
-		makepkg -si --noconfirm
-		cd ..
-		rm -rf paru
-		paru -S paru bat --noconfirm
-		paru -Syu --noconfirm
+		makepkg -si --noconfirm --dir paru-bin
+		paru -S bat --noconfirm
+		rm -rf paru-bin
+	fi
+
+}
+
+function install_flatpak() {
+	if ! command -v flatpak &>/dev/null; then
+		sudo pacman -S --needed flatpak --noconfirm
 	fi
 }
 
-function setup_basic_system() {
-	echo "starting basic system setup..."
+# Function to check if a tool is installed
+function is_installed() {
+	local manager=$1
+	local tool=$2
 
-	paru -S base-devel blueman chrony curl wofi keychain openssh openssl pipewire pipewire-pulse sway ufw xorg-server-xwayland nm-connection-editor --noconfirm
+	case "$manager" in
+	cargo)
+		cargo install --list | grep -q "$tool"
+		;;
+	paru)
+		paru -Q "$tool"
+		;;
+	flatpak)
+		flatpak list | grep -q "$tool"
+		;;
+	pixi)
+		pixi global list | grep -q "$tool"
+		;;
+	*)
+		echo "Unknown package manager: $manager"
+		return 1
+		;;
+	esac
+}
 
-	echo "installing fish"
-	# don't want fish to start when we install it so it get's handled seperately
-	sudo pacman -S --needed --noconfirm fish
+# General installation function that can handle different package managers
+function install_tools() {
+	local manager=$1
+	shift # Remove the manager argument from the list
+	local tools=("$@")
+
+	if [ "${#tools[@]}" -eq 0 ]; then
+		return 1
+	fi
+
+	# Loop through each tool
+	for t in "${tools[@]}"; do
+		# Check if the tool is already installed, based on the manager
+		if ! is_installed "$manager" "$t"; then
+			echo "$t already installed, skipping..."
+		else
+			# Perform the installation
+			case "$manager" in
+			cargo)
+				cargo install "$t"
+				;;
+			flatpak)
+				flatpak install "$t" -y
+				;;
+			pixi)
+				pixi global install "$t"
+				;;
+			*)
+				echo "Unknown package manager: $manager"
+				return 1
+				;;
+			esac
+		fi
+	done
+}
+
+function install_helix_fork() {
+
+	if [ -f "$HOME/.cargo/bin/hx" ]; then
+		return 0
+	fi
+
+	mkdir -p ~/projects/rust
+
+	pushd ~/projects/rust || exit 1
+	git clone git@github.com:savente93/helix.git
+	pushd helix || exit 1
+	git checkout bin
+	cargo install --path helix-term --locked
+
+	# just in case
+	rm -rf ~/.config/helix/runtime
+	ln -s "$PWD"/runtime ~/.config/helix/ -f
+
+	# download theme
+	curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
+
+	~/.cargo/bin/hx -g fetch
+	~/.cargo/bin/hx -g build
+
+	popd || exit 1
+	popd || exit 1
+
+}
+
+function setup_internet() {
+
+	nmcli d wifi connect -a "$(nmcli -f SSID d wifi list | sort | uniq | grep -v SSID | grep -o '[^[:space:]].*[^[:space:]]' | fzf --header "Please select a wifi network")"
+	install_tool paru ufw ssh curl chrony
 
 	timedatectl set-timezone Europe/Amsterdam
 
-	for s in NetworkManager bluetooth chronyd sshd ufw; do
-		sudo systemctl enable --now $s.service
-	done
-
-	systemctl enable --now --user pipewire-pulse
-
-	# make sure laptop hybernates when battery is too low
-	echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
+	sudo systemctl enable --now NetworkManager.service
+	sudo systemctl enable --now chronyd.service
 
 }
 
-function setup_dev_stuff() {
+function setup_audio() {
+	install_tools paru pipewire pipewire-pulse qpwgraph wireplumber
+	systemctl enable --now --user pipewire-pulse
+	sudo systemctl enable --now bluetooth.service
+	systemctl --user --now enable wireplumber
+	install_tools flatpak spotify
+}
 
-	echo "setting up dev tools"
-	# tools
-	for tool in bottom cargo-audit cargo-binstall cargo-cache cargo-tarpaulin cargo-update d2 difftastic dust eza fd git-delta lazygit ripgrep ruff rustup starship stylua topgrade-bin wikiman wezterm zola zoxide typst; do
-		if ! command -v $tool &>/dev/null; then
-			paru -S $tool --noconfirm
-		fi
-	done
+function setup_power_management() {
 
-	curl -fsSL https://pixi.sh/install.sh | bash
-	export PATH=$PATH:$HOME/.pixi/bin
-	rustup default stable
-
-	echo "setting up docker & npm"
-	# runtimes/compilers
-	sudo pacman -S --needed --noconfirm docker npm
-	sudo usermod -aG docker sam
-	if [ -z "$(getent group docker)" ]; then
-		newgrp docker
+	install_tools paru acpi
+	# make sure laptop hybernates when battery is too low
+	# ls | grep is fine in this case and the alternative is needlessly complicated
+	# shellcheck disable=SC2010
+	if ls /sys/class/power_supply | grep -q BAT; then
+		echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
 	fi
+}
 
-	sudo systemctl enable --now docker.service
-
-	paru -S docker-compose --noconfirm
-
-	sudo npm i -g dockerfile-language-server-nodejs
-	cargo install jinja-lsp
-
-	echo "setting up LSPs and linters"
-	#LSPs/linters
-	for tool in bash-language-server bibtex-tidy lua-language-server marksman pyright ruff-lsp rust-analyzer shellcheck shfmt stylua taplo-cli terraform-ls texlab yaml-language-server typst-lsp-bin; do
-		if ! command -v $tool &>/dev/null; then
-			paru -S $tool --noconfirm
-		fi
-	done
-
-	echo "setting up pixi"
-	# pixi
-	pixi global install pre-commit awscli djlint
+function setup_wezterm() {
 
 	curl -Ssfo ~/.wezterm.sh https://raw.githubusercontent.com/wez/wezterm/refs/heads/main/assets/shell-integration/wezterm.sh
+	install_tools paru wezterm stylua lua-language-server
+
+}
+
+function setup_terminal() {
+
+	install_helix_fork
+	setup_wezterm
+
+	install_tools pixi pre-commit
+	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi
+
+	# don't want fish to start when we install it so it get's handled seperately
+	sudo pacman -S --needed --noconfirm fish
 
 	echo "creating symlinks"
 	ln -s ~/Documents/dotfiles/.wezterm.lua ~/.wezterm.lua -f
@@ -103,103 +200,91 @@ function setup_dev_stuff() {
 
 }
 
-function install_helix_fork() {
-	echo "installing helix"
+function setup_writing_tools() {
 
-	mkdir -p ~/Documents/projects/rust
-	mkdir -p ~/.config/helix
+	install_tools paru bibtex-tidy d2 evince jinja-lsp marksman texlab typos typst typst-lsp-bin zola
 
-	cd ~/Documents/projects/rust
-	git clone git@github.com:savente93/helix.git
-	cd helix
-	git checkout bin
-	cargo install --path helix-term --locked
-	# just in case
-	rm -rf ~/.config/helix/runtime
-	ln -s "$PWD"/runtime ~/.config/helix/ -f
+	#set evince as defatul pdf application
+	xdg-mime default org.gnome.Evince.desktop application/pdf
+	gio mime application/pdf org.gnome.Evince.desktop
 
-	mkdir ~/.config/helix/themes
-	mkdir -p ~/.cargo/bin/runtime
-	curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
-	ln -s ~/Documents/dotfiles/helix/config.toml ~/.config/helix/config.toml -f
-	ln -s ~/Documents/dotfiles/helix/languages.toml ~/.config/helix/languages.toml -f
-
-	~/.cargo/bin/hx -g fetch
-	~/.cargo/bin/hx -g build
+	install_tools cargo jinja-lsp
+	install_tools pixi djlint
 
 }
 
-function setup_creature_comforts() {
+function setup_python_tools() {
+	install_tools paru pyright ruff-lsp
 
-	echo "setting up creature comforts"
-	paru -S flatpak steam-devices-git espanso-wayland-git unzip --noconfirm
+}
 
-	flatpak install -y com.discordapp.Discord
-	flatpak install -y com.github.IsmaelMartinez.teams_for_linux
-	flatpak install -y com.spotify.Client
-	flatpak install -y com.valvesoftware.Steam
+function setup_rust_tools() {
+	install_tools paru rustup rust-analyzer taplo-cli
 
-	# setup espanso
+}
+
+function setup_bash_tools() {
+	install_tools paru bash-language-server shellcheck shfmt yaml-language-server
+}
+
+function setup_infra_tools() {
+	install_tools pixi awscli
+	install_tools paru terraform-ls
+}
+
+function setup_espanso() {
+	install_tools paru espanso-wayland-git
 	espanso service register
 
 	mkdir -p ~/.config/espanso
 	rm -rf ~/.config/espanso/*
 	ln -s ~/Documents/dotfiles/espanso/config ~/.config/espanso/ -f
 	ln -s ~/Documents/dotfiles/espanso/match ~/.config/espanso/ -f
+}
 
+function setup_fonts() {
+	install_tools paru noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-firacode-nerd ttf-font-awesome
+	mkdir -p ~/.local/share/fonts{Clicker_Script,EB_Garmond}
+	curl -Ls -o ~/.local/share/fonts/Clicker_Script/ClickerScript-Regular.ttf https://raw.githubusercontent.com/google/fonts/main/ofl/clickerscript/ClickerScript-Regular.ttf
+	curl -Ls -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond%5Bwght%5D.ttf
+	curl -Ls -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond-Italic%5Bwght%5D.ttf
 }
 
 function setup_de() {
-	paru -S acpi brightnessctl cronie dunst evince firefox gammastep grim lxappearance mesa noto-fonts noto-fonts-cjk pulsemixer noto-fonts-emoji pipewire pipewire-audio qpwgraph sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock ttf-firacode-nerd ttf-font-awesome tz waybar webp-pixbuf-loader wireplumber xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr yazi --noconfirm
+	paru -S brightnessctl cronie gammastep grim lxappearance sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr --noconfirm
 	mkdir -p ~/{.local/bin,.config}/rofi
 	mkdir -p ~/Wallpapers
 	curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
 	curl https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
 
-	#set evince as defatul pdf application
-	xdg-mime default org.gnome.Evince.desktop application/pdf
-	gio mime application/pdf org.gnome.Evince.desktop
-	systemctl --user --now enable wireplumber
+}
 
-	rm -rf ~/.config/sway
-	ln -s ~/Documents/dotfiles/sway ~/.config/ -f
-	rm -rf ~/.config/waybar
-	ln -s ~/Documents/dotfiles/waybar ~/.config/ -f
-	sudo mkdir -p /usr/share/rofi/themes/
-	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi /usr/share/rofi/themes/powermenu.rasi -f
-	sudo ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.rasi ~/.config/rofi/powermenu.rasi -f
-	ln -s ~/Documents/dotfiles/rofi/powermenu/powermenu.sh ~/.local/bin/rofi/ -f
-	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi ~/.config/rofi/ -f
-	sudo ln -s ~/Documents/dotfiles/rofi/launcher/launcher.rasi /usr/share/rofi/themes/launcher.rasi -f
-	ln -s ~/Documents/dotfiles/rofi/launcher/launcher.sh ~/.local/bin/rofi/ -f
-	sudo ln -s ~/Documents/dotfiles/sddm.conf /etc/ -f
-
+function setup_games() {
+	flatpak install -y com.valvesoftware.Steam
 }
 
 function setup_dotfiles() {
-	if [ ! -d ~/Documents/dotfiles ]; then
-		git clone https://github.com/savente93/dotfiles.git ~/Documents/dotfiles
-		pushd ~/Documents/dotfiles
+	install_tools paru stow
+	if [ ! -d ~/dotfiles ]; then
+		git clone https://github.com/savente93/dotfiles.git ~/dotfiles
+		pushd ~/dotfiles || exit 1
 		git remote set-url origin git@github.com:savente93/dotfiles.git
-		popd
+		stow .
+		popd || exit 1
 	fi
-	mkdir -p ~/Documents/projects
 }
 
-function setup_security() {
-
+function setup_1password() {
 	echo "setting up secruity"
 
-	# install password manager
-	# installing through the deb will setup apt et al for us
 	if ! command -v 1password; then
 		echo "installing 1password"
 
 		curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-		paru -S 1password 1password-cli rofi-1pass aws-credential-1password --noconfirm
+		install_tools paru 1password 1password-cli rofi-1pass aws-credential-1password
 
 		read -r -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
-		op vault list
+		op vault list || exit 1
 	fi
 
 	mkdir -p ~/.config/autostart
@@ -209,11 +294,15 @@ function setup_security() {
 		# autostart 1password at login
 		echo -e "[Desktop Entry]\nType=Application\nExec=/usr/bin/1password --silent\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_GB]=1Password\nName=1Password\nComment[en_GB]=\nComment=" >~/.config/autostart/1password.desktop
 	fi
+}
 
-	echo "disabling root login"
-	# disable root login
-	sudo sed -i -E 's/root:x:0:0:root:\/root:\/bin\/bash/root:x:0:0:root:\/root:\/usr\/sbin\/nologin/' /etc/passwd
+function setup_ssh() {
 
+	paru -S wikiman base-devel --noconfirm
+
+	install_tools paru keychain openssh openssl
+	sudo systemctl enable --now ufw.service
+	sudo systemctl enable --now sshd.service
 	# ssh
 	echo "setting up ssh identities"
 	mkdir -p ~/.ssh
@@ -223,6 +312,10 @@ function setup_security() {
 	ssh-keyscan github.com >githubKey
 	ssh-keygen -lf githubKey >>~/.ssh/known_hosts
 	rm githubKey
+
+	ssh-keyscan git.sam-vente.com >personal_git_key
+	ssh-keygen -lf personal_git_key >>~/.ssh/known_hosts
+	rm personal_git_key
 
 	# get sshkeys from password manager
 	key_type=$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "key type")
@@ -242,7 +335,6 @@ function setup_security() {
 	echo "Host *" >~/.ssh/config
 	echo "IdentityFile ~/.ssh/id_$key_type" >>~/.ssh/config
 
-	echo "configing ssh"
 	# ssh connections only allowed through non root key based auth
 	sudo sed -i -E "s/[#]?PasswordAuthentication (yes|no)/PasswordAuthentication no/;s/#?PubkeyAuthentication (yes|no)/PubkeyAuthentication yes/;s/#?PermitRootLogin (yes|no)/PermitRootLogin no/;s/#?AllowUsers .*/AllowUsers $USER/" /etc/ssh/sshd_config
 
@@ -253,33 +345,96 @@ function setup_security() {
 	# git by using the signing key each machine can have it's own key but still have a common gitconfig
 	echo "[user]" >~/.gitconfig.signingkey
 	echo -e "\tsigningkey = $(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >>~/.gitconfig.signingkey
+}
 
+function setup_docker() {
+	# runtimes/compilers
+	install_paru docker dockerfile-language-server docker-compose
+	sudo usermod -aG docker sam
+	if [ -z "$(getent group docker)" ]; then
+		newgrp docker
+	fi
+
+	sudo systemctl enable --now docker.service
+
+}
+
+function setup_aws() {
 	# aws cli
 	mkdir -p ~/.aws
 	echo -e "[default]\n\t" >~/.aws/credentials
 	echo "aws_access_key_id = $(op item get 'AWS [Personal]' --fields username)" >>~/.aws/credentials
 	echo "aws_secret_access_key= $(op item get 'AWS [Personal]' --fields credential)" >>~/.aws/credentials
 
-	echo "Done"
+}
+
+function disable_root_login() {
+
+	sudo sed -i -E 's/root:x:0:0:root:\/root:\/bin\/bash/root:x:0:0:root:\/root:\/usr\/sbin\/nologin/' /etc/passwd
 
 }
 
-function all() {
-	setup_internet
+function install_package_managers() {
+	install_cargo
 	install_paru
-	setup_basic_system
-	setup_dotfiles
-	setup_dev_stuff
-	setup_creature_comforts
-	setup_de
-	setup_security
-	install_helix_fork
+	install_pixi
+	install_flatpak
 }
 
-# exit on error
-set -e
+function setup_common() {
+	disable_root_login
+	setup_internet
+	install_package_managers
+	setup_dotfiles
+	setup_terminal
+	setup_1password
+	setup_ssh
+	setup_espanso
+	setup_de
+	setup_fonts
+	setup_audio
+
+}
+
+function setup_minimal() {
+	setup_common
+	setup_writing_tools
+}
+
+function setup_dev() {
+	setup_python_tools
+	setup_rust_tools
+	setup_infra_tools
+	setup_bash_tools
+	setup_1password
+	setup_docker
+	setup_aws
+}
+
+function setup_all() {
+	setup_common
+	setup_writing_tools
+	setup_dev
+	setup_games
+}
 
 #get sudo rights for when we need it
 sudo -v
 
-all
+group=$1
+case "$group" in
+all)
+	setup_all
+	;;
+minimal)
+	setup_minimal
+	;;
+#for if we want to source the functions
+source)
+	setup_all
+	;;
+*)
+	echo "Unknown group: $group"
+	return 1
+	;;
+esac
