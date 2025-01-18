@@ -89,8 +89,8 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Alt+r exec --no-startup-id ironbar reload
 
 # launchers
-bindsym $mod+d exec ~/.local/bin/rofi/launcher.sh
-bindsym ctrl+Shift+Delete exec --no-startup-id ~/.local/bin/rofi/powermenu.sh
+bindsym $mod+d exec ~/.config/rofi/launcher.sh
+bindsym ctrl+Shift+Delete exec --no-startup-id ~/.config/rofi/powermenu.sh
 
 # lockscreen
 bindsym ctrl+Alt+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png

@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 
-Dotfile_path = "/home/sam/Documents/dotfiles"
+Dotfile_path = "/home/sam/dotfiles"
 Project_path = "/home/sam/Documents/projects"
 Work_path = "/home/sam/Documents/work"
 Base_path = "/home/sam"

@@ -414,6 +414,9 @@ minimal)
 source)
 	setup_all
 	;;
+"")
+	exit 1
+	;;
 *)
 	echo "Unknown group: $group"
 	exit 1
