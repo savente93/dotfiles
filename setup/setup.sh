@@ -88,7 +88,7 @@ function install_tools() {
 				paru -S "$t" --noconfirm
 				;;
 			cargo)
-				cargo binstall "$t"
+				cargo binstall "$t" -y
 				;;
 			flatpak)
 				flatpak install "$t" -y
