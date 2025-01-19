@@ -115,9 +115,10 @@ function install_helix_fork() {
 
 	pushd ~/projects/rust || exit 1
 	if [ ! -d ~/projects/rust/helix ]; then
-		git clone git@github.com:savente93/helix.git
+		git clone https://github.com/savente93/helix.git
 	fi
 	pushd helix || exit 1
+	git remote set-url origin git@github.com:savente93/helix.git
 	git checkout bin
 	cargo install --path helix-term --locked
 
@@ -380,13 +381,13 @@ function setup_common() {
 	install_package_managers
 	setup_time_zone
 	setup_dotfiles
+	setup_terminal
 	setup_espanso
 	setup_fonts
 	setup_audio
 	setup_de
 	setup_1password
 	setup_ssh
-	setup_terminal
 
 }
 
