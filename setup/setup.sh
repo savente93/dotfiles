@@ -141,6 +141,10 @@ function install_helix_fork() {
 function setup_internet() {
 
 	nmcli d wifi connect -a "$(nmcli -f SSID d wifi list | sort | uniq | grep -v SSID | grep -o '[^[:space:]].*[^[:space:]]' | fzf --header "Please select a wifi network")"
+
+}
+
+function setup_time_zone() {
 	install_tools paru ufw ssh curl chrony
 
 	timedatectl set-timezone Europe/Amsterdam
@@ -371,6 +375,7 @@ function setup_common() {
 	disable_root_login
 	setup_internet
 	install_package_managers
+	setup_time_zone
 	setup_dotfiles
 	setup_terminal
 	setup_1password
