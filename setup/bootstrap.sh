@@ -35,7 +35,7 @@ reflector
 pacman -Sy --needed archlinux-keyring
 
 #install what we'll need for system setup after reboot
-pacstrap -K /mnt amd-ucode base curl firefox foot git linux linux-firmware mesa networkmanager openssl sddm sof-firmware sudo sway vim wezterm xorg-server-xwayland wikiman
+pacstrap -K /mnt amd-ucode base curl foot git linux linux-firmware mesa networkmanager openssl sddm sudo sway vim wikiman
 
 genfstab -U /mnt >>/mnt/etc/fstab
 

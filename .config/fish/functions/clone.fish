@@ -3,11 +3,10 @@
 function clone
     set -l TOKEN $(op item get "gitea-token" --fields label=credential --reveal)
     set -l BASE_URL $(op item get "Personal gitea" --fields label=url)
-    set -l SSH_URL $(op item get "Personal gitea" --fields label=ssh-url)
     set -l USERNAME $(op item get "Personal gitea" --fields label=username)
 
 
-    if test -z "$TOKEN" | test -z "$BASE_URL" | test -z "$SSH_URL" | test -z "$USERNAME"
+    if test -z "$TOKEN" | test -z "$BASE_URL" | test -z "git@$BASE_URL" | test -z "$USERNAME"
         echo "Could not retrieve secrets"
         return
     end
@@ -27,6 +26,6 @@ function clone
     end
 
     mkdir -p "$HOME/Documents/projects/$REPO_TOPIC"
-    git clone "$SSH_URL:$USERNAME/$SELECTED_REPO.git" "$HOME/Documents/projects/$REPO_TOPIC/$SELECTED_REPO"
+    git clone "git@$BASE_URL:$USERNAME/$SELECTED_REPO.git" "$HOME/Documents/projects/$REPO_TOPIC/$SELECTED_REPO"
 
 end
