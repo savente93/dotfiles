@@ -253,8 +253,8 @@ function setup_de() {
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
 	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr walker
 	mkdir -p ~/Wallpapers
-	curl -Lsc https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
-	curl -Lsc https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
+	curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -oc ~/Wallpapers/wall.webp
+	curl -Ls https://wallpapercave.com/wp/wp2639448.png -oc ~/Wallpapers/locked.png
 
 }
 
