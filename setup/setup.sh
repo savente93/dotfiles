@@ -378,10 +378,10 @@ function setup_common() {
 	setup_internet
 	install_package_managers
 	setup_time_zone
-	setup_dotfiles
-	setup_terminal
 	setup_1password
 	setup_ssh
+	setup_dotfiles
+	setup_terminal
 	setup_espanso
 	setup_de
 	setup_fonts
