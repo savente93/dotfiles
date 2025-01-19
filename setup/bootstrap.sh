@@ -32,7 +32,7 @@ swapon /dev/nvme0n1p2
 reflector
 
 #update keyring in case the iso is old
-pacman -Sy --needed archlinux-keyring
+pacman -Sy --needed archlinux-keyring --noconfirm
 
 #install what we'll need for system setup after reboot
 pacstrap -K /mnt amd-ucode base curl foot git linux linux-firmware mesa networkmanager openssl sddm sudo sway vim wikiman
