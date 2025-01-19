@@ -140,7 +140,9 @@ function install_helix_fork() {
 
 function setup_internet() {
 
-	nmcli d wifi connect -a "$(nmcli -f SSID d wifi list | sort | uniq | grep -v SSID | grep -o '[^[:space:]].*[^[:space:]]' | fzf --header "Please select a wifi network")"
+	if nmcli d wifi list | grep -q -F '*'; then
+		nmcli d wifi connect -a "$(nmcli -f SSID d wifi list | sort | uniq | grep -v SSID | grep -o '[^[:space:]].*[^[:space:]]' | fzf --header "Please select a wifi network")"
+	fi
 
 }
 
