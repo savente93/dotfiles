@@ -85,7 +85,7 @@ function install_tools() {
 			# Perform the installation
 			case "$manager" in
 			paru)
-				paru -S "$tool" --noconfirm
+				paru -S "$t" --noconfirm
 				;;
 			cargo)
 				cargo install "$t"
@@ -114,7 +114,7 @@ function install_helix_fork() {
 	mkdir -p ~/projects/rust
 
 	pushd ~/projects/rust || exit 1
-	if [ ! -d helix ]; then
+	if [ ! -d ~/projects/rust/helix ]; then
 		git clone git@github.com:savente93/helix.git
 	fi
 	pushd helix || exit 1
@@ -145,7 +145,7 @@ function setup_internet() {
 }
 
 function setup_time_zone() {
-	install_tools paru ufw ssh curl chrony
+	install_tools paru ufw curl chrony
 
 	timedatectl set-timezone Europe/Amsterdam
 
