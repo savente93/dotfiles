@@ -84,6 +84,9 @@ function install_tools() {
 		if ! is_installed "$manager" "$t"; then
 			# Perform the installation
 			case "$manager" in
+			paru)
+				paru -S "$tool" --noconfirm
+				;;
 			cargo)
 				cargo install "$t"
 				;;
