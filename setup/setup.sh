@@ -33,6 +33,7 @@ function install_paru() {
 		makepkg -si --noconfirm --dir paru-bin
 		paru -S bat --noconfirm
 		rm -rf paru-bin
+		sudo pacman -Syyu
 	fi
 
 }
@@ -249,7 +250,7 @@ function setup_fonts() {
 
 function setup_de() {
 	sudo rm /etc/sddm.conf
-	ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
+	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
 	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr walker xorg-xwayland-server
 	mkdir -p ~/Wallpapers
 	curl -Lsc https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
