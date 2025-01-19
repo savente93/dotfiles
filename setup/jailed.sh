@@ -26,7 +26,19 @@ initrd  /initramfs-linux.img
 options root=UUID=$(blkid -s UUID -o value /dev/nvme0n1p3) rw" >/boot/loader/entries/arch.conf
 
 useradd -m -G wheel sam
-visudo
+
+# arch wiki would be very mad at me but whatever it's my system I can do what I want
+# This is roughly what visudo does but I don't want to type
+# so I'll do it myself so I can do this step unattended.
+sudo cp /etc/sudoers sudoers.tmp
+echo 'Defaults passwd_timeout=0' | sudo tee -a sudoers.tmp
+echo '%wheel ALL = (ALL:ALL) ALL' | sudo tee -a sudoers.tmp
+if visudo -c sudoers.tmp; then
+	sudo mv sudoers.tmp /etc/sudoers
+else
+	echo "Error in sudoers.tmp! aborting..."
+	exit 1
+fi
 
 passwd sam
 mkdir -p /home/sam/.config/sway
