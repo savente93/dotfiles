@@ -378,6 +378,7 @@ function setup_common() {
 	setup_internet
 	install_package_managers
 	setup_time_zone
+	setup_audio # 1password needs alsa-lib for some reason??
 	setup_1password
 	setup_ssh
 	setup_dotfiles
@@ -385,7 +386,6 @@ function setup_common() {
 	setup_espanso
 	setup_de
 	setup_fonts
-	setup_audio
 
 }
 
