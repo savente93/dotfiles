@@ -50,7 +50,7 @@ function is_installed() {
 
 	case "$manager" in
 	cargo)
-		cargo install --list | grep -q "\b$tool\b"
+		cargo binstall --list | grep -q "\b$tool\b"
 		;;
 	paru)
 		paru -Q "$tool"
