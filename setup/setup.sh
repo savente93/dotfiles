@@ -53,7 +53,7 @@ function is_installed() {
 		cargo install --list | grep -q "\b$tool\b"
 		;;
 	paru)
-		paru -Q "$tool"
+		paru -Q "$tool" &>/dev/null
 		;;
 	flatpak)
 		flatpak list | grep -q "\b$tool\b"
