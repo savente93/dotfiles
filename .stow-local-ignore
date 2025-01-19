@@ -1,0 +1,27 @@
+RCS
+.+,v
+
+CVS
+\.\#.+       # CVS conflict files / emacs lock files
+\.cvsignore
+
+\.svn
+_darcs
+\.hg
+
+\.git
+\.gitignore
+\.gitmodules
+
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
+
+setup
+sddm.conf
+pacman.conf  # these belong else where so we'll have to do those manually
+luarc.json
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+
