@@ -20,6 +20,7 @@ setup
 sddm.conf
 pacman.conf  # these belong else where so we'll have to do those manually
 luarc.json
+.pre-commit-config.yaml
 
 ^/README.*
 ^/LICENSE.*
