@@ -238,7 +238,7 @@ function setup_fonts() {
 }
 
 function setup_de() {
-	paru -S brightnessctl cronie gammastep grim lxappearance sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr --noconfirm
+	paru -S brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr walker xdg-desktop-portal-wlr --noconfirm
 	mkdir -p ~/Wallpapers
 	curl -Lsc https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
 	curl -Lsc https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
@@ -264,7 +264,7 @@ function setup_1password() {
 
 	if ! command -v 1password; then
 		curl -LsS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-		install_tools paru 1password 1password-cli rofi-1pass aws-credential-1password
+		install_tools paru 1password 1password-cli aws-credential-1password
 
 		read -r -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
 		op vault list || exit 1

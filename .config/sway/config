@@ -89,7 +89,7 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Alt+r exec --no-startup-id ironbar reload
 
 # launchers
-bindsym $mod+d exec ~/.config/rofi/launcher.sh
+bindsym $mod+d exec walker
 bindsym ctrl+Shift+Delete exec --no-startup-id ~/.config/rofi/powermenu.sh
 
 # lockscreen
