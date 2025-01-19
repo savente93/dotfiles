@@ -26,7 +26,9 @@ if status is-interactive
     abbr --add ct cargo nextest run --failure-output final --all-features --no-fail-fast
     abbr --add cb cargo build
     abbr --add cc cargo check
-    abbr --add b bacon
+
+    #bluetooth
+    abbr --add bt bluetui
 
     # git
     abbr --add gad git add -p

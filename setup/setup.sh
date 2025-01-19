@@ -188,7 +188,7 @@ function setup_terminal() {
 
 	# outside of home dir so stow won't manage these I think
 	sudo rm /etc/pacman.conf
-	sudo ln -s ~/Documents/dotfiles/pacman.conf /etc/pacman.conf -f
+	sudo ln -s ~/dotfiles/pacman.conf /etc/pacman.conf -f
 
 }
 
@@ -238,7 +238,9 @@ function setup_fonts() {
 }
 
 function setup_de() {
-	paru -S brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr walker xdg-desktop-portal-wlr --noconfirm
+	sudo rm /etc/sddm.conf
+	ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
+	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr
 	mkdir -p ~/Wallpapers
 	curl -Lsc https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
 	curl -Lsc https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
