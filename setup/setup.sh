@@ -275,7 +275,7 @@ function setup_1password() {
 
 	if ! command -v 1password; then
 		curl -LsS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-		install_tools paru 1password 1password-cli aws-credential-1password
+		install_tools paru 1password 1password-cli
 
 		read -r -p "1Password has been installed. Please unlock it and enable the CLI. Press Enter to continue..." -s -n1 </dev/tty
 		op vault list || exit 1
@@ -357,6 +357,7 @@ function setup_aws() {
 	echo -e "[default]\n\t" >~/.aws/credentials
 	echo "aws_access_key_id = $(op item get 'AWS [Personal]' --fields username)" >>~/.aws/credentials
 	echo "aws_secret_access_key= $(op item get 'AWS [Personal]' --fields credential)" >>~/.aws/credentials
+	install_tools paru aws-credential-1password
 
 }
 
@@ -378,14 +379,14 @@ function setup_common() {
 	setup_internet
 	install_package_managers
 	setup_time_zone
-	setup_audio # 1password needs alsa-lib for some reason??
-	setup_1password
-	setup_ssh
 	setup_dotfiles
 	setup_terminal
+	setup_1password
+	setup_ssh
 	setup_espanso
 	setup_de
 	setup_fonts
+	setup_audio
 
 }
 
