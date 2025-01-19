@@ -50,7 +50,7 @@ function is_installed() {
 
 	case "$manager" in
 	cargo)
-		cargo binstall --list | grep -q "\b$tool\b"
+		cargo install --list | grep -q "\b$tool\b"
 		;;
 	paru)
 		paru -Q "$tool"
@@ -88,7 +88,7 @@ function install_tools() {
 				paru -S "$t" --noconfirm
 				;;
 			cargo)
-				cargo install "$t"
+				cargo binstall "$t"
 				;;
 			flatpak)
 				flatpak install "$t" -y
