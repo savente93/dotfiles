@@ -93,7 +93,6 @@ bindsym $mod+Alt+r exec --no-startup-id ironbar reload
 
 # walker stuff
 bindsym $mod+d exec --no-startup-id walker
-bindsym $mod+Semicolon exec --no-startup-id walker -m switcher
 
 # lockscreen
 bindsym ctrl+Alt+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png

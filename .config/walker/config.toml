@@ -1,15 +1,36 @@
-app_launch_prefix = ""
 terminal_title_flag = ""
 locale = ""
 close_when_open = true
 theme = "default"
-monitor = ""
 hotreload_theme = false
 as_window = false
 timeout = 0
 disable_click_to_close = false
 force_keyboard_focus = true
 disabled = ["ai", "commands", "ssh", "windows", "dmenu", "xdph_picker"]
+
+[[plugins]]
+prefix = "0"
+name = "power"
+placeholder = "Power"
+switcher_only = true
+recalculate_score = true
+show_icon_when_single = true
+
+[[plugins.entries]]
+label = "Shutdown"
+icon = "system-shutdown"
+exec = "shutdown now"
+
+[[plugins.entries]]
+label = "Reboot"
+icon = "system-reboot"
+exec = "reboot"
+
+[[plugins.entries]]
+label = "Lock Screen"
+icon = "system-lock-screen"
+exec = "playerctl --all-players pause & hyprlock"
 
 
 [keys]
@@ -82,6 +103,7 @@ url = "https://github.com/abenz1267/walker"
 keywords = ["walker", "github"]
 
 [builtins.calc]
+prefix = "="
 require_number = true
 weight = 5
 name = "calc"
@@ -117,6 +139,7 @@ typeahead = true
 show_unqualified = false
 
 [builtins.symbols]
+prefix = ";"
 after_copy = ""
 weight = 5
 name = "symbols"
