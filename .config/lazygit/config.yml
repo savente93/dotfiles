@@ -16,8 +16,8 @@ gui:
     mainPanelSplitMode: flexible
     enlargedSideViewLocation: left
     language: auto
-    timeFormat: 02 Jan 06
-    shortTimeFormat: 3:04PM
+    timeFormat: 06-01-02 15:04:05
+    shortTimeFormat: 15:04
     theme:
         activeBorderColor:
             - green
@@ -105,7 +105,6 @@ git:
     allBranchesLogCmds: []
     overrideGpg: false
     disableForcePushing: false
-    commitPrefix: null
     commitPrefixes: {}
     branchPrefix: ""
     parseEmoji: false
@@ -120,10 +119,13 @@ update:
 refresher:
     refreshInterval: 10
     fetchInterval: 60
-confirmOnQuit: false
+confirmOnQuit: true
 quitOnTopLevelReturn: false
 disableStartupPopups: false
-customCommands: []
+customCommands:
+    - key: 'C'
+      context: 'global'
+      command: "git checkout"
 services: {}
 notARepository: prompt
 promptToReturnFromSubprocess: true
@@ -132,7 +134,6 @@ keybinding:
         quit: q
         quit-alt1: <c-c>
         return: <esc>
-        quitWithoutChangingDirectory: Q
         togglePanel: <tab>
         prevItem: <up>
         nextItem: <down>
@@ -241,8 +242,6 @@ keybinding:
         setUpstream: u
         fetchRemote: f
         sortOrder: s
-    worktrees:
-        viewWorktreeOptions: w
     commits:
         squashDown: s
         renameCommit: r
