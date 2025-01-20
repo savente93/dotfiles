@@ -23,6 +23,8 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked $mod+i exec playerctl play-pause
 bindsym --locked $mod+o exec playerctl next
 bindsym --locked $mod+u exec playerctl previous
+bindsym --locked $mod+p  exec pulsemixer --change-volume +5 --max-volume 100
+bindsym --locked $mod+y  exec pulsemixer --change-volume -5
 
 floating_modifier $mod
 
