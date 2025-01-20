@@ -3,7 +3,7 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 Dotfile_path = "/home/sam/dotfiles"
-Project_path = "/home/sam/Documents/projects"
+Project_path = "/home/sam/projects"
 Work_path = "/home/sam/Documents/work"
 Base_path = "/home/sam"
 Git_client = "lazygit"

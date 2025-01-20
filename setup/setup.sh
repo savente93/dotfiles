@@ -125,7 +125,7 @@ function install_helix_fork() {
 
 	# just in case
 	rm -rf ~/.config/helix/runtime
-	ln -s "$PWD"/runtime ~/.config/helix/ -f
+	cp -r runtime ~/.config/helix/
 
 	# download theme
 	if [ ! -f ~/.config/helix/themes/onedark.toml ]; then
