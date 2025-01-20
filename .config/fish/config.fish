@@ -15,8 +15,9 @@ if status is-interactive
     #files
     abbr --add ls eza
     abbr --add la eza -lah
-    abbr --add lt eza --tree -L 2
-    abbr --add ltt eza --tree -L 3
+    abbr --add lt eza --tree -L 2 --git-ignore -A
+    abbr --add ltt eza --tree -L 3 --git-ignore -A
+    abbr --add lttt eza --tree -L 4 --git-ignore -A
 
 
     # clean up empty dirs
