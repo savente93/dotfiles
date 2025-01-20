@@ -4,7 +4,7 @@ local mux = wezterm.mux
 
 Dotfile_path = "/home/sam/dotfiles"
 Project_path = "/home/sam/projects"
-Work_path = "/home/sam/Documents/work"
+Work_path = "/home/sam/work"
 Base_path = "/home/sam"
 Git_client = "lazygit"
 Editor = "/home/sam/.cargo/bin/hx"
