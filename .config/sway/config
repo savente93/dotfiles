@@ -1,6 +1,5 @@
 set $mod Mod4
 
-focus_follows_mouse no
 default_border none
 titlebar_border_thickness 0
 
@@ -89,7 +88,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # reload config
 bindsym $mod+Shift+r reload
 bindsym $mod+Alt+r exec --no-startup-id ironbar reload
-bindsym $mod+Return exec --no-startup-id wezterm
 
 # launchers
 
