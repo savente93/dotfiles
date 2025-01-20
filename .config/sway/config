@@ -1,5 +1,6 @@
 set $mod Mod4
 
+focus_follows_mouse no
 default_border none
 titlebar_border_thickness 0
 
@@ -23,7 +24,6 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked $mod+i exec playerctl play-pause
 bindsym --locked $mod+o exec playerctl next
 bindsym --locked $mod+u exec playerctl previous
-bindsym XF86Search exec bemenu-run
 
 floating_modifier $mod
 
@@ -31,7 +31,9 @@ bindsym $mod+Shift+q kill
 
 # in case configs get borked
 bindsym ctrl+Return exec wezterm
+bindsym $mod+Return exec wezterm
 bindsym ctrl+Shift+Return exec foot
+bindsym $mod+Shift+Return exec foot
 
 # change focus
 bindsym $mod+j focus up
@@ -90,9 +92,10 @@ bindsym $mod+Alt+r exec --no-startup-id ironbar reload
 bindsym $mod+Return exec --no-startup-id wezterm
 
 # launchers
-bindsym $mod+d exec walker
-bindsym ctrl+Shift+Delete exec --no-startup-id ~/.config/rofi/powermenu.sh
-exec --no-startup-id walker --gapplication-service
+
+# walker stuff
+bindsym $mod+d exec --no-startup-id walker
+bindsym $mod+Semicolon exec --no-startup-id walker -m switcher
 
 # lockscreen
 bindsym ctrl+Alt+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png
