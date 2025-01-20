@@ -162,20 +162,20 @@ return {
 			action = act.RotatePanes("CounterClockwise"),
 		},
 		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
-		{
-			key = "p",
-			mods = "CTRL",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_zoomed(win, pane, "Prev")
-			end),
-		},
-		{
-			key = "n",
-			mods = "CTRL",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_zoomed(win, pane, "Next")
-			end),
-		},
+		-- {
+		-- 	key = "p",
+		-- 	mods = "CTRL",
+		-- 	action = wezterm.action_callback(function(win, pane)
+		-- 		Activate_pane_zoomed(win, pane, "Prev")
+		-- 	end),
+		-- },
+		-- {
+		-- 	key = "n",
+		-- 	mods = "CTRL",
+		-- 	action = wezterm.action_callback(function(win, pane)
+		-- 		Activate_pane_zoomed(win, pane, "Next")
+		-- 	end),
+		-- },
 		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
 		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
