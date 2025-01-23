@@ -21,7 +21,7 @@ self_update = true
 max_concurrency = 5
 pull_predefined = true
 
-repos = ["~/Documents/projects/*/*"]
+repos = ["~/projects/*/*"]
 
 
 [windows]
