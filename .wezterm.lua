@@ -210,6 +210,11 @@ return {
 			mods = "CTRL",
 			action = act.ActivateTabRelative(1),
 		},
+		{
+			key = "Tab",
+			mods = "CTRL|SHIFT",
+			action = act.ActivateTabRelative(-1),
+		},
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
 		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
