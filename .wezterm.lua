@@ -184,77 +184,40 @@ return {
 		{ key = "J", mods = "LEADER", action = act({ AdjustPaneSize = { "Down", 5 } }) },
 		{ key = "K", mods = "LEADER", action = act({ AdjustPaneSize = { "Up", 5 } }) },
 		{ key = "L", mods = "LEADER", action = act({ AdjustPaneSize = { "Right", 5 } }) },
-		{ key = "1", mods = "CTRL", action = act({ ActivateTab = 0 }) },
-		{ key = "2", mods = "CTRL", action = act({ ActivateTab = 1 }) },
-		{ key = "3", mods = "CTRL", action = act({ ActivateTab = 2 }) },
-		{ key = "4", mods = "CTRL", action = act({ ActivateTab = 3 }) },
-		{ key = "5", mods = "CTRL", action = act({ ActivateTab = 4 }) },
-		{ key = "6", mods = "CTRL", action = act({ ActivateTab = 5 }) },
-		{ key = "7", mods = "CTRL", action = act({ ActivateTab = 6 }) },
-		{ key = "8", mods = "CTRL", action = act({ ActivateTab = 7 }) },
-		{ key = "9", mods = "CTRL", action = act({ ActivateTab = 8 }) },
+		{ key = "1", mods = "ALT", action = act({ ActivateTab = 0 }) },
+		{ key = "2", mods = "ALT", action = act({ ActivateTab = 1 }) },
+		{ key = "3", mods = "ALT", action = act({ ActivateTab = 2 }) },
+		{ key = "4", mods = "ALT", action = act({ ActivateTab = 3 }) },
+		{ key = "5", mods = "ALT", action = act({ ActivateTab = 4 }) },
+		{ key = "6", mods = "ALT", action = act({ ActivateTab = 5 }) },
+		{ key = "7", mods = "ALT", action = act({ ActivateTab = 6 }) },
+		{ key = "8", mods = "ALT", action = act({ ActivateTab = 7 }) },
+		{ key = "9", mods = "ALT", action = act({ ActivateTab = 8 }) },
 		{
 			key = "1",
-			mods = "ALT",
+			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				Activate_pane_by_index_zoomed(win, pane, 0)
 			end),
 		},
 		{
 			key = "2",
-			mods = "ALT",
+			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				Activate_pane_by_index_zoomed(win, pane, 1)
 			end),
 		},
 		{
 			key = "3",
-			mods = "ALT",
+			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				Activate_pane_by_index_zoomed(win, pane, 2)
 			end),
 		},
 		{
-			key = "4",
-			mods = "ALT",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 3)
-			end),
-		},
-		{
-			key = "5",
-			mods = "ALT",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 4)
-			end),
-		},
-		{
-			key = "6",
-			mods = "ALT",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 5)
-			end),
-		},
-		{
-			key = "7",
-			mods = "ALT",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 6)
-			end),
-		},
-		{
-			key = "8",
-			mods = "ALT",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 7)
-			end),
-		},
-		{
-			key = "9",
-			mods = "ALT",
-			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 8)
-			end),
+			key = "tab",
+			mods = "CTRL",
+			action = act({ act.ActivateTabRelative(1) }),
 		},
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
