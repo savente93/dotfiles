@@ -3,6 +3,9 @@
 # thanks to @ericmurphyxyz
 # Send a notification if the laptop battery is either low or is fully charged.
 
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+
 # Battery percentage at which to notify
 WARNING_LEVEL=20
 CRITICAL_LEVEL=10
