@@ -168,11 +168,19 @@ function setup_audio() {
 
 function setup_power_management() {
 
-	install_tools paru acpi
+	# check if system has a battery
+	if upower -e | grep -q 'BAT'; then
+		install_tools paru acpi
 
-	# make sure laptop hybernates when battery is too low
-	# this won't do anything if we don't have a battery so no checks necessary
-	echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
+		# make sure laptop hybernates when battery is too low
+		echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
+
+		# shellcheck disable=SC2016
+		(
+			crontab -l
+			echo '*/5 * * * * "/bin/bash" "/home/sam/.local/bin/notify_battery.sh"'
+		) 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
+	fi
 }
 
 function setup_wezterm() {
