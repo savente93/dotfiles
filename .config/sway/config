@@ -126,7 +126,7 @@ for_window [window_role="alert"]          floating enable
 
 # make sure apps stay where I like them
 assign [class="org.wezfurlong.wezterm"]  $ws1
-assign [app_id="firefox"]                 $ws2
+assign [app_id="vivaldi"]                 $ws2
 assign [class="Spotify"]                 $ws3
 assign [class="discord"]                 $ws4
 assign [class="Microsoft Teams.*"]       $ws5
@@ -145,6 +145,7 @@ bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 
 # starup apps
 exec --no-startup-id wezterm
+exec --no-startup-id vivaldi
 
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
