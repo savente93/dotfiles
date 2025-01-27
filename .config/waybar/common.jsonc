@@ -1,6 +1,7 @@
 {
     "layer":"top",
     "position":"top",
+    "mode":"dock",
     "name":"main",
     "modules-left":[
         "sway/workspaces",
@@ -74,7 +75,7 @@
         ]
     },
     "battery":{
-        "interval":5,
+        "interval":1,
         "states":{
             "full":100,
             "good":75,
@@ -94,7 +95,6 @@
     },
     "network":{
         "format-wifi":" ",
-        "format-ethernet":" ",
         "format-disconnected":" ",
         "tooltip-format":"{ipaddr}",
         "tooltip-format-wifi":"{essid}({ipaddr})",
@@ -105,29 +105,4 @@
     "tray":{
         "icon-size":20
     },
-    "mpris":{
-        "tooltip-format":"{dynamic}",
-        "format":"{status_icon}    {player_icon}",
-        "on-click-right":"playerctld shift",
-        "player-icons":{
-            "default":"",
-            "spotify":" ",
-            "firefox":" "
-        },
-        "status-icons":{
-            "playing":"",
-            "paused":"",
-            "stopped":""
-        }
-    },
-    "bluetooth": {
-			"format": " {status}",
-			"format-connected": " {device_alias}",
-			"format-connected-battery": " {device_alias} {device_battery_percentage}%",
-			// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-			"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-			"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-			"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-			"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
-		}
 }

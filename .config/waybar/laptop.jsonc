@@ -4,13 +4,10 @@
 
     "modules-right":[
         "custom/left-arrow-dark",
-        "mpris",
+        "battery",
         "custom/left-arrow-light",
         "custom/left-arrow-dark",
         "wireplumber",
-        "custom/left-arrow-light",
-        "custom/left-arrow-dark",
-        "battery",
         "custom/left-arrow-light",
         "custom/left-arrow-dark",
         "network",
