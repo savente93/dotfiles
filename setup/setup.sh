@@ -135,8 +135,9 @@ function install_helix_fork() {
 	~/.cargo/bin/hx -g fetch
 	~/.cargo/bin/hx -g build
 
-	popd
-	popd
+	# I don't care if popd fails
+	popd || true
+	popd || true
 
 }
 
