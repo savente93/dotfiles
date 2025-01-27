@@ -89,12 +89,16 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload config
 bindsym $mod+Shift+r reload
-bindsym $mod+Alt+r exec --no-startup-id ironbar reload
 
-# launchers
 
 # walker stuff
-bindsym $mod+d exec --no-startup-id walker
+bindsym $mod+d exec --no-startup-id walker -m applications
+bindsym ctrl+Shift+Delete exec --no-startup-id walker -m power
+bindsym $mod+equal exec --no-startup-id walker -m calc -q '='
+bindsym $mod+e exec --no-startup-id walker -m emojis
+bindsym $mod+m exec --no-startup-id walker -m symbols
+bindsym $mod+c exec --no-startup-id walker -m clipboard
+exec --no-startup-id walker --gapplication-service
 
 # lockscreen
 bindsym ctrl+Alt+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png
