@@ -3,6 +3,7 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 Dotfile_path = "/home/sam/dotfiles"
+Scratchpad_path = "/home/sam/scratchpad"
 Project_path = "/home/sam/projects"
 Work_path = "/home/sam/work"
 Base_path = "/home/sam"
@@ -21,7 +22,7 @@ end
 function Spawn_with_title(win, cwd, name)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
-	local editor_pane = pane:split({ args = { Editor, cwd }, cwd = cwd, direction = "Left" })
+	local editor_pane = pane:split({ args = { Editor }, cwd = cwd, direction = "Left" })
 	local _git_pane = pane:split({ args = { Git_client }, cwd = cwd, direction = "Top" })
 	win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
 	win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
@@ -225,6 +226,13 @@ return {
 			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "dotfiles", Dotfile_path)
+			end),
+		},
+		{
+			key = "s",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(win, pane)
+				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Dotfile_path)
 			end),
 		},
 		-- {
