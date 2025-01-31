@@ -294,11 +294,6 @@ function setup_1password() {
 		op vault list || exit 1
 	fi
 
-	if [ ! -f ~/.config/autostart/1password.desktop ]; then
-		mkdir -p ~/.config/autostart
-		# autostart 1password at login
-		echo -e "[Desktop Entry]\nType=Application\nExec=/usr/bin/1password --silent\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_GB]=1Password\nName=1Password\nComment[en_GB]=\nComment=" >~/.config/autostart/1password.desktop
-	fi
 }
 
 function setup_ssh() {
