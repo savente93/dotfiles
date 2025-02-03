@@ -185,6 +185,15 @@ return {
 		{ key = "J", mods = "LEADER", action = act({ AdjustPaneSize = { "Down", 5 } }) },
 		{ key = "K", mods = "LEADER", action = act({ AdjustPaneSize = { "Up", 5 } }) },
 		{ key = "L", mods = "LEADER", action = act({ AdjustPaneSize = { "Right", 5 } }) },
+		{ key = "1", mods = "LEADER", action = act({ ActivateTab = 0 }) },
+		{ key = "2", mods = "LEADER", action = act({ ActivateTab = 1 }) },
+		{ key = "3", mods = "LEADER", action = act({ ActivateTab = 2 }) },
+		{ key = "4", mods = "LEADER", action = act({ ActivateTab = 3 }) },
+		{ key = "5", mods = "LEADER", action = act({ ActivateTab = 4 }) },
+		{ key = "6", mods = "LEADER", action = act({ ActivateTab = 5 }) },
+		{ key = "7", mods = "LEADER", action = act({ ActivateTab = 6 }) },
+		{ key = "8", mods = "LEADER", action = act({ ActivateTab = 7 }) },
+		{ key = "9", mods = "LEADER", action = act({ ActivateTab = 8 }) },
 		{
 			key = "1",
 			mods = "CTRL",
@@ -232,7 +241,7 @@ return {
 			key = "s",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
-				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Dotfile_path)
+				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Scratchpad_path)
 			end),
 		},
 		-- {
