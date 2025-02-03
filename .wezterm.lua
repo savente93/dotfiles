@@ -19,23 +19,25 @@ function Find_tab_index(win, name)
 	return nil
 end
 
-function Spawn_with_title(win, cwd, name)
+function Spawn_with_title(win, cwd, name, workspace_layout)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
-	local editor_pane = pane:split({ args = { Editor }, cwd = cwd, direction = "Left" })
-	local _git_pane = pane:split({ args = { Git_client }, cwd = cwd, direction = "Top" })
-	win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
-	win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
+	if workspace_layout then
+		local editor_pane = pane:split({ args = { Editor }, cwd = cwd, direction = "Left" })
+		local _git_pane = pane:split({ args = { Git_client }, cwd = cwd, direction = "Top" })
+		win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
+		win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
+	end
 end
 
-function Spawn_or_activate_tab(win, pane, name, cwd)
+function Spawn_or_activate_tab(win, pane, name, cwd, workspace_layout)
 	if cwd == nil then
 		return
 	end
 
 	local tab_index = Find_tab_index(win, name)
 	if tab_index == nil then
-		Spawn_with_title(win, cwd, name)
+		Spawn_with_title(win, cwd, name, workspace_layout)
 	else
 		win:gui_window():perform_action(wezterm.action.ActivateTab(tab_index), pane)
 	end
@@ -66,7 +68,7 @@ function Sessionize_dir(win, pane, dir)
 		act.InputSelector({
 			action = wezterm.action_callback(function(_win, _pane, id, label)
 				if id and label then
-					Spawn_or_activate_tab(win:mux_window(), pane, label, id)
+					Spawn_or_activate_tab(win:mux_window(), pane, label, id, true)
 				end
 			end),
 			fuzzy = true,
@@ -234,14 +236,14 @@ return {
 			key = "d",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
-				Spawn_or_activate_tab(win:mux_window(), pane, "dotfiles", Dotfile_path)
+				Spawn_or_activate_tab(win:mux_window(), pane, "dotfiles", Dotfile_path, true)
 			end),
 		},
 		{
 			key = "s",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
-				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Scratchpad_path)
+				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Scratchpad_path, false)
 			end),
 		},
 		-- {
@@ -255,7 +257,7 @@ return {
 			key = "b",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
-				Spawn_or_activate_tab(win:mux_window(), pane, "base", Base_path)
+				Spawn_or_activate_tab(win:mux_window(), pane, "base", Base_path, false)
 			end),
 		},
 		{ key = "f", mods = "LEADER", action = wezterm.action_callback(Sessionize_projects) },
