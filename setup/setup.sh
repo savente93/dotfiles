@@ -171,9 +171,7 @@ function setup_power_management() {
 
 	# check if system has a battery
 	if upower -e | grep -q 'BAT'; then
-		install_tools paru acpi tlp
-
-		sudo systemctl enable --now tlp
+		install_tools paru acpi
 
 		# make sure laptop hybernates when battery is too low
 		echo 'SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-7]", RUN+="/usr/bin/systemctl hibernate"' | sudo tee /etc/udev/rules.d/99-lowbat.rules
