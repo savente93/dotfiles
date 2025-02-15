@@ -214,7 +214,7 @@ function setup_terminal() {
 
 function setup_writing_tools() {
 
-	install_tools paru bibtex-tidy d2 evince jinja-lsp marksman texlab typos typst typst-lsp-bin zola
+	install_tools paru bibtex-tidy d2 evince jinja-lsp marksman texlab typos-cli typst typst-lsp-bin zola
 
 	#set evince as defatul pdf application
 	xdg-mime default org.gnome.Evince.desktop application/pdf
