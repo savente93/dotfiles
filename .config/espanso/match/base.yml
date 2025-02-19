@@ -43,11 +43,27 @@ matches:
     replace: "Hélène"
   - trigger: "Helene"
     replace: "Hélène"
-  - trigger: ;hmt
+  - trigger: ";hmt"
     replace: HydroMT
-  - trigger: ;rd
-    replace: raison d'être
+  - trigger: ";rd"
+    replace: "raison d'être"
   - trigger: umit
     replace: Ümit
-  - trigger: ;dh
+  - trigger: ";dh"
     replace: ":dragon_heart:"
+  - trigger: ";wcc"
+    replace: "#writerscoffeeclub {{d}}"
+    vars:
+      - name: d
+        type: date
+        params:
+          format: "%Y %b"
+  - trigger: ";ww"
+    replace: "#wordweavers {{d}}"
+    vars:
+      - name: d
+        type: date
+        params:
+          format: "%Y %b"
+  - trigger: ";pp"
+    replace: "#pennedpossibilities "
