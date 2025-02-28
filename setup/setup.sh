@@ -362,7 +362,7 @@ function setup_aws() {
 	mkdir -p ~/.aws
 	echo -e "[default]\n\t" >~/.aws/credentials
 	echo "aws_access_key_id = $(op item get 'AWS [Personal]' --fields username)" >>~/.aws/credentials
-	echo "aws_secret_access_key= $(op item get 'AWS [Personal]' --fields credential)" >>~/.aws/credentials
+	echo "aws_secret_access_key= $(op item get 'AWS [Personal]' --fields credential --reveal)" >>~/.aws/credentials
 	install_tools paru aws-credential-1password
 
 }
