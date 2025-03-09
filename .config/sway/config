@@ -134,6 +134,7 @@ assign [class="Vivaldi-stable"]                 $ws2
 assign [class="Spotify"]                        $ws3
 assign [class="discord"]                        $ws4
 assign [class="Microsoft Teams.*"]              $ws5
+assign [class="Plex"]                           $ws5
 assign [class="steam"]                          $ws8
 
 # waybar
