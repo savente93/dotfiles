@@ -131,11 +131,13 @@ for_window [window_role="alert"]          floating enable
 # make sure apps stay where I like them
 assign [class="org.wezfurlong.wezterm"]         $ws1
 assign [class="Vivaldi-stable"]                 $ws2
-assign [class="Spotify"]                        $ws3
-assign [class="discord"]                        $ws4
-assign [class="Microsoft Teams.*"]              $ws5
-assign [class="Plex"]                           $ws5
+assign [class="obsidian"]                       $ws3
+assign [class="Microsoft Teams.*"]              $ws4
+
+assign [class="discord"]                        $ws7
 assign [class="steam"]                          $ws8
+assign [class="Plex"]                           $ws9
+assign [class="Spotify"]                        $ws0
 
 # waybar
 exec_always --no-startup-id sh $HOME/.config/waybar/launch.sh
@@ -151,6 +153,7 @@ bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 # starup apps
 exec --no-startup-id wezterm
 exec --no-startup-id vivaldi
+exec --no-startup-id obsidian
 exec --no-startup-id 1password --silent
 
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
