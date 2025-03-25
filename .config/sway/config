@@ -137,7 +137,7 @@ assign [class="Microsoft Teams.*"]              $ws4
 assign [class="discord"]                        $ws7
 assign [class="steam"]                          $ws8
 assign [class="Plex"]                           $ws9
-assign [class="Spotify"]                        $ws0
+assign [class="Spotify"]                        $ws10
 
 # waybar
 exec_always --no-startup-id sh $HOME/.config/waybar/launch.sh
