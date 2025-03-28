@@ -22,11 +22,6 @@ formatter = { command = "shfmt", args = ['-'] }
 
 
 [[language]]
-name = "markdown"
-auto-format = true
-language-servers = [{ name = "marksman" }]
-
-[[language]]
 name = "yaml"
 auto-format = true
 language-servers = [{ name = "yaml-language-server" }]
