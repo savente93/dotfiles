@@ -91,7 +91,7 @@ args = ["--stdio"]
 
 [[language]]
 name = "markdown"
-language-servers = [{ name = "ltex" }]
+language-servers = [{ name = "ltex" }, { name = "prosemd" }, { name = "typos" }]
 file-types = ["md", "txt"]
 scope = "text.markdown"
 roots = []
@@ -103,10 +103,13 @@ file-types = ["typ"]
 formatter = { command = "typstle" }
 
 [language-server.typos]
-command = "/home/sam/.cargo/bin/typos-lsp"
+command = "/usr/bin/typos-lsp"
 
 [language-server.tinymist]
 command = "/home/sam/.cargo/bin/tinymist"
 
 [language-server.ltex]
-command = "/usr/bin/ltex-ls"
+command = "/usr/bin/ltex-ls-plus"
+
+[language-server.prosemd]
+command = "/home/sam/.cargo/bin/prosemd-lsp"
