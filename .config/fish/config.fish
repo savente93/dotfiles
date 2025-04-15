@@ -3,7 +3,6 @@ if status is-interactive
     zoxide init fish | source
     pixi completion --shell fish | source
 
-
     # typing is for chumps
     abbr --add dotdot --regex '^\.\.+$' --function multicd
     abbr --add up topgrade -y --skip-notify
@@ -19,7 +18,6 @@ if status is-interactive
     abbr --add ltt eza --tree -L 3 --git-ignore -A
     abbr --add lttt eza --tree -L 4 --git-ignore -A
 
-
     # clean up empty dirs
     abbr --add ced fd . -te -td -x rmdir
 
@@ -27,6 +25,7 @@ if status is-interactive
     abbr --add ct cargo nextest run --failure-output final --all-features --no-fail-fast
     abbr --add cb cargo build
     abbr --add cc cargo check
+    abbr --add newrust cargo generate --favorite rust
 
     #bluetooth
     abbr --add bt bluetui

@@ -1,4 +1,4 @@
-[favorites.rust-template]
+[favorites.rust]
 handle        = "savente93"
 inclue_bin    = true
 include_bench = false
