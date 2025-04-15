@@ -1,0 +1,6 @@
+[favorites.rust-template]
+handle        = "savente93"
+inclue_bin    = true
+include_bench = false
+description   = "New rust project with my prefered setups"
+git           = "https://github.com/savente93/rust-template"
