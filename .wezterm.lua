@@ -148,23 +148,23 @@ return {
 	-----------
 	-- Keys  --
 	-----------
-	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
+	-- leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		-- Window management
 		{
 			key = "\\",
-			mods = "LEADER",
+			mods = "ALT",
 			action = act.SplitHorizontal,
 		},
-		{ key = "-", mods = "LEADER", action = wezterm.action.DecreaseFontSize },
-		{ key = "=", mods = "LEADER", action = wezterm.action.IncreaseFontSize },
-		{ key = "0", mods = "LEADER", action = wezterm.action.ResetFontSize },
+		{ key = "-", mods = "ALT", action = wezterm.action.DecreaseFontSize },
+		{ key = "=", mods = "ALT", action = wezterm.action.IncreaseFontSize },
+		{ key = "0", mods = "ALT", action = wezterm.action.ResetFontSize },
 		{
 			key = "r",
-			mods = "LEADER",
+			mods = "ALT",
 			action = act.RotatePanes("CounterClockwise"),
 		},
-		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
+		{ key = "z", mods = "ALT", action = "TogglePaneZoomState" },
 		-- {
 		-- 	key = "p",
 		-- 	mods = "CTRL",
@@ -179,23 +179,23 @@ return {
 		-- 		Activate_pane_zoomed(win, pane, "Next")
 		-- 	end),
 		-- },
-		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-		{ key = "H", mods = "LEADER", action = act({ AdjustPaneSize = { "Left", 5 } }) },
-		{ key = "J", mods = "LEADER", action = act({ AdjustPaneSize = { "Down", 5 } }) },
-		{ key = "K", mods = "LEADER", action = act({ AdjustPaneSize = { "Up", 5 } }) },
-		{ key = "L", mods = "LEADER", action = act({ AdjustPaneSize = { "Right", 5 } }) },
-		{ key = "1", mods = "LEADER", action = act({ ActivateTab = 0 }) },
-		{ key = "2", mods = "LEADER", action = act({ ActivateTab = 1 }) },
-		{ key = "3", mods = "LEADER", action = act({ ActivateTab = 2 }) },
-		{ key = "4", mods = "LEADER", action = act({ ActivateTab = 3 }) },
-		{ key = "5", mods = "LEADER", action = act({ ActivateTab = 4 }) },
-		{ key = "6", mods = "LEADER", action = act({ ActivateTab = 5 }) },
-		{ key = "7", mods = "LEADER", action = act({ ActivateTab = 6 }) },
-		{ key = "8", mods = "LEADER", action = act({ ActivateTab = 7 }) },
-		{ key = "9", mods = "LEADER", action = act({ ActivateTab = 8 }) },
+		{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
+		{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
+		{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
+		{ key = "l", mods = "ALT", action = act.ActivatePaneDirection("Right") },
+		{ key = "H", mods = "ALT", action = act({ AdjustPaneSize = { "Left", 5 } }) },
+		{ key = "J", mods = "ALT", action = act({ AdjustPaneSize = { "Down", 5 } }) },
+		{ key = "K", mods = "ALT", action = act({ AdjustPaneSize = { "Up", 5 } }) },
+		{ key = "L", mods = "ALT", action = act({ AdjustPaneSize = { "Right", 5 } }) },
+		{ key = "1", mods = "ALT", action = act({ ActivateTab = 0 }) },
+		{ key = "2", mods = "ALT", action = act({ ActivateTab = 1 }) },
+		{ key = "3", mods = "ALT", action = act({ ActivateTab = 2 }) },
+		{ key = "4", mods = "ALT", action = act({ ActivateTab = 3 }) },
+		{ key = "5", mods = "ALT", action = act({ ActivateTab = 4 }) },
+		{ key = "6", mods = "ALT", action = act({ ActivateTab = 5 }) },
+		{ key = "7", mods = "ALT", action = act({ ActivateTab = 6 }) },
+		{ key = "8", mods = "ALT", action = act({ ActivateTab = 7 }) },
+		{ key = "9", mods = "ALT", action = act({ ActivateTab = 8 }) },
 		{
 			key = "1",
 			mods = "CTRL",
@@ -227,41 +227,41 @@ return {
 			mods = "CTRL|SHIFT",
 			action = act.ActivateTabRelative(-1),
 		},
-		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
+		{ key = "x", mods = "ALT", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
-		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
+		{ key = "[", mods = "ALT", action = act.ActivateCopyMode },
 		-- Paste from Copy Mode
-		{ key = "]", mods = "LEADER", action = act.PasteFrom("PrimarySelection") },
+		{ key = "]", mods = "ALT", action = act.PasteFrom("PrimarySelection") },
 		{
 			key = "d",
-			mods = "LEADER",
+			mods = "ALT",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "dotfiles", Dotfile_path, true)
 			end),
 		},
 		{
 			key = "s",
-			mods = "LEADER",
+			mods = "ALT",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Scratchpad_path, false)
 			end),
 		},
 		-- {
 		-- 	key = "w",
-		-- 	mods = "LEADER",
+		-- 	mods = "ALT",
 		-- 	action = wezterm.action_callback(function(win, pane)
 		-- 		spawn_or_activate_tab(win:mux_window(), pane, "hydromt", work_path)
 		-- 	end),
 		-- },
 		{
 			key = "b",
-			mods = "LEADER",
+			mods = "ALT",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "base", Base_path, false)
 			end),
 		},
-		{ key = "f", mods = "LEADER", action = wezterm.action_callback(Sessionize_projects) },
-		{ key = "w", mods = "LEADER", action = wezterm.action_callback(Sessionize_work) },
+		{ key = "f", mods = "ALT", action = wezterm.action_callback(Sessionize_projects) },
+		{ key = "w", mods = "ALT", action = wezterm.action_callback(Sessionize_work) },
 	},
 	--
 
