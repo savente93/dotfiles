@@ -167,6 +167,12 @@ function setup_audio() {
 	install_tools flatpak spotify
 }
 
+function setup_image_processing() {
+	install_tools flatpak org.inkscape.Inkscape org.gnome.Loupe flathub org.kde.krita org.kryogenix.Pick
+	install_tools paru hyprpicker-git
+
+}
+
 function setup_power_management() {
 
 	# check if system has a battery
@@ -214,13 +220,13 @@ function setup_terminal() {
 
 function setup_writing_tools() {
 
-	install_tools paru bibtex-tidy d2 evince jinja-lsp marksman texlab typos-cli typst typst-lsp-bin zola ltex-ls-plus-bin
+	install_tools paru evince jinja-lsp typos-cli typst typst-lsp-bin zola ltex-ls-plus-bin
 
 	#set evince as defatul pdf application
 	xdg-mime default org.gnome.Evince.desktop application/pdf
 	gio mime application/pdf org.gnome.Evince.desktop
 
-	install_tools cargo jinja-lsp
+	# jinja lint stuff for the zola website templates
 	install_tools pixi djlint
 
 }
@@ -265,10 +271,6 @@ function setup_de() {
 	curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
 	curl -Ls https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
 
-}
-
-function setup_games() {
-	flatpak install -y com.valvesoftware.Steam
 }
 
 function setup_dotfiles() {
@@ -415,7 +417,7 @@ function setup_all() {
 	setup_common
 	setup_writing_tools
 	setup_dev
-	setup_games
+	setup_image_processing
 }
 
 #get sudo rights for when we need it
