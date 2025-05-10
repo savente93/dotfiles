@@ -45,6 +45,8 @@ if status is-interactive
     abbr --add gbd git branch -D
     abbr --add gfp git fetch --all --prune
 
+    abbr --add fkt fk teams
+
     # work
     abbr --add pt pixi run -e default test-lf
     abbr --add ptt pixi run -e default test
