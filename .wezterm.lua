@@ -9,6 +9,7 @@ Work_path = "/home/sam/work"
 Base_path = "/home/sam"
 Git_client = "lazygit"
 Editor = "/home/sam/.cargo/bin/hx"
+Pixi = "/home/sam/.pixi/bin/pixi"
 
 function Find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
@@ -19,11 +20,22 @@ function Find_tab_index(win, name)
 	return nil
 end
 
+function File_exists(name)
+	local f = io.open(name, "r")
+	return f ~= nil and io.close(f)
+end
+
 function Spawn_with_title(win, cwd, name, workspace_layout)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
 	if workspace_layout then
-		local editor_pane = pane:split({ args = { Editor }, cwd = cwd, direction = "Left" })
+		local editor_pane = nil
+		if File_exists(cwd .. "/pyproject.toml") then
+			editor_pane = pane:split({ args = { Pixi, "run", Editor }, cwd = cwd, direction = "Left" })
+		else
+			editor_pane = pane:split({ args = { Editor }, cwd = cwd, direction = "Left" })
+		end
+
 		local _git_pane = pane:split({ args = { Git_client }, cwd = cwd, direction = "Top" })
 		win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
 		win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
