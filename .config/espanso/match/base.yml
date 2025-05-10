@@ -12,6 +12,17 @@ matches:
         type: date
         params:
           format: "%d/%m/%Y"
+  - trigger: ";week"
+    replace: "{{year}} week {{week}}"
+    vars:
+      - name: year
+        type: date
+        params:
+          format: "%Y"
+      - name: week
+        type: date
+        params:
+          format: "%W"
   - trigger: ";isodate"
     replace: "{{isodate}}"
     vars:
@@ -19,51 +30,11 @@ matches:
         type: date
         params:
           format: "%Y-%m-%d"
-  - trigger: ";eyes"
-    replace: 👀
-  - trigger: ";music"
-    replace: 🎵
-  - trigger: ";small"
-    replace: 🤏
-  - trigger: ";think"
-    replace: 🤔
-  - trigger: ";imp"
-    replace: 😈
-  - trigger: ";sparkle"
-    replace: ✨
-  - trigger: ";skull"
-    replace: 💀
-  - trigger: ";sweat"
-    replace: 😅
-  - trigger: ";scream"
-    replace: 😱
   - trigger: "deg C"
     replace: "°C"
   - trigger: "helene"
     replace: "Hélène"
   - trigger: "Helene"
     replace: "Hélène"
-  - trigger: ";hmt"
-    replace: HydroMT
-  - trigger: ";rd"
-    replace: "raison d'être"
   - trigger: umit
     replace: Ümit
-  - trigger: ";dh"
-    replace: ":dragon_heart:"
-  - trigger: ";wcc"
-    replace: "#writerscoffeeclub {{d}}"
-    vars:
-      - name: d
-        type: date
-        params:
-          format: "%Y %b"
-  - trigger: ";ww"
-    replace: "#wordweavers {{d}}"
-    vars:
-      - name: d
-        type: date
-        params:
-          format: "%Y %b"
-  - trigger: ";pp"
-    replace: "#pennedpossibilities "
