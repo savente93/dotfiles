@@ -119,7 +119,7 @@ update:
 refresher:
   refreshInterval: 10
   fetchInterval: 60
-confirmOnQuit: true
+confirmOnQuit: false
 quitOnTopLevelReturn: false
 disableStartupPopups: false
 customCommands:
