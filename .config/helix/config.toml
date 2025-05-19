@@ -1,18 +1,18 @@
 theme = "onedark"
 
 [editor]
-true-color = true
-line-number = "relative"
-soft-wrap.enable = true
-middle-click-paste = true
-scroll-lines = 5
-cursorline = true
-gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
-auto-format = true
-auto-save = true
-auto-info = true
-bufferline = "multiple"
-idle-timeout = 0
+true-color             = true
+line-number            = "relative"
+soft-wrap.enable       = true
+middle-click-paste     = true
+scroll-lines           = 5
+cursorline             = true
+gutters                = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
+auto-format            = true
+auto-save              = true
+auto-info              = true
+bufferline             = "multiple"
+idle-timeout           = 0
 completion-trigger-len = 1
 
 # Minimum severity to show a diagnostic after the end of a line:
@@ -27,23 +27,23 @@ other-lines = "error"
 
 
 [editor.statusline]
-left = ["spinner", "spacer", "diagnostics", "spacer", "file-name"]
-center = []
-right = ["version-control", "spacer", "position"]
+left      = ["spinner", "spacer", "diagnostics", "spacer", "file-name"]
+center    = []
+right     = ["version-control", "spacer", "position"]
 separator = "│"
 
 [editor.lsp]
-enable = true
-display-messages = true
-auto-signature-help = true
-display-inlay-hints = true
-display-signature-help-docs = true
-snippets = true
+enable                             = true
+display-messages                   = true
+auto-signature-help                = true
+display-inlay-hints                = true
+display-signature-help-docs        = true
+snippets                           = true
 goto-reference-include-declaration = true
 
 [editor.indent-guides]
-render = true
-character = "┆"
+render      = true
+character   = "┆"
 skip-levels = 1
 
 [editor.file-picker]
@@ -56,111 +56,88 @@ select = "underline"
 
 [keys.select]
 minus = "trim_selections"
-r = "replace_with_yanked"
-Y = ":clipboard-yank-join"
-A-j = "half_page_down"
-A-k = "half_page_up"
+r     = "replace_with_yanked"
+Y     = ":clipboard-yank-join"
+A-j   = "half_page_down"
+A-k   = "half_page_up"
 "A-." = "goto_next_buffer"
 "A-," = "goto_previous_buffer"
-
-"!" = ":register-mark 1"
-"@" = ":register-mark 2"
-"#" = ":register-mark 3"
-"$" = ":register-mark 4"
 
 [keys.normal]
 minus = "trim_selections"
-";" = "flip_selections"
+";"   = "flip_selections"
 "esc" = ["collapse_selection", "keep_primary_selection"]
-d = "delete_selection"
-c = "change_selection"
-D = "delete_selection_noyank"
-C = "change_selection_noyank"
-M = "join_selections"
-J = "copy_selection_on_next_line"
-K = "copy_selection_on_prev_line"
-r = "replace_with_yanked"
-R = "replace_selections_with_clipboard"
-Y = ":clipboard-yank-join"
-C-b = "increment"
-C-k = [
-  "extend_to_line_bounds",
-  "delete_selection",
-  "move_line_up",
-  "paste_before",
-]
-C-g = ":run-shell-command git pull"
-C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
-A-j = "half_page_down"
-A-k = "half_page_up"
+d     = "delete_selection"
+c     = "change_selection"
+D     = "delete_selection_noyank"
+C     = "change_selection_noyank"
+M     = "join_selections"
+J     = "copy_selection_on_next_line"
+K     = "copy_selection_on_prev_line"
+r     = "replace_with_yanked"
+R     = "replace_selections_with_clipboard"
+Y     = ":clipboard-yank-join"
+A-j   = "half_page_down"
+A-k   = "half_page_up"
 "A-." = "goto_next_buffer"
 "A-," = "goto_previous_buffer"
 
-"!" = ":register-mark 1"
-"1" = ":goto-mark 1"
-"@" = ":register-mark 2"
-"2" = ":goto-mark 2"
-"#" = ":register-mark 3"
-"3" = ":goto-mark 3"
-"$" = ":register-mark 4"
-"4" = ":goto-mark 4"
 
 [keys.normal."space"]
 # nops to clean up menus
-"G" = "no_op"
-"'" = "no_op"
-"P" = "no_op"
-"p" = "no_op"
-"y" = "no_op"
-"Y" = "no_op"
-"d" = "no_op"
-"D" = "no_op"
-"S" = "no_op"
-"b" = "no_op"
-"r" = "no_op"
-"C" = "no_op"
-"F" = "no_op"
-"R" = "no_op"
-"g" = "no_op"
-"k" = "no_op"
-"h" = "no_op"
-"?" = "no_op"
+"G"   = "no_op"
+"'"   = "no_op"
+"P"   = "no_op"
+"p"   = "no_op"
+"y"   = "no_op"
+"Y"   = "no_op"
+"d"   = "no_op"
+"D"   = "no_op"
+"S"   = "no_op"
+"r"   = "no_op"
+"C"   = "no_op"
+"F"   = "no_op"
+"R"   = "no_op"
+"g"   = "no_op"
+"k"   = "no_op"
+"h"   = "no_op"
+"?"   = "no_op"
 "A-c" = "no_op"
-"/" = "no_op"
+"/"   = "no_op"
 
 
 [keys.normal."space".j]
 label = "Jumps"
-p = "jumplist_picker"
-s = "save_selection"
+p     = "jumplist_picker"
+s     = "save_selection"
 
 [keys.normal."space".s]
 label = "Search"
-p = "global_search"
-l = "search"
-h = "command_palette"
+p     = "global_search"
+l     = "search"
+h     = "command_palette"
 
 [keys.normal."space".a]
 label = "LSP"
-t = "signature_help"
-r = "rename_symbol"
-k = "hover"
-f = { label = "Format Document", command = ":format" }
-a = "code_action"
-s = "symbol_picker"
-S = "workspace_symbol_picker"
-d = "diagnostics_picker"
-D = "workspace_diagnostics_picker"
+t     = "signature_help"
+r     = "rename_symbol"
+k     = "hover"
+f     = { label = "Format Document", command = ":format" }
+a     = "code_action"
+s     = "symbol_picker"
+S     = "workspace_symbol_picker"
+d     = "diagnostics_picker"
+D     = "workspace_diagnostics_picker"
 
 [keys.normal."space".f]
 label = "File"
-"f" = "file_picker"
-"g" = "changed_file_picker"
-"F" = "file_picker_in_current_directory"
-"r" = { label = "Reaload all files", command = ":reload-all" }
-"w" = { label = "Write all files", command = ":wa" }
-"c" = { label = "Close current buffer", command = ":bc" }
-"C" = { label = "Close all other open buffers", command = ":bco" }
+"f"   = "file_picker"
+"g"   = "changed_file_picker"
+"F"   = "file_picker_in_current_directory"
+"r"   = { label = "Reaload all files", command = ":reload-all" }
+"w"   = { label = "Write all files", command = ":wa" }
+"c"   = { label = "Close current buffer", command = ":bc" }
+"C"   = { label = "Close all other open buffers", command = ":bco" }
 
 [keys.normal."space".m]
 label = "Macros"
@@ -175,43 +152,54 @@ r = { label = "Load Rust macros", command = [
 
 [keys.normal."space".c]
 label = "Config"
-c = { label = "Open Config", command = ":config-open" }
-l = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
-r = { label = "Reload Config", command = ":config-reload" }
+c     = { label = "Open Config", command = ":config-open" }
+l     = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
+r     = { label = "Reload Config", command = ":config-reload" }
 
+
+[keys.normal."space".b]
+label = "Bookmarks"
+"!"   = ":register-mark 1"
+"1"   = ":goto-mark 1"
+"@"   = ":register-mark 2"
+"2"   = ":goto-mark 2"
+"#"   = ":register-mark 3"
+"3"   = ":goto-mark 3"
+"$"   = ":register-mark 4"
+"4"   = ":goto-mark 4"
 
 # ALIAS BACKSPACE TO SPACE
 
 [keys.normal."backspace".j]
 label = "Jumps"
-p = "jumplist_picker"
+p     = "jumplist_picker"
 
 [keys.normal."backspace".s]
 label = "Search"
-p = "global_search"
-l = "search"
-h = "command_palette"
+p     = "global_search"
+l     = "search"
+h     = "command_palette"
 
 [keys.normal."backspace".a]
 label = "LSP"
-t = "signature_help"
-r = "rename_symbol"
-k = "hover"
-f = { label = "Format Document", command = ":format" }
-a = "code_action"
-s = "symbol_picker"
-S = "workspace_symbol_picker"
-d = "diagnostics_picker"
+t     = "signature_help"
+r     = "rename_symbol"
+k     = "hover"
+f     = { label = "Format Document", command = ":format" }
+a     = "code_action"
+s     = "symbol_picker"
+S     = "workspace_symbol_picker"
+d     = "diagnostics_picker"
 
 [keys.normal."backspace".f]
 label = "File"
-"f" = "file_picker"
-"g" = "changed_file_picker"
-"F" = "file_picker_in_current_directory"
-"r" = { label = "Reaload all files", command = ":reload-all" }
-"w" = { label = "Write all files", command = ":wa" }
-"c" = { label = "Close current buffer", command = ":bc" }
-"C" = { label = "Close all other open buffers", command = ":bco" }
+"f"   = "file_picker"
+"g"   = "changed_file_picker"
+"F"   = "file_picker_in_current_directory"
+"r"   = { label = "Reaload all files", command = ":reload-all" }
+"w"   = { label = "Write all files", command = ":wa" }
+"c"   = { label = "Close current buffer", command = ":bc" }
+"C"   = { label = "Close all other open buffers", command = ":bco" }
 
 [keys.normal."backspace".m]
 label = "Macros"
@@ -226,6 +214,6 @@ r = { label = "Load Rust macros", command = [
 
 [keys.normal."backspace".c]
 label = "Config"
-c = { label = "Open Config", command = ":config-open" }
-l = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
-r = { label = "Reload Config", command = ":config-reload" }
+c     = { label = "Open Config", command = ":config-open" }
+l     = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
+r     = { label = "Reload Config", command = ":config-reload" }
