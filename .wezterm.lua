@@ -2,14 +2,16 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 
-Dotfile_path = "/home/sam/dotfiles"
-Scratchpad_path = "/home/sam/scratchpad"
-Project_path = "/home/sam/projects"
-Work_path = "/home/sam/work"
-Base_path = "/home/sam"
+Home_path = os.getenv("HOME")
+Dotfile_path = Home_path .. "/dotfiles"
+Scratchpad_path = Home_path .. "/scratchpad"
+Project_path = Home_path .. "/projects"
+Work_path = Home_path .. "/work"
+Base_path = Home_path
 Git_client = "lazygit"
-Editor = "/home/sam/.cargo/bin/hx"
-Pixi = "/home/sam/.pixi/bin/pixi"
+User_shell = "fish"
+Editor = Home_path .. "/.cargo/bin/hx"
+Pixi = Home_path .. "/.pixi/bin/pixi"
 
 function Find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
@@ -20,15 +22,48 @@ function Find_tab_index(win, name)
 	return nil
 end
 
+function Find_fish_pane(tab)
+	print(tab)
+	for _, pane in ipairs(tab:panes()) do
+		print(pane:get_foreground_process_info())
+		if pane:get_foreground_process_info().name == User_shell then
+			return pane
+		end
+	end
+	return nil
+end
+
+function Spawn_or_find_fish_pane(tab)
+	local fish_pane = Find_fish_pane(tab)
+	if fish_pane == nil then
+		fish_pane = tab:active_pane():split({ direction = "Right" })
+	end
+
+	return fish_pane
+end
+
+function Send_current_test_to_fish_pane(win, _pane)
+	local fish_pane = Spawn_or_find_fish_pane(win:active_tab())
+
+	local file = io.open("/tmp/helix_test.txt", "r") -- r read mode
+	if not file then
+		return nil
+	end
+	local content = file:read("*a") -- *a or *all reads the whole file
+	file:close()
+	fish_pane:send_paste("pixi run test -k " .. content)
+	fish_pane:activate()
+end
+
 function File_exists(name)
 	local f = io.open(name, "r")
 	return f ~= nil and io.close(f)
 end
 
-function Spawn_with_title(win, cwd, name, workspace_layout)
+function Spawn_with_title(win, cwd, name, setup_workspace_layout)
 	local tab, pane, _ = win:spawn_tab({ domain = "CurrentPaneDomain", cwd = cwd })
 	tab:set_title(name)
-	if workspace_layout then
+	if setup_workspace_layout then
 		local editor_pane = nil
 		-- little hacky but I'll do something more inteligent later
 		if File_exists(cwd .. "/pyproject.toml") then
@@ -59,14 +94,14 @@ function Spawn_or_activate_git_pane(win, pane)
 	win:active_tab():set_zoomed(true)
 end
 
-function Spawn_or_activate_tab(win, pane, name, cwd, workspace_layout)
+function Spawn_or_activate_tab(win, pane, name, cwd, setup_workspace_layout)
 	if cwd == nil then
 		return
 	end
 
 	local tab_index = Find_tab_index(win, name)
 	if tab_index == nil then
-		Spawn_with_title(win, cwd, name, workspace_layout)
+		Spawn_with_title(win, cwd, name, setup_workspace_layout)
 	else
 		win:gui_window():perform_action(wezterm.action.ActivateTab(tab_index), pane)
 	end
@@ -224,8 +259,18 @@ return {
 		{
 			key = "t", -- terminal
 			mods = "CTRL",
+			action = wezterm.action_callback(function(win, _pane)
+				local tab = win:active_tab()
+				tab:set_zoomed(false)
+				local fish_pane = Spawn_or_find_fish_pane(tab)
+				fish_pane:activate()
+			end),
+		},
+		{
+			key = "t", -- terminal
+			mods = "ALT",
 			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 1)
+				Send_current_test_to_fish_pane(win, pane)
 			end),
 		},
 		{
