@@ -49,7 +49,7 @@ function Send_current_test_to_fish_pane(win, _pane)
 	if not file then
 		return nil
 	end
-	local content = file:read("*a") -- *a or *all reads the whole file
+	local content = file:read("*l") -- *l reads a line
 	file:close()
 	fish_pane:send_paste("pixi run test -k " .. content)
 	fish_pane:activate()
