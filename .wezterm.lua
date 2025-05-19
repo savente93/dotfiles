@@ -2,14 +2,14 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 
-Dotfile_path = "/home/sam/dotfiles"
-Scratchpad_path = "/home/sam/scratchpad"
-Project_path = "/home/sam/projects"
-Work_path = "/home/sam/work"
-Base_path = "/home/sam"
+Dotfile_path = "$HOME/dotfiles"
+Scratchpad_path = "$HOME/scratchpad"
+Project_path = "$HOME/projects"
+Work_path = "$HOME/work"
+Base_path = "$HOME"
 Git_client = "lazygit"
-Editor = "/home/sam/.cargo/bin/hx"
-Pixi = "/home/sam/.pixi/bin/pixi"
+Editor = "$HOME/.cargo/bin/hx"
+Pixi = "$HOME/.pixi/bin/pixi"
 
 function Find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
@@ -37,10 +37,26 @@ function Spawn_with_title(win, cwd, name, workspace_layout)
 			editor_pane = pane:split({ args = { Editor }, cwd = cwd, direction = "Left" })
 		end
 
-		local _git_pane = pane:split({ args = { Git_client }, cwd = cwd, direction = "Top" })
 		win:gui_window():perform_action(act.ActivatePaneDirection("Left"), editor_pane)
 		win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
 	end
+end
+
+function Spawn_or_activate_git_pane(win, pane)
+	for _, p in ipairs(win:active_tab():panes()) do
+		if p:get_foreground_process_info().name == Git_client then
+			win:active_tab():set_zoomed(false)
+			p:activate()
+			win:active_tab():set_zoomed(true)
+			return
+		end
+	end
+
+	-- didn't find git tab so we'll spawn one
+	local git_pane = pane:split({ args = { Git_client } })
+
+	git_pane:activate()
+	win:active_tab():set_zoomed(true)
 end
 
 function Spawn_or_activate_tab(win, pane, name, cwd, workspace_layout)
@@ -99,7 +115,7 @@ function Sessionize_work(win, pane)
 	Sessionize_dir(win, pane, Work_path)
 end
 
-function Activate_pane_zoomed(win, pane, direction)
+function Activate_pane_by_direction_zoomed(win, pane, direction)
 	win:perform_action(act.SetPaneZoomState(false), pane)
 	win:perform_action(act.ActivatePaneDirection(direction), pane)
 	win:perform_action(act.SetPaneZoomState(true), pane)
@@ -202,7 +218,7 @@ return {
 			key = "g", -- git
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 1)
+				Spawn_or_activate_git_pane(win, pane)
 			end),
 		},
 		{
