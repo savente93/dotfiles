@@ -174,6 +174,15 @@ label = "Rust"
 
 [keys.normal."space".d]
 label = "Debug"
+c     = "dap_continue"
+r     = "dap_restart"
+t     = "dap_terminate"
+v     = "dap_variables"
+n     = "dap_next"
+s     = "dap_step_in"
+o     = "dap_step_out"
+b     = "dap_toggle_breakpoint"
+l     = "dap_launch"
 
 # nops to clean up menus
 [keys.normal."space"]
@@ -188,6 +197,8 @@ label = "Debug"
 "i"   = "no_op"
 "S"   = "no_op"
 "r"   = "no_op"
+"b"   = "no_op"
+"j"   = "no_op"
 "C"   = "no_op"
 "F"   = "no_op"
 "R"   = "no_op"
