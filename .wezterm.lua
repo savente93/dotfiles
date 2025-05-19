@@ -30,6 +30,7 @@ function Spawn_with_title(win, cwd, name, workspace_layout)
 	tab:set_title(name)
 	if workspace_layout then
 		local editor_pane = nil
+		-- little hacky but I'll do something more inteligent later
 		if File_exists(cwd .. "/pyproject.toml") then
 			editor_pane = pane:split({ args = { Pixi, "run", Editor }, cwd = cwd, direction = "Left" })
 		else
