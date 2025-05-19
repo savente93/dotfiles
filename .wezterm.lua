@@ -181,6 +181,7 @@ return {
 		{ key = "J", mods = "CTRL", action = act({ AdjustPaneSize = { "Down", 5 } }) },
 		{ key = "K", mods = "CTRL", action = act({ AdjustPaneSize = { "Up", 5 } }) },
 		{ key = "L", mods = "CTRL", action = act({ AdjustPaneSize = { "Right", 5 } }) },
+		{ key = "L", mods = "ALT", action = wezterm.action.ShowDebugOverlay },
 		{ key = "1", mods = "CTRL", action = act({ ActivateTab = 0 }) },
 		{ key = "2", mods = "CTRL", action = act({ ActivateTab = 1 }) },
 		{ key = "3", mods = "CTRL", action = act({ ActivateTab = 2 }) },
