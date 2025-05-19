@@ -165,7 +165,7 @@ return {
 		-- Window management
 		{
 			key = "\\",
-			mods = "ALT",
+			mods = "LEADER",
 			action = act.SplitHorizontal,
 		},
 		{ key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
@@ -262,12 +262,10 @@ return {
 			{ key = "l", mods = "NONE", action = act.CopyMode("MoveRight") },
 			{ key = "w", mods = "NONE", action = act.CopyMode("MoveForwardWord") },
 			{ key = "b", mods = "NONE", action = act.CopyMode("MoveBackwardWord") },
-			{ key = "m", mods = "ALT", action = act.CopyMode("MoveToStartOfLineContent") },
-			{ key = " ", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+			{ key = "^", mods = "NONE", action = act.CopyMode("MoveToStartOfLineContent") },
+			{ key = "$", mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
 			{ key = "v", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
 			{ key = "V", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Line" }) },
-			{ key = "V", mods = "SHIFT", action = act.CopyMode({ SetSelectionMode = "Line" }) },
-			{ key = "v", mods = "CTRL", action = act.CopyMode({ SetSelectionMode = "Block" }) },
 			{ key = "g", mods = "NONE", action = act.CopyMode("MoveToScrollbackTop") },
 			{ key = "H", mods = "NONE", action = act.CopyMode("MoveToViewportTop") },
 			-- Enter y to copy and quit the copy mode.
