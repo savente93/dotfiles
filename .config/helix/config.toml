@@ -5,7 +5,7 @@ true-color             = true
 line-number            = "relative"
 soft-wrap.enable       = true
 middle-click-paste     = true
-scroll-lines           = 5
+scroll-lines           = 8
 cursorline             = true
 gutters                = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 auto-format            = true
@@ -62,6 +62,9 @@ A-j   = "half_page_down"
 A-k   = "half_page_up"
 "A-." = "goto_next_buffer"
 "A-," = "goto_previous_buffer"
+"C-n" = "goto_next_tabstop"
+"C-p" = "goto_prev_tabstop"
+
 
 [keys.normal]
 minus = "trim_selections"
@@ -83,137 +86,111 @@ A-k   = "half_page_up"
 "A-," = "goto_previous_buffer"
 
 
-[keys.normal."space"]
-# nops to clean up menus
-"G"   = "no_op"
-"'"   = "no_op"
-"P"   = "no_op"
-"p"   = "no_op"
-"y"   = "no_op"
-"Y"   = "no_op"
-"d"   = "no_op"
-"D"   = "no_op"
-"S"   = "no_op"
-"r"   = "no_op"
-"C"   = "no_op"
-"F"   = "no_op"
-"R"   = "no_op"
-"g"   = "no_op"
-"k"   = "no_op"
-"h"   = "no_op"
-"?"   = "no_op"
-"A-c" = "no_op"
-"/"   = "no_op"
-
-
-[keys.normal."space".j]
-label = "Jumps"
-p     = "jumplist_picker"
-s     = "save_selection"
-
-[keys.normal."space".s]
-label = "Search"
-p     = "global_search"
-l     = "search"
-h     = "command_palette"
-
-[keys.normal."space".a]
-label = "LSP"
-t     = "signature_help"
-r     = "rename_symbol"
-k     = "hover"
-f     = { label = "Format Document", command = ":format" }
-a     = "code_action"
-s     = "symbol_picker"
-S     = "workspace_symbol_picker"
-d     = "diagnostics_picker"
+# project namespace
+[keys.normal."space".p]
+label = "Project"
+"/"   = "global_search"
+s     = "workspace_symbol_picker"
+g     = "changed_file_picker"
+f     = "file_picker"
 D     = "workspace_diagnostics_picker"
 
+# Language namespace
+[keys.normal."space".l]
+label = "LSP"
+r     = "rename_symbol"
+d     = "hover"
+h     = "select_references_to_symbol_under_cursor"
+a     = "code_action"
+c     = "completion"
+
+# lsp/comment
+[keys.normal."space".l."/"]
+label = "Comments"
+c     = "toggle_comments"
+l     = "toggle_line_comments"
+b     = "toggle_block_comments"
+
+
+# lsp/signature
+[keys.normal."space".l.f]
+label = "Function"
+h     = "signature_help"
+i     = "add_function_parameter"
+p     = "goto_prev_parameter"
+n     = "goto_next_parameter"
+
+
+# file namespace
 [keys.normal."space".f]
 label = "File"
-"f"   = "file_picker"
-"g"   = "changed_file_picker"
-"F"   = "file_picker_in_current_directory"
-"r"   = { label = "Reaload all files", command = ":reload-all" }
-"w"   = { label = "Write all files", command = ":wa" }
-"c"   = { label = "Close current buffer", command = ":bc" }
-"C"   = { label = "Close all other open buffers", command = ":bco" }
+"/"   = "search"
+s     = "symbol_picker"
+d     = "diagnostics_picker"
+r     = { label = "Reaload all files", command = ":reload-all" }
+w     = { label = "Write all files", command = ":wa" }
+c     = { label = "Close current buffer", command = ":bc" }
+f     = { label = "Format Document", command = ":format" }
 
-[keys.normal."space".m]
-label = "Macros"
-p = { label = "Load Python macros", command = [
-  ":open ~/Documents/projects/helix-macros/python.hxm",
-  "extend_to_line_bounds",
-] }
-r = { label = "Load Rust macros", command = [
-  ":open ~/Documents/projects/helix-macros/rust.hxm",
-  "extend_to_line_bounds",
-] }
-
+# config namespace
 [keys.normal."space".c]
 label = "Config"
 c     = { label = "Open Config", command = ":config-open" }
 l     = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
 r     = { label = "Reload Config", command = ":config-reload" }
 
+# marks namespace
+[keys.normal."space".m]
+label = "Marks"
 
-[keys.normal."space".b]
-label = "Bookmarks"
-"!"   = ":register-mark 1"
+[keys.normal."space".m.g]
+label = "Goto"
 "1"   = ":goto-mark 1"
-"@"   = ":register-mark 2"
 "2"   = ":goto-mark 2"
-"#"   = ":register-mark 3"
 "3"   = ":goto-mark 3"
-"$"   = ":register-mark 4"
 "4"   = ":goto-mark 4"
 
-# ALIAS BACKSPACE TO SPACE
+[keys.normal."space".m.s]
+label = "Set"
+"1"   = ":register-mark 1"
+"2"   = ":register-mark 2"
+"3"   = ":register-mark 3"
+"4"   = ":register-mark 4"
 
-[keys.normal."backspace".j]
-label = "Jumps"
-p     = "jumplist_picker"
+[keys.normal."space".g]
+label = "Git"
+s     = { label = "Status", command = ":sh git status" }
+p     = { label = "pull", command = ":sh git pull" }
+u     = { label = "undo change under cursor", command = ":reset-diff-change" }
 
-[keys.normal."backspace".s]
-label = "Search"
-p     = "global_search"
-l     = "search"
-h     = "command_palette"
+[keys.normal."space".t]
+label = "Test"
 
-[keys.normal."backspace".a]
-label = "LSP"
-t     = "signature_help"
-r     = "rename_symbol"
-k     = "hover"
-f     = { label = "Format Document", command = ":format" }
-a     = "code_action"
-s     = "symbol_picker"
-S     = "workspace_symbol_picker"
-d     = "diagnostics_picker"
+[keys.normal."space".t.p]
+label = "Python"
 
-[keys.normal."backspace".f]
-label = "File"
-"f"   = "file_picker"
-"g"   = "changed_file_picker"
-"F"   = "file_picker_in_current_directory"
-"r"   = { label = "Reaload all files", command = ":reload-all" }
-"w"   = { label = "Write all files", command = ":wa" }
-"c"   = { label = "Close current buffer", command = ":bc" }
-"C"   = { label = "Close all other open buffers", command = ":bco" }
+[keys.normal."space".t.r]
+label = "Rust"
 
-[keys.normal."backspace".m]
-label = "Macros"
-p = { label = "Load Python macros", command = [
-  ":open ~/Documents/projects/helix-macros/python.hxm",
-  "extend_to_line_bounds",
-] }
-r = { label = "Load Rust macros", command = [
-  ":open ~/Documents/projects/helix-macros/rust.hxm",
-  "extend_to_line_bounds",
-] }
+[keys.normal."space".d]
+label = "Debug"
 
-[keys.normal."backspace".c]
-label = "Config"
-c     = { label = "Open Config", command = ":config-open" }
-l     = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
-r     = { label = "Reload Config", command = ":config-reload" }
+# nops to clean up menus
+[keys.normal."space"]
+"G"   = "no_op"
+"'"   = "no_op"
+"P"   = "no_op"
+"y"   = "no_op"
+"Y"   = "no_op"
+"D"   = "no_op"
+"h"   = "no_op"
+"s"   = "no_op"
+"i"   = "no_op"
+"S"   = "no_op"
+"r"   = "no_op"
+"C"   = "no_op"
+"F"   = "no_op"
+"R"   = "no_op"
+"k"   = "no_op"
+"A-c" = "no_op"
+"/"   = "no_op"
