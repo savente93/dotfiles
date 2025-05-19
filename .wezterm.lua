@@ -2,14 +2,14 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 
-Dotfile_path = "$HOME/dotfiles"
-Scratchpad_path = "$HOME/scratchpad"
-Project_path = "$HOME/projects"
-Work_path = "$HOME/work"
-Base_path = "$HOME"
+Dotfile_path = "/home/sam/dotfiles"
+Scratchpad_path = "/home/sam/scratchpad"
+Project_path = "/home/sam/projects"
+Work_path = "/home/sam/work"
+Base_path = "/home/sam"
 Git_client = "lazygit"
-Editor = "$HOME/.cargo/bin/hx"
-Pixi = "$HOME/.pixi/bin/pixi"
+Editor = "/home/sam/.cargo/bin/hx"
+Pixi = "/home/sam/.pixi/bin/pixi"
 
 function Find_tab_index(win, name)
 	for i, tab in ipairs(win:tabs()) do
@@ -225,7 +225,7 @@ return {
 			key = "t", -- terminal
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
-				Activate_pane_by_index_zoomed(win, pane, 2)
+				Activate_pane_by_index_zoomed(win, pane, 1)
 			end),
 		},
 		{
