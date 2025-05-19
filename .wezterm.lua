@@ -160,7 +160,7 @@ return {
 	-----------
 	-- Keys  --
 	-----------
-	-- leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
+	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		-- Window management
 		{
@@ -168,29 +168,10 @@ return {
 			mods = "ALT",
 			action = act.SplitHorizontal,
 		},
-		{ key = "-", mods = "ALT", action = wezterm.action.DecreaseFontSize },
-		{ key = "=", mods = "ALT", action = wezterm.action.IncreaseFontSize },
-		{ key = "0", mods = "ALT", action = wezterm.action.ResetFontSize },
-		{
-			key = "r",
-			mods = "ALT",
-			action = act.RotatePanes("CounterClockwise"),
-		},
-		{ key = "z", mods = "ALT", action = "TogglePaneZoomState" },
-		-- {
-		-- 	key = "p",
-		-- 	mods = "CTRL",
-		-- 	action = wezterm.action_callback(function(win, pane)
-		-- 		Activate_pane_zoomed(win, pane, "Prev")
-		-- 	end),
-		-- },
-		-- {
-		-- 	key = "n",
-		-- 	mods = "CTRL",
-		-- 	action = wezterm.action_callback(function(win, pane)
-		-- 		Activate_pane_zoomed(win, pane, "Next")
-		-- 	end),
-		-- },
+		{ key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
+		{ key = "=", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
+		{ key = "0", mods = "CTRL", action = wezterm.action.ResetFontSize },
+		{ key = "z", mods = "CTRL", action = "TogglePaneZoomState" },
 		{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
 		{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
 		{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
@@ -209,21 +190,21 @@ return {
 		{ key = "8", mods = "ALT", action = act({ ActivateTab = 7 }) },
 		{ key = "9", mods = "ALT", action = act({ ActivateTab = 8 }) },
 		{
-			key = "1",
+			key = "e", -- editor
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				Activate_pane_by_index_zoomed(win, pane, 0)
 			end),
 		},
 		{
-			key = "2",
+			key = "g", -- git
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				Activate_pane_by_index_zoomed(win, pane, 1)
 			end),
 		},
 		{
-			key = "3",
+			key = "t", -- terminal
 			mods = "CTRL",
 			action = wezterm.action_callback(function(win, pane)
 				Activate_pane_by_index_zoomed(win, pane, 2)
@@ -239,41 +220,34 @@ return {
 			mods = "CTRL|SHIFT",
 			action = act.ActivateTabRelative(-1),
 		},
-		{ key = "x", mods = "ALT", action = act({ CloseCurrentTab = { confirm = true } }) },
+		{ key = "x", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 		-- Activate Copy Mode
-		{ key = "[", mods = "ALT", action = act.ActivateCopyMode },
+		{ key = "[", mods = "CTRL", action = act.ActivateCopyMode },
 		-- Paste from Copy Mode
-		{ key = "]", mods = "ALT", action = act.PasteFrom("PrimarySelection") },
+		{ key = "]", mods = "CTRL", action = act.PasteFrom("PrimarySelection") },
 		{
 			key = "d",
-			mods = "ALT",
+			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "dotfiles", Dotfile_path, true)
 			end),
 		},
 		{
 			key = "s",
-			mods = "ALT",
+			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "scratchpad", Scratchpad_path, false)
 			end),
 		},
-		-- {
-		-- 	key = "w",
-		-- 	mods = "ALT",
-		-- 	action = wezterm.action_callback(function(win, pane)
-		-- 		spawn_or_activate_tab(win:mux_window(), pane, "hydromt", work_path)
-		-- 	end),
-		-- },
 		{
 			key = "b",
-			mods = "ALT",
+			mods = "LEADER",
 			action = wezterm.action_callback(function(win, pane)
 				Spawn_or_activate_tab(win:mux_window(), pane, "base", Base_path, false)
 			end),
 		},
-		{ key = "f", mods = "ALT", action = wezterm.action_callback(Sessionize_projects) },
-		{ key = "w", mods = "ALT", action = wezterm.action_callback(Sessionize_work) },
+		{ key = "f", mods = "LEADER", action = wezterm.action_callback(Sessionize_projects) },
+		{ key = "w", mods = "LEADER", action = wezterm.action_callback(Sessionize_work) },
 	},
 	--
 
