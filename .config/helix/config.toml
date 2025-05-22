@@ -205,3 +205,124 @@ l     = "dap_launch"
 "k"   = "no_op"
 "A-c" = "no_op"
 "/"   = "no_op"
+
+# alias to backapace necessary until scheme lands
+# project namespace
+[keys.normal."backspace".p]
+label = "Project"
+"/"   = "global_search"
+s     = "workspace_symbol_picker"
+g     = "changed_file_picker"
+f     = "file_picker"
+D     = "workspace_diagnostics_picker"
+
+# Language namespace
+[keys.normal."backspace".l]
+label = "LSP"
+r     = "rename_symbol"
+d     = "hover"
+h     = "select_references_to_symbol_under_cursor"
+a     = "code_action"
+c     = "completion"
+
+# lsp/comment
+[keys.normal."backspace".l."/"]
+label = "Comments"
+c     = "toggle_comments"
+l     = "toggle_line_comments"
+b     = "toggle_block_comments"
+
+
+# lsp/signature
+[keys.normal."backspace".l.f]
+label = "Function"
+h     = "signature_help"
+i     = "add_function_parameter"
+p     = "goto_prev_parameter"
+n     = "goto_next_parameter"
+
+
+# file namespace
+[keys.normal."backspace".f]
+label = "File"
+"/"   = "search"
+s     = "symbol_picker"
+d     = "diagnostics_picker"
+r     = { label = "Reaload all files", command = ":reload-all" }
+w     = { label = "Write all files", command = ":wa" }
+c     = { label = "Close current buffer", command = ":bc" }
+f     = { label = "Format Document", command = ":format" }
+
+# config namespace
+[keys.normal."backspace".c]
+label = "Config"
+c     = { label = "Open Config", command = ":config-open" }
+l     = { label = "Open Language Config", command = ":open ~/.config/helix/languages.toml" }
+r     = { label = "Reload Config", command = ":config-reload" }
+
+# marks namespace
+[keys.normal."backspace".m]
+label = "Marks"
+
+[keys.normal."backspace".m.g]
+label = "Goto"
+"1"   = ":goto-mark 1"
+"2"   = ":goto-mark 2"
+"3"   = ":goto-mark 3"
+"4"   = ":goto-mark 4"
+
+[keys.normal."backspace".m.s]
+label = "Set"
+"1"   = ":register-mark 1"
+"2"   = ":register-mark 2"
+"3"   = ":register-mark 3"
+"4"   = ":register-mark 4"
+
+[keys.normal."backspace".g]
+label = "Git"
+s     = { label = "Status", command = ":sh git status" }
+p     = { label = "pull", command = ":sh git pull" }
+u     = { label = "undo change under cursor", command = ":reset-diff-change" }
+
+[keys.normal."backspace".t]
+label = "Test"
+
+[keys.normal."backspace".t.p]
+label = "Python"
+
+[keys.normal."backspace".t.r]
+label = "Rust"
+
+[keys.normal."backspace".d]
+label = "Debug"
+c     = "dap_continue"
+r     = "dap_restart"
+t     = "dap_terminate"
+v     = "dap_variables"
+n     = "dap_next"
+s     = "dap_step_in"
+o     = "dap_step_out"
+b     = "dap_toggle_breakpoint"
+l     = "dap_launch"
+
+# nops to clean up menus
+[keys.normal."backspace"]
+"G"   = "no_op"
+"'"   = "no_op"
+"P"   = "no_op"
+"y"   = "no_op"
+"Y"   = "no_op"
+"D"   = "no_op"
+"h"   = "no_op"
+"s"   = "no_op"
+"i"   = "no_op"
+"S"   = "no_op"
+"r"   = "no_op"
+"b"   = "no_op"
+"j"   = "no_op"
+"C"   = "no_op"
+"F"   = "no_op"
+"R"   = "no_op"
+"k"   = "no_op"
+"A-c" = "no_op"
+"/"   = "no_op"
