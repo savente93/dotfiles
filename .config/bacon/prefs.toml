@@ -1,0 +1,69 @@
+# This is a preferences file for the bacon tool
+# More info at https://github.com/Canop/bacon
+summary = true
+wrap    = false
+reverse = true
+
+
+# The grace period is a delay after a file event before the real
+# task is launched and during which other events will be ignored.
+# This is mostly useful when your editor does several operations
+# when saving a file and the state is temporarily wrong (eg it
+# moves the file to a backup name before recreating the right one)
+# You can set it to "none" if it's useless for you.
+#
+# grace_period = "15ms"
+
+
+show_changes_count = true
+
+
+# Uncomment one of those lines if you don't want the default
+# behavior triggered by a file change. This property can also
+# be set directly in a specific job.
+#
+on_change_strategy = "kill_then_restart"
+# on_change_strategy = "wait_then_restart"
+
+
+[sound]
+enabled = false # set true to allow sound
+
+[keybindings]
+# esc = "back"
+# g = "scroll-to-top"
+# shift-g = "scroll-to-bottom"
+# k = "scroll-lines(-1)"
+# j = "scroll-lines(1)"
+# ctrl-c = "quit"
+# ctrl-q = "quit"
+# q = "quit"
+# F5 = "rerun"
+# alt-s = "toggle-summary"
+# alt-w = "toggle-wrap"
+# alt-b = "toggle-backtrace"
+# Home = "scroll-to-top"
+# End = "scroll-to-bottom"
+# Up = "scroll-lines(-1)"
+# Down = "scroll-lines(1)"
+# PageUp = "scroll-pages(-1)"
+# PageDown = "scroll-pages(1)"
+# Space = "scroll-pages(1)"
+c = "job:clippy-all"
+d = "job:doc-open"
+t = "job:test"
+r = "job:run"
+
+[jobs.clippy-all]
+command = [
+  "cargo",
+  "clippy",
+  "--all",
+  "--all-targets",
+  "--all-features",
+  "--",
+  "--deny",
+  "warnings",
+]
+
+default_job = "clippy-all"
