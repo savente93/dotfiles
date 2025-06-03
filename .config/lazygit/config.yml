@@ -79,6 +79,7 @@ gui:
   switchToFilesAfterStashPop: true
   switchToFilesAfterStashApply: true
 git:
+  overrideGpg: true
   paging:
     colorArg: always
     pager: ""
@@ -102,7 +103,6 @@ git:
   autoStageResolvedConflicts: true
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
   allBranchesLogCmds: [git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium]
-  overrideGpg: false
   disableForcePushing: false
   commitPrefixes: {}
   branchPrefix: ""
@@ -249,8 +249,8 @@ keybinding:
     markCommitAsFixup: f
     createFixupCommit: F
     squashAboveCommits: S
-    moveDownCommit: <c-j>
-    moveUpCommit: <c-k>
+    moveDownCommit: <c-n>
+    moveUpCommit: <c-p>
     amendToCommit: A
     resetCommitAuthor: a
     pickCommit: p
