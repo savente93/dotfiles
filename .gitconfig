@@ -9,7 +9,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	pager = delta
-	editor = hx
+	editor = ~/.cargo/bin/hx
 [init]
 	defaultBranch = main
 [commit]
