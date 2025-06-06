@@ -344,7 +344,7 @@ function setup_ssh() {
 
 	# git by using the signing key each machine can have it's own key but still have a common gitconfig
 	echo "[user]" >~/.gitconfig.signingkey
-	echo -e "\tsigningkey = $(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "public key")" >>~/.gitconfig.signingkey
+	echo -e "\tsigningkey = ~/.ssh/id_$key_type" >>~/.gitconfig.signingkey
 }
 
 function setup_docker() {
