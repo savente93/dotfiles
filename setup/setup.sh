@@ -237,7 +237,7 @@ function setup_python_tools() {
 }
 
 function setup_rust_tools() {
-	install_tools paru rustup rust-analyzer taplo-cli bacon
+	install_tools paru rustup rust-analyzer taplo-cli bacon release-plz
 
 }
 

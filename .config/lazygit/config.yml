@@ -82,7 +82,7 @@ git:
   overrideGpg: true
   paging:
     colorArg: always
-    pager: ""
+    pager: delta --paging=never
     useConfig: false
     externalDiffCommand: ""
   commit:
