@@ -101,7 +101,7 @@ bindsym $mod+c exec --no-startup-id walker -m clipboard
 exec --no-startup-id walker --gapplication-service
 
 # lockscreen
-bindsym ctrl+Alt+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png
+bindsym ctrl+Shift+l exec --no-startup-id swaylock --ignore-empty-password -i ~/Wallpapers/locked.png
 exec swayidle -w \
 	resume 'swaymsg "output * power on"' \
     before-sleep 'playerctl pause'\
