@@ -53,4 +53,5 @@ if status is-interactive
     abbr --add pe pixi run -e default helix .
     abbr --add pi pixi run -e default ipython
 
+    set -g fish_key_bindings fish_vi_key_bindings
 end
