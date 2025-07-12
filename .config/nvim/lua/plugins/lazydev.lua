@@ -1,4 +1,5 @@
 return {
+  -- lsp setup for lua. mainly keeping this for editing neovim stuff
   'folke/lazydev.nvim',
   ft = 'lua',
   opts = {

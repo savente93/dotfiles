@@ -20,10 +20,6 @@ return {
     -- Ignore non-empty buftypes, for example terminal buffers
     ignoreSpecialBuftypes = true,
 
-    -- Ignore visible buffers. Buffers that are open in a window or in a tab
-    -- are considered visible by vim. ("a" in `:buffers`)
-    ignoreVisibleBufs = true,
-
     -- ignore unloaded buffers. Session-management plugin often add buffers
     -- to the buffer list without loading them.
     ignoreUnloadedBufs = false,

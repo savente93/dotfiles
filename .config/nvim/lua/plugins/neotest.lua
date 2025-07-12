@@ -6,6 +6,11 @@ return {
       'nvim-lua/plenary.nvim',
       'antoinemadec/FixCursorHold.nvim',
       'nvim-treesitter/nvim-treesitter',
+      {
+        'mrcjkb/rustaceanvim',
+        version = '^6', -- Recommended
+      },
+      'nvim-neotest/neotest-python',
     },
     config = function()
       require('neotest').setup {

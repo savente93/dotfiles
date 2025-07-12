@@ -3,6 +3,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
   event = 'VimEnter',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope-ui-select.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
 
