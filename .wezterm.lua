@@ -254,13 +254,6 @@ return {
       end),
     },
     {
-      key = 't', -- terminal
-      mods = 'ALT',
-      action = wezterm.action_callback(function(win, pane)
-        Send_current_test_to_fish_pane(win, pane)
-      end),
-    },
-    {
       key = 'Tab',
       mods = 'CTRL',
       action = act.ActivateTabRelative(1),
