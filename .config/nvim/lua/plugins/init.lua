@@ -3,7 +3,6 @@ return {
   'nvim-telescope/telescope-ui-select.nvim',
   'nvim-tree/nvim-web-devicons',
   'nvim-neotest/neotest-python',
-  'mbbill/undotree',
   {
     'navarasu/onedark.nvim',
     priority = 1000, -- make sure to load this before all the other start plugins
