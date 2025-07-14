@@ -39,6 +39,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
             '.git',
           },
         },
+        live_grep = {
+          additional_args = {
+            '--hidden',
+            '--iglob=!.git',
+          },
+        },
       },
       extensions = {
         ['ui-select'] = {
