@@ -1,5 +1,6 @@
 return {
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  'rcarriga/nvim-notify',
   {
     'navarasu/onedark.nvim',
     priority = 1000, -- make sure to load this before all the other start plugins

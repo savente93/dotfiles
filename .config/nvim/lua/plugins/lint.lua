@@ -6,7 +6,10 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        --markdown = { 'markdownlint' },
+        markdownlint = {
+          args = { '--disable', 'MD013', '--' },
+        },
       }
 
       -- Create autocommand which carries out the actual linting
