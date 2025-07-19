@@ -32,8 +32,6 @@ return { -- Autocompletion
       },
     },
 
-    snippets = { preset = 'luasnip' },
-
     fuzzy = { implementation = 'rust' },
 
     -- Shows a signature help window while you type arguments for a function
