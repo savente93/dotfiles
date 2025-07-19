@@ -1,10 +1,3 @@
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- NOTE: Quickfix keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<A-k>', '<cmd>cnext<CR>zz', { desc = 'Quicklist up' })
-vim.keymap.set('n', '<A-j>', '<cmd>cprev<CR>zz', { desc = 'Quicklist down' })
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -24,19 +17,16 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines up' }
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected lines down' })
 
 -- NOTE: Movement
---
+
 -- keep cursor in same place on screen while moving around
 vim.keymap.set('n', 'K', 'mzK`z', { desc = 'Join line up' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line down' })
 
--- vim.keymap.set('n', '<C-d>', '<C-d>zz')
--- vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '=ap', "ma=ap'a", { desc = 'format paragraph' })
 
 -- NOTE: Pasting
---
 
 -- paste without losing current register
 vim.keymap.set('x', 'P', [["_dP]], { desc = 'Paste without yanking' })

@@ -14,14 +14,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
     },
   },
   config = function()
-    -- Two important keymaps to use while in Telescope are:
-    --  - Insert mode: <c-/>
-    --  - Normal mode: ?
-    --
-    -- This opens a window that shows you all of the keymaps for the current
-    -- Telescope picker. This is really useful to discover what Telescope can
-    -- do as well as how to actually do it!
-
     -- [[ Configure Telescope ]]
     require('telescope').setup {
       defaults = require('telescope.themes').get_ivy { layout_config = { height = 0.75 } },
@@ -59,16 +51,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'persisted')
 
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>st', builtin.live_grep, { desc = '[S]earch [T]ext' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymap' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>of', function()
+    vim.keymap.set('n', '<leader>hs', builtin.help_tags, { desc = '[H]elp [S]earch' })
+    vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = '[F]ile [S]earch' })
+    vim.keymap.set('n', '<leader>ks', builtin.keymaps, { desc = '[K]eymap [S]earch' })
+    vim.keymap.set('n', '<leader>fo', function()
       builtin.find_files { hidden = true }
-    end, { desc = '[O]pen [F]iles' })
-    vim.keymap.set('n', '<leader>ob', builtin.buffers, { desc = '[O]pen [B]uffer' })
+    end, { desc = '[F]ile [O]pen' })
+    vim.keymap.set('n', '<leader>bo', builtin.buffers, { desc = '[B]uffer [O]pen' })
 
-    vim.keymap.set('n', '<leader>sc', function()
+    vim.keymap.set('n', '<leader>ns', function()
       builtin.live_grep { cwd = vim.fn.stdpath 'config' }
     end, { desc = 'Search config files' })
   end,
