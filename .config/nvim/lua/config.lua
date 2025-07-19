@@ -55,16 +55,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.cmd [[highlight WinSeperator guibg=None]]
 vim.cmd [[set laststatus=3]]
 
-vim.cmd [[
-highlight TabLineSel guifg=#ffffff guibg=#5f87af gui=bold
-highlight TabLine guifg=#888888 guibg=#303030
-highlight MiniTablineVisible guifg=#848b98 guibg=#282c34
-highlight MiniTablineModifiedVisible gui=italic guifg=#e5c07b guibg=#282c34
-highlight MiniTablineModifiedHidden gui=italic guifg=#848b98 guibg=#31353f
-highlight MiniTablineModifiedCurrent gui=bold,italic guifg=#d19a66
-highlight MiniTablineHidden guifg=#abb2bf guibg=#31353f
-highlight MiniTablineCurrent gui=bold
-highlight MiniTablineTabpagesection guifg=#282c34 guibg=#ebd09c
-]]
-
 vim.o.sessionoptions = 'buffers,curdir,folds,globals,tabpages,winpos,winsize'
+
+vim.o.undofile = true
+vim.o.undodir = os.getenv 'HOME' .. '.vim_undo'
