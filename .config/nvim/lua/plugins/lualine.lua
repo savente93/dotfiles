@@ -16,7 +16,15 @@ return {
       },
       tabline = {
 
-        lualine_b = { 'buffers' },
+        lualine_b = {
+          {
+            'buffers',
+            symbols = {
+              alternate_file = '',
+              directory = '',
+            },
+          },
+        },
       },
     }
   end,
