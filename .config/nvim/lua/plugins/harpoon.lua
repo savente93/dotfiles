@@ -9,7 +9,7 @@ return {
     {
       '<leader>A',
       function()
-        require('harpoon'):list():add()
+        require('harpoon'):list():append()
       end,
       desc = 'harpoon file',
     },

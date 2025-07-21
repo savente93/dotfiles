@@ -18,6 +18,14 @@ return {
           require 'neotest-python',
           require 'rustaceanvim.neotest',
         },
+
+        vim.keymap.set('n', '<leader>nl', function()
+          require('neotest').run.run_last()
+        end),
+
+        vim.keymap.set('n', '<leader>nt', function()
+          require('neotest').run.run()
+        end),
       }
     end,
   },

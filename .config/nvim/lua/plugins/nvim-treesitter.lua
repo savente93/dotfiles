@@ -59,10 +59,10 @@ return { -- Highlight, edit, and navigate code
         -- Use if you want more granular movements
         -- Make it even more gradual by adding multiple queries and regex.
         goto_next = {
-          [']d'] = '@conditional.outer',
+          [']o'] = '@conditional.outer',
         },
         goto_previous = {
-          ['[d'] = '@conditional.outer',
+          ['[o'] = '@conditional.outer',
         },
       },
       select = {
