@@ -40,3 +40,15 @@ vim.keymap.set('n', '<leader>Y', [[ggVG"+Y<C-o>]], { desc = 'Yank entire file in
 vim.keymap.set('v', 'Y', '"+y', { desc = 'yank into system clipboard' })
 
 vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace occurences under cursor' })
+
+vim.keymap.set('n', ']t', function()
+  require('todo-comments').jump_next()
+end, { desc = 'Next todo comment' })
+
+vim.keymap.set('n', '[t', function()
+  require('todo-comments').jump_prev()
+end, { desc = 'Previous todo comment' })
+
+vim.keymap.set('n', '<leader>qt', function()
+  vim.cmd [[ TodoTelescope ]]
+end, { desc = 'Previous todo comment' })
