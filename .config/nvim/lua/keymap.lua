@@ -52,3 +52,11 @@ end, { desc = 'Previous todo comment' })
 vim.keymap.set('n', '<leader>qt', function()
   vim.cmd [[ TodoTelescope ]]
 end, { desc = 'Previous todo comment' })
+
+vim.keymap.set('n', '<F1>', '<Nop>')
+vim.keymap.set('n', '<leader>fn', function()
+  vim.ui.input({ prompt = 'Enter file name: ' }, function(result)
+    local path = vim.fn.expand '%:p:h' .. '/' .. result
+    vim.cmd('e ' .. path)
+  end)
+end)
