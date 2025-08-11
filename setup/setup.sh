@@ -185,7 +185,7 @@ function setup_power_management() {
 		# shellcheck disable=SC2016
 		(
 			crontab -l
-			echo '*/5 * * * * "/bin/bash" "/home/sam/.local/bin/notify_battery.sh"'
+			echo '* * * * * "/bin/bash" "/home/sam/.local/bin/notify_battery.sh"'
 		) 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 	fi
 }
@@ -267,6 +267,7 @@ function setup_de() {
 	sudo rm /etc/sddm.conf
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
 	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr walker libqalculate
+	sudo systemctl enable --now cronie.service
 	mkdir -p ~/Wallpapers
 	curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
 	curl -Ls https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png

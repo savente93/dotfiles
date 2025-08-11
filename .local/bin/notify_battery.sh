@@ -1,37 +1,42 @@
-#!/bin/sh
+#!/bin/bash
 
-# thanks to @ericmurphyxyz
-# Send a notification if the laptop battery is either low or is fully charged.
-
-export DISPLAY=:0
-export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
-
-# Battery percentage at which to notify
-WARNING_LEVEL=20
+WARNING_LEVEL=15
 CRITICAL_LEVEL=10
-BATTERY_DISCHARGING=$(acpi -b | grep "Battery 0" | grep -c "Discharging")
-BATTERY_LEVEL=$(acpi -b | grep "Battery 0" | grep -P -o '[0-9]+(?=%)')
-
-# Use files to store whether we've shown a notification or not (to prevent multiple notifications)
-EMPTY_FILE=/tmp/batteryempty
+SHUTDOWN_LEVEL=5
+LOW_FILE=/tmp/batterylow
 CRITICAL_FILE=/tmp/batterycritical
 
-# Reset notifications if the computer is charging/discharging
-if [ "$BATTERY_DISCHARGING" -eq 0 ]; then
-	if [ -f $EMPTY_FILE ]; then
-		rm $EMPTY_FILE
-	fi
-	if [ -f $CRITICAL_FILE ]; then
-		rm $CRITICAL_FILE
-	fi
+export XDG_RUNTIME_DIR="/run/user/1000"
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+
+# thank you arch wiki https://wiki.archlinux.org/title/Laptop
+BATTERY_DISCHARGING=$(acpi -b | awk -F'[,:%]' '{print $2}' | grep -c "Discharging")
+BATTERY_LEVEL=$(acpi -b | awk -F'[,:%]' '{print $3}')
+
+# If charging, reset notification state
+if [[ $BATTERY_DISCHARGING -eq 0 ]]; then
+	rm -f "$LOW_FILE" "$CRITICAL_FILE"
+	exit 0
 fi
 
-# If the battery is low and is not charging (and has not shown notification yet)
-if [ "$BATTERY_LEVEL" -le $WARNING_LEVEL ] && [ "$BATTERY_DISCHARGING" -eq 1 ] && [ ! -f $EMPTY_FILE ]; then
-	notify-send "Low Battery" "${BATTERY_LEVEL}% of battery remaining." -u critical -i "battery-alert" -r 9991 -c battery
-	touch $EMPTY_FILE
-	# If the battery is critical and is not charging (and has not shown notification yet)
-elif [ "$BATTERY_LEVEL" -le $CRITICAL_LEVEL ] && [ "$BATTERY_DISCHARGING" -eq 1 ] && [ ! -f $CRITICAL_FILE ]; then
-	notify-send "Battery Critical" "The computer will shutdown soon." -u critical -i "battery-alert" -r 9991 -c battery
-	touch $CRITICAL_FILE
+if ((BATTERY_LEVEL <= SHUTDOWN_LEVEL)); then
+	logger "Battery monitor: Critical threshold reached. Hibernating."
+	systemctl hibernate
+	exit 0
+fi
+
+if ((BATTERY_LEVEL <= CRITICAL_LEVEL)) && [[ ! -f $CRITICAL_FILE ]]; then
+	touch "$CRITICAL_FILE"
+	notify-send "Battery Critical" \
+		"The computer will hibernate soon." \
+		-u critical -i "battery-alert" -r 9991 -c battery
+	exit 0
+fi
+
+if ((BATTERY_LEVEL <= WARNING_LEVEL)) && [[ ! -f $LOW_FILE ]]; then
+	notify-send "Low Battery" \
+		"${BATTERY_LEVEL}% remaining." \
+		-u critical -i "battery-alert" -r 9991 -c battery
+	touch "$LOW_FILE"
 fi
