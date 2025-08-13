@@ -2,16 +2,30 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local mux = wezterm.mux
 
-Home_path = os.getenv 'HOME'
-Dotfile_path = Home_path .. '/dotfiles'
-Scratchpad_path = Home_path .. '/scratchpad'
-Project_path = Home_path .. '/projects'
-Work_path = Home_path .. '/work'
+Path_sep = package.config:sub(1, 1)
+Home_path = wezterm.home_dir
+
+if wezterm.target_triple:find 'windows' then
+  Editor = 'C:\\Program Files\\Neovim\\bin\\nvim.exe'
+  User_shell = 'powershell'
+  Default_prog = 'powershell'
+
+  Pixi = Home_path .. '\\AppData\\Local\\pixi\\bin\\pixi.exe'
+  Path_component_re = '.*\\(.*\\.*)\\'
+else
+  Editor = '/usr/bin/nvim'
+  User_shell = 'fish'
+  Default_prog = 'bash'
+  Pixi = Home_path .. '/.pixi/bin/pixi'
+  Path_component_re = '.*/(.*/.*)/'
+end
+
+Dotfile_path = Home_path .. Path_sep .. 'dotfiles'
+Scratchpad_path = Home_path .. Path_sep .. 'scratchpad'
+Project_path = Home_path .. Path_sep .. 'projects'
+Work_path = Home_path .. Path_sep .. 'work'
 Base_path = Home_path
 Git_client = 'lazygit'
-User_shell = 'fish'
-Editor = '/usr/bin/nvim'
-Pixi = Home_path .. '/.pixi/bin/pixi'
 
 function Find_tab_index(win, name)
   for i, tab in ipairs(win:tabs()) do
@@ -23,9 +37,7 @@ function Find_tab_index(win, name)
 end
 
 function Find_fish_pane(tab)
-  print(tab)
   for _, pane in ipairs(tab:panes()) do
-    print(pane:get_foreground_process_info())
     if pane:get_foreground_process_info().name == User_shell then
       return pane
     end
@@ -53,7 +65,7 @@ function Spawn_with_title(win, cwd, name, setup_workspace_layout)
   if setup_workspace_layout then
     local editor_pane = nil
     -- little hacky but I'll do something more inteligent later
-    if File_exists(cwd .. '/pyproject.toml') then
+    if File_exists(cwd .. Path_sep .. 'pyproject.toml') then
       editor_pane = pane:split { args = { Pixi, 'run', Editor }, cwd = cwd, direction = 'Left' }
     else
       editor_pane = pane:split { args = { Editor }, cwd = cwd, direction = 'Left' }
@@ -111,14 +123,14 @@ function Sessionize_dir(win, pane, dir)
     -- I'm sorry, lua has no path operations :(
     -- should be okay since we told find to only return dirs
 
-    local name = string.gmatch(dir_name, '.*/(.*/.*)/')()
+    local name = string.gmatch(dir_name, Path_component_re)()
     table.insert(choices, { id = dir_name, label = name })
   end
 
   win:perform_action(
     act.InputSelector {
       action = wezterm.action_callback(function(_win, _pane, id, full_label)
-        local label = string.gmatch(full_label, '.*/(.*)')()
+        local label = string.gmatch(full_label, '.*' .. Path_sep .. '(.*)')()
         if id and label then
           Spawn_or_activate_tab(win:mux_window(), pane, label, id, true)
         end
@@ -165,7 +177,7 @@ return {
   check_for_updates = true,
   term = 'xterm-256color',
   use_ime = true,
-  default_prog = { 'bash' },
+  default_prog = { Default_prog },
 
   ----------------
   -- Appearance --

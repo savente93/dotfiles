@@ -11,7 +11,7 @@ vim.o.breakindent = true
 vim.o.mouse = 'a'
 vim.o.showmode = false
 vim.o.undofile = true
-vim.o.undodir = os.getenv 'HOME' .. '/.vim_undo'
+vim.o.undodir = vim.env.HOME .. '/.vim_undo'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
