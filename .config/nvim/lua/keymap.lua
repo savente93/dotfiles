@@ -60,3 +60,6 @@ vim.keymap.set('n', '<leader>fn', function()
     vim.cmd('e ' .. path)
   end)
 end)
+
+vim.keymap.set('x', '>', '>gv')
+vim.keymap.set('x', '<', '<gv')
