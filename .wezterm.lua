@@ -97,27 +97,28 @@ end
 function Sessionize_dir(win, pane, dir)
   local choices = {}
   local _success, stdout, _stderr = wezterm.run_child_process {
-    'find',
+    'fd',
+    '.',
     dir,
-    '-mindepth',
-    '1',
-    '-maxdepth',
+    '--max-depth',
     '2',
-    '-type',
-    'd',
+    '--min-depth',
+    '2',
+    '-td',
   }
 
   for dir_name in string.gmatch(stdout, '[^\n]+') do
     -- I'm sorry, lua has no path operations :(
     -- should be okay since we told find to only return dirs
 
-    local name = string.gmatch(dir_name, '.*/(.*)')()
+    local name = string.gmatch(dir_name, '.*/(.*/.*)/')()
     table.insert(choices, { id = dir_name, label = name })
   end
 
   win:perform_action(
     act.InputSelector {
-      action = wezterm.action_callback(function(_win, _pane, id, label)
+      action = wezterm.action_callback(function(_win, _pane, id, full_label)
+        local label = string.gmatch(full_label, '.*/(.*)')()
         if id and label then
           Spawn_or_activate_tab(win:mux_window(), pane, label, id, true)
         end
