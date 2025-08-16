@@ -205,7 +205,7 @@ function setup_terminal() {
 	setup_wezterm
 
 	install_tools pixi pre-commit
-	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi
+	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi neovim
 
 	# don't want fish to start when we install it so it get's handled seperately
 	if ! command -v fish &>/dev/null; then
