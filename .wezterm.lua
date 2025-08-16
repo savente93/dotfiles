@@ -26,6 +26,7 @@ Project_path = Home_path .. Path_sep .. 'projects'
 Work_path = Home_path .. Path_sep .. 'work'
 Base_path = Home_path
 Git_client = 'lazygit'
+Jj_client = 'lazyjj'
 
 function Find_tab_index(win, name)
   for i, tab in ipairs(win:tabs()) do
@@ -74,6 +75,23 @@ function Spawn_with_title(win, cwd, name, setup_workspace_layout)
     win:gui_window():perform_action(act.ActivatePaneDirection 'Left', editor_pane)
     win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
   end
+end
+
+function Spawn_or_activate_jj_pane(win, pane)
+  for _, p in ipairs(win:active_tab():panes()) do
+    if p:get_foreground_process_info().name == Jj_client then
+      win:active_tab():set_zoomed(false)
+      p:activate()
+      win:active_tab():set_zoomed(true)
+      return
+    end
+  end
+
+  -- didn't find git tab so we'll spawn one
+  local git_pane = pane:split { args = { Jj_client } }
+
+  git_pane:activate()
+  win:active_tab():set_zoomed(true)
 end
 
 function Spawn_or_activate_git_pane(win, pane)
@@ -247,6 +265,13 @@ return {
       mods = 'CTRL',
       action = wezterm.action_callback(function(win, pane)
         Activate_pane_by_index_zoomed(win, pane, 0)
+      end),
+    },
+    {
+      key = 'j', -- jujutsu
+      mods = 'CTRL',
+      action = wezterm.action_callback(function(win, pane)
+        Spawn_or_activate_jj_pane(win, pane)
       end),
     },
     {
