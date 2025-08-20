@@ -63,3 +63,5 @@ end)
 
 vim.keymap.set('x', '>', '>gv')
 vim.keymap.set('x', '<', '<gv')
+
+vim.keymap.set('n', '<leader>ff', 'ggV=G<C-o>')
