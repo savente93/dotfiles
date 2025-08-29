@@ -35,11 +35,11 @@ vim.keymap.set({ 'n', 'v' }, '<A-d>', '"_d', { desc = 'Delete without yanking' }
 
 -- NOTE: Yanking
 --
--- yank into syste clipboard
+-- yank into system clipboard
 vim.keymap.set('n', '<leader>Y', [[ggVG"+Y<C-o>]], { desc = 'Yank entire file into system clipboard' })
 vim.keymap.set('v', 'Y', '"+y', { desc = 'yank into system clipboard' })
 
-vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace occurences under cursor' })
+vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace occurrences under cursor' })
 
 vim.keymap.set('n', ']t', function()
   require('todo-comments').jump_next()
