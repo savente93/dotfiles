@@ -106,41 +106,6 @@ function install_tools() {
 	done
 }
 
-function install_helix_fork() {
-
-	if [ -f "$HOME/.cargo/bin/hx" ]; then
-		return 0
-	fi
-
-	mkdir -p ~/projects/rust
-
-	pushd ~/projects/rust || exit 1
-	if [ ! -d ~/projects/rust/helix ]; then
-		git clone https://github.com/savente93/helix.git
-	fi
-	pushd helix || exit 1
-	git remote set-url origin git@github.com:savente93/helix.git
-	git checkout bin
-	cargo install --path helix-term --locked
-
-	# just in case
-	rm -rf ~/.config/helix/runtime
-	cp -r runtime ~/.config/helix/
-
-	# download theme
-	if [ ! -f ~/.config/helix/themes/onedark.toml ]; then
-		curl -Ssfo ~/.config/helix/themes/onedark.toml https://raw.githubusercontent.com/helix-editor/helix/master/runtime/themes/onedark.toml
-	fi
-
-	~/.cargo/bin/hx -g fetch
-	~/.cargo/bin/hx -g build
-
-	# I don't care if popd fails
-	popd || true
-	popd || true
-
-}
-
 function setup_internet() {
 
 	if ! nmcli d wifi list | grep -q -F '*'; then
@@ -169,7 +134,6 @@ function setup_audio() {
 
 function setup_image_processing() {
 	install_tools flatpak org.inkscape.Inkscape org.gnome.Loupe flathub org.kde.krita org.kryogenix.Pick
-	install_tools paru hyprpicker-git
 
 }
 
@@ -195,19 +159,18 @@ function setup_wezterm() {
 	if [ ! -f ~/.wezterm.sh ]; then
 		curl -Ssfo ~/.wezterm.sh https://raw.githubusercontent.com/wez/wezterm/refs/heads/main/assets/shell-integration/wezterm.sh
 	fi
-	install_tools paru wezterm stylua lua-language-server
+	install_tools paru wezterm
 
 }
 
 function setup_terminal() {
 
-	install_helix_fork
 	setup_wezterm
 
 	install_tools pixi pre-commit
 	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi neovim
 
-	# don't want fish to start when we install it so it get's handled seperately
+	# don't want fish to start when we install it so it get's handled separately
 	if ! command -v fish &>/dev/null; then
 		sudo pacman -S --needed --noconfirm fish
 	fi
@@ -220,34 +183,20 @@ function setup_terminal() {
 
 function setup_writing_tools() {
 
-	install_tools paru evince jinja-lsp typos-cli typst typst-lsp-bin zola ltex-ls-plus-bin
+	install_tools paru evince typos-cli typst zola
 
 	#set evince as defatul pdf application
 	xdg-mime default org.gnome.Evince.desktop application/pdf
 	gio mime application/pdf org.gnome.Evince.desktop
 
-	# jinja lint stuff for the zola website templates
-	install_tools pixi djlint
-
-}
-
-function setup_python_tools() {
-	install_tools paru pyright ruff-lsp
-
 }
 
 function setup_rust_tools() {
-	install_tools paru rustup rust-analyzer taplo-cli bacon release-plz
+	install_tools paru rustup taplo-cli bacon release-plz
 
 }
-
-function setup_bash_tools() {
-	install_tools paru bash-language-server shellcheck shfmt yaml-language-server
-}
-
 function setup_infra_tools() {
 	install_tools pixi awscli
-	install_tools paru terraform-ls
 }
 
 function setup_espanso() {
@@ -266,7 +215,8 @@ function setup_fonts() {
 function setup_de() {
 	sudo rm /etc/sddm.conf
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
-	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr walker libqalculate
+	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr libqalculate
+	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-privderlist elephant-menus elephant-calc elephant-desktopapplications
 	sudo systemctl enable --now cronie.service
 	mkdir -p ~/Wallpapers
 	curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
@@ -405,10 +355,8 @@ function setup_minimal() {
 }
 
 function setup_dev() {
-	setup_python_tools
 	setup_rust_tools
 	setup_infra_tools
-	setup_bash_tools
 	setup_1password
 	setup_docker
 	setup_aws
