@@ -33,6 +33,11 @@ return {
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         map('gt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
+        -- format file
+        vim.keymap.set('', '<leader>ff', function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end)
+
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         ---@param client vim.lsp.Client
         ---@param method vim.lsp.protocol.Method
@@ -115,7 +120,6 @@ return {
     --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     --  - settings (table): Override the default settings passed when initializing the server.
     local servers = {
-      pyright = {},
 
       lua_ls = {
         settings = {

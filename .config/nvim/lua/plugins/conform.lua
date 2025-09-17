@@ -18,8 +18,8 @@ return { -- Autoformat
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'ruff' },
-      rust = { 'cargo', 'fmt' },
-      toml = { 'taplo', 'fmt' },
+      rust = { 'rustfmt' },
+      toml = { 'taplo' },
     },
   },
 }
