@@ -1,7 +1,7 @@
 eval "$(keychain --eval --quiet -Q id_ed25519)"
 
 export WALKER_CONFIG_TYPE=toml
-export EDITOR="$HOME/.cargo/bin/hx"
+export EDITOR="nvim"
 
 if [[ $- != *i* ]]; then
 	# Shell is non-interactive.  Be done now!
@@ -12,6 +12,7 @@ export TZ_LIST="Europe/Amsterdam,Home;America/Chicago,Wrezinsky;America/New_York
 if [[ ":$PATH:" != *":$HOME/.pixi/bin:"* ]]; then
 	export PATH="$PATH:$HOME/.pixi/bin"
 fi
+
 # maybe don't brick the system if fish isn't installed
 # don't ask me how I know that...
 if command -v fish >/dev/null 2>&1; then
