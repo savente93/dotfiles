@@ -191,6 +191,10 @@ function setup_writing_tools() {
 
 }
 
+function setup_misc_dev_tools() {
+	install_tools paru github-cli just mise tokei grex scooter fw gittype gitui gitu skim jnv
+
+}
 function setup_rust_tools() {
 	install_tools paru rustup taplo-cli bacon release-plz
 
@@ -355,6 +359,7 @@ function setup_minimal() {
 }
 
 function setup_dev() {
+	setup_misc_dev_tools
 	setup_rust_tools
 	setup_infra_tools
 	setup_1password

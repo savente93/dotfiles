@@ -3,6 +3,14 @@ if status is-interactive
     zoxide init fish | source
     pixi completion --shell fish | source
 
+    if test -x (command -v fw)
+        if test -x (command -v sk)
+            fw print-fish-setup -s | source
+        else
+            fw print-fish-setup | source
+        end
+    end
+
     # typing is for chumps
     abbr --add dotdot --regex '^\.\.+$' --function multicd
     abbr --add up topgrade -y --skip-notify
