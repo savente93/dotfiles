@@ -133,7 +133,7 @@ function setup_audio() {
 }
 
 function setup_image_processing() {
-	install_tools flatpak org.inkscape.Inkscape org.gnome.Loupe flathub org.kde.krita org.kryogenix.Pick
+	install_tools flatpak org.inkscape.Inkscape org.gnome.Loupe flathub org.kde.krita
 
 }
 
