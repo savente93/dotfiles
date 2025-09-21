@@ -134,7 +134,7 @@ for_window [window_role="alert"]          floating enable
 
 # make sure apps stay where I like them
 assign [class="org.wezfurlong.wezterm"]         $ws1
-assign [class="Vivaldi-stable"]                 $ws2
+assign [app_id="vivaldi-stable"]                 $ws2
 assign [class="obsidian"]                       $ws3
 assign [class="Microsoft Teams.*"]              $ws4
 
@@ -154,7 +154,7 @@ exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 bindsym $mod+g exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
 bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 
-# starup apps
+# startup apps
 exec --no-startup-id wezterm
 exec --no-startup-id vivaldi
 exec --no-startup-id obsidian
