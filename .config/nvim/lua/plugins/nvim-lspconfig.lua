@@ -26,6 +26,7 @@ return {
         map('<leader>lr', vim.lsp.buf.rename, 'Rename symbol under cursor')
         map('<leader>la', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
         map('<leader>ls', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+        map('<leader>lS', require('telescope.builtin').lsp_workspace_symbols, 'Open Workspace Symbols')
 
         map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
