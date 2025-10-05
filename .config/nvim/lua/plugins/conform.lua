@@ -19,7 +19,6 @@ return { -- Autoformat
       lua = { 'stylua' },
       python = { 'ruff' },
       rust = { 'rustfmt' },
-      toml = { 'taplo' },
     },
   },
 }
