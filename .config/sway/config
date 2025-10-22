@@ -92,7 +92,7 @@ bindsym $mod+Shift+r reload
 
 
 # walker stuff
-exec --no-startup-id elephant
+exec_always --no-startup-id elephant
 exec --no-startup-id walker --gapplication-service
 bindsym $mod+d exec --no-startup-id walker applications
 bindsym ctrl+Shift+Delete exec --no-startup-id walker power
@@ -155,6 +155,8 @@ bindsym $mod+g exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -
 bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 
 # startup apps
+exec --no-startup-id flatpak run com.discordapp.Discord
+exec --no-startup-id flatpak run com.spotify.Client
 exec --no-startup-id wezterm
 exec --no-startup-id vivaldi
 exec --no-startup-id obsidian
