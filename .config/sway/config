@@ -96,10 +96,10 @@ exec_always --no-startup-id elephant
 exec --no-startup-id walker --gapplication-service
 bindsym $mod+d exec --no-startup-id walker applications
 bindsym ctrl+Shift+Delete exec --no-startup-id walker power
-bindsym $mod+equal exec --no-startup-id walker calc 
-bindsym $mod+e exec --no-startup-id walker emojis
-bindsym $mod+m exec --no-startup-id walker symbols
-bindsym $mod+c exec --no-startup-id walker clipboard
+bindsym $mod+equal exec --no-startup-id walker -m "calc"
+bindsym $mod+u exec --no-startup-id walker -m "unicode"
+bindsym $mod+m exec --no-startup-id walker -m "symbols"
+bindsym $mod+c exec --no-startup-id walker -m "clipboard"
 
 # lockscreen
 set $lock 'swaylock --ignore-empty-password -i ~/Wallpapers/locked.png'
