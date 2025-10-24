@@ -17,6 +17,7 @@ else
   User_shell = 'fish'
   Default_prog = 'bash'
   Pixi = Home_path .. '/.pixi/bin/pixi'
+  Uv = '/usr/bin/uv'
   Path_component_re = '.*/(.*/.*)/'
 end
 
@@ -60,14 +61,23 @@ function File_exists(name)
   return f ~= nil and io.close(f)
 end
 
+function Is_UV_project(path)
+  return File_exists(path .. Path_sep .. 'uv.lock')
+end
+
+function Is_pixi_project(path)
+  return File_exists(path .. Path_sep .. 'pixi.lock')
+end
+
 function Spawn_with_title(win, cwd, name, setup_workspace_layout)
   local tab, pane, _ = win:spawn_tab { domain = 'CurrentPaneDomain', cwd = cwd }
   tab:set_title(name)
   if setup_workspace_layout then
     local editor_pane = nil
-    -- little hacky but I'll do something more inteligent later
-    if File_exists(cwd .. Path_sep .. 'pyproject.toml') then
+    if Is_pixi_project(cwd) then
       editor_pane = pane:split { args = { Pixi, 'run', Editor }, cwd = cwd, direction = 'Left' }
+    elseif Is_UV_project(cwd) then
+      editor_pane = pane:split { args = { Uv, 'run', Editor }, cwd = cwd, direction = 'Left' }
     else
       editor_pane = pane:split { args = { Editor }, cwd = cwd, direction = 'Left' }
     end
