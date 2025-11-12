@@ -65,3 +65,21 @@ vim.keymap.set('x', '>', '>gv')
 vim.keymap.set('x', '<', '<gv')
 
 vim.keymap.set('n', '<leader>ff', 'ggV=G<C-o>')
+
+-- Close all buffers except the current one
+local function close_others()
+  -- Get the number of the current buffer
+  local cur_buf = vim.api.nvim_get_current_buf()
+
+  -- Iterate over all listed buffers
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    -- Only act on listed buffers that are loaded and aren't the current one
+    if vim.bo[buf].buflisted and buf ~= cur_buf then
+      -- Force‑close the buffer (ignores unsaved changes)
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end
+
+-- Example keybinding (Ctrl‑w o like Vim’s window‑only command)
+vim.keymap.set('n', '<Leader>fC', close_others, { desc = 'Close all other buffers' })
