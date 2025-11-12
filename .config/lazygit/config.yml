@@ -80,11 +80,11 @@ gui:
   switchToFilesAfterStashApply: true
 git:
   overrideGpg: true
-  paging:
-    colorArg: always
-    pager: delta --paging=never
-    useConfig: false
-    externalDiffCommand: ""
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
+      useConfig: false
+      externalDiffCommand: ""
   commit:
     signOff: false
     autoWrapCommitMessage: true
@@ -222,7 +222,7 @@ keybinding:
     viewResetOptions: D
     fetch: f
     toggleTreeView: '`'
-    openMergeTool: M
+    openMergeOptions: M
     openStatusFilter: <c-b>
     copyFileInfoToClipboard: "y"
   branches:
