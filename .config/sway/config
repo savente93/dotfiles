@@ -133,15 +133,15 @@ for_window [class="Nm-connection-editor"] floating enable
 for_window [window_role="alert"]          floating enable
 
 # make sure apps stay where I like them
-assign [class="org.wezfurlong.wezterm"]         $ws1
+assign [class="org.wezfurlong.wezterm"]          $ws1
 assign [app_id="vivaldi-stable"]                 $ws2
-assign [class="obsidian"]                       $ws3
-assign [class="Microsoft Teams.*"]              $ws4
+assign [class="obsidian"]                        $ws3
+assign [app_id=".*teams_for_linux"]              $ws4
 
-assign [class="discord"]                        $ws7
-assign [class="steam"]                          $ws8
-assign [class="Plex"]                           $ws9
-assign [class="Spotify"]                        $ws10
+assign [class="discord"]                         $ws7
+assign [class="steam"]                           $ws8
+assign [class="Plex"]                            $ws9
+assign [class="Spotify"]                         $ws10
 
 # waybar
 exec_always --no-startup-id sh $HOME/.config/waybar/launch.sh
