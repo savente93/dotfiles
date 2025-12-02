@@ -97,7 +97,7 @@ exec --no-startup-id walker --gapplication-service
 bindsym $mod+d exec --no-startup-id walker applications
 bindsym ctrl+Shift+Delete exec --no-startup-id walker power
 bindsym $mod+equal exec --no-startup-id walker -m "calc"
-bindsym $mod+u exec --no-startup-id walker -m "unicode"
+bindsym $mod+e exec --no-startup-id walker -m "unicode"
 bindsym $mod+m exec --no-startup-id walker -m "symbols"
 bindsym $mod+c exec --no-startup-id walker -m "clipboard"
 
