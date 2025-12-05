@@ -22,7 +22,7 @@ matches:
       - name: week
         type: date
         params:
-          format: "%W"
+          format: "%V"
   - trigger: ";isodate"
     replace: "{{isodate}}"
     vars:
