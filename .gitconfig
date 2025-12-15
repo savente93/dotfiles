@@ -40,3 +40,5 @@
 	unwip = reset HEAD^
 	wip = "!f(){ git add -A && git checkout -b wip-$( date +\"%Y%m%d%H%m\") && git commit -m \"[no ci] WIP\" --no-verify && git push;};f"
 	patch = !git --no-pager diff --no-color
+[fetch]
+	prune = true
