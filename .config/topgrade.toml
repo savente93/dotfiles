@@ -2,8 +2,8 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pip3", "pipx", "conda", "mamba", "julia", "juliaup", "vim"]
-# neovim update causes conficts with lazy lockfile during git pull so I'll do that manually
+disable = ["pip3", "pipx", "conda", "mamba", "julia", "juliaup", "vim", "uv"]
+# neovim update causes conflicts with lazy lockfile during git pull so I'll do that manually
 # the others I need on system for work, but don't really use and don't want to spend time updating
 
 
