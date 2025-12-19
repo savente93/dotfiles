@@ -27,12 +27,12 @@ function install_paru() {
 		# but we want to be able to update itself so we'll
 		# install one version manually, then install paru through that
 		# and remove the version we just installed
-		if [ ! -d paru-bin ]; then
-			git clone https://aur.archlinux.org/paru-bin.git
+		if [ ! -d paru ]; then
+			git clone https://aur.archlinux.org/paru.git
 		fi
-		makepkg -si --noconfirm --dir paru-bin
+		makepkg -si --noconfirm --dir paru
 		paru -S bat --noconfirm
-		rm -rf paru-bin
+		rm -rf paru
 		sudo pacman -Syyu
 	fi
 
