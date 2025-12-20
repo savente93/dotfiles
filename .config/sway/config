@@ -150,8 +150,8 @@ exec_always --no-startup-id sh $HOME/.config/waybar/launch.sh
 output * bg $HOME/Wallpapers/wall.webp  fill
 
 # nightlight
-exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
-bindsym $mod+g exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:2000
+exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:3000
+bindsym $mod+g exec --no-startup-id gammastep -b 1.0:0.7 -l 52.132633:5.291266 -t 6500:3000
 bindsym $mod+Shift+g exec --no-startup-id killall gammastep
 
 # startup apps
