@@ -252,7 +252,7 @@ return {
     { key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
     { key = '0', mods = 'CTRL', action = wezterm.action.ResetFontSize },
     { key = 'z', mods = 'CTRL', action = 'TogglePaneZoomState' },
-    { key = 'p', mods = 'CTRL', action = wezterm.action.CloseCurrentPane { confirm = true } },
+    { key = 'p', mods = 'CTRL|ALT', action = wezterm.action.CloseCurrentPane { confirm = true } },
     { key = 'h', mods = 'CTRL', action = act.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'CTRL', action = act.ActivatePaneDirection 'Down' },
     { key = 'k', mods = 'CTRL', action = act.ActivatePaneDirection 'Up' },
