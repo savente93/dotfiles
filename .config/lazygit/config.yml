@@ -50,8 +50,8 @@ gui:
   showListFooter: true
   showFileTree: true
   showRandomTip: true
-  showCommandLog: false
-  showBottomLine: false
+  showCommandLog: true
+  showBottomLine: true
   showPanelJumps: true
   showIcons: true
   nerdFontsVersion: "3"
