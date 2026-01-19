@@ -133,7 +133,7 @@ function setup_audio() {
 }
 
 function setup_image_processing() {
-	install_tools flatpak org.inkscape.Inkscape org.gnome.Loupe flathub org.kde.krita
+	install_tools flatpak org.inkscape.Inkscape
 
 }
 
@@ -192,7 +192,7 @@ function setup_writing_tools() {
 }
 
 function setup_misc_dev_tools() {
-	install_tools paru github-cli just mise tokei grex scooter fw gittype gitui gitu skim jnv
+	install_tools paru github-cli just tokei fw gittype lazygit
 
 }
 function setup_rust_tools() {
