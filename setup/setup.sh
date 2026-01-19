@@ -183,7 +183,7 @@ function setup_terminal() {
 
 function setup_writing_tools() {
 
-	install_tools paru evince typos-cli typst zola
+	install_tools paru evince typst zola
 
 	#set evince as defatul pdf application
 	xdg-mime default org.gnome.Evince.desktop application/pdf
@@ -220,7 +220,7 @@ function setup_de() {
 	sudo rm /etc/sddm.conf
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
 	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr libqalculate
-	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-privderlist elephant-menus elephant-calc elephant-desktopapplications
+	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-providerlist elephant-menus elephant-calc elephant-desktopapplications
 	sudo systemctl enable --now cronie.service
 	mkdir -p ~/Wallpapers
 	curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
@@ -234,7 +234,13 @@ function setup_dotfiles() {
 		git clone https://github.com/savente93/dotfiles.git ~/dotfiles
 		pushd ~/dotfiles || exit 1
 		git remote set-url origin git@github.com:savente93/dotfiles.git
-		stow .
+		if [ -d ~/.config/sway ]; then
+		    rm -rf ~/.config/sway
+		fi;
+		if [ -d ~/.config/espanso ]; then
+		    rm -rf ~/.config/espanso
+		fi;
+		stow . || exit 1
 		popd || exit 1
 	fi
 }
@@ -268,9 +274,9 @@ function setup_ssh() {
 	ssh-keygen -lf githubKey >>~/.ssh/known_hosts
 	rm githubKey
 
-	ssh-keyscan git.sam-vente.com >personal_git_key
-	ssh-keygen -lf personal_git_key >>~/.ssh/known_hosts
-	rm personal_git_key
+	ssh-keyscan gitlab.com >gitlabKey
+	ssh-keygen -lf gitlabKey >>~/.ssh/known_hosts
+	rm gitlabKey
 
 	# get sshkeys from password manager
 	key_type=$(op item get "$(hostnamectl | grep hostname | awk '{print$3}') [ssh]" --fields "key type")

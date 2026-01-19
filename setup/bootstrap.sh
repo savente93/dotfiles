@@ -4,7 +4,7 @@ timedatectl
 
 # Calculate swap size
 ram=$(free -g | awk '/^Mem:/{print $2}')
-swap_size=$((ram + 2)) # enough for hybernate plus some change
+swap_size=$((ram + 2)) # enough for hibernate plus some change
 
 # Create partition table
 echo "label: gpt" | sfdisk /dev/nvme0n1
@@ -27,7 +27,7 @@ mount /dev/nvme0n1p3 /mnt
 mount --mkdir /dev/nvme0n1p1 /mnt/boot
 swapon /dev/nvme0n1p2
 
-#insalling packages
+#installing packages
 #update mirror list
 reflector
 

@@ -1,4 +1,4 @@
 [favorites.rust]
-description = "New rust project with my prefered setups"
+description = "New rust project with my preferred setups"
 git         = "https://github.com/savente93/rust-template"
 values      = { handle = "savente93", include_bin = true, include_bench = false }
