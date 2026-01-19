@@ -1,6 +1,0 @@
-[tools]
-hugo = "latest"
-zola = "latest"
-
-[settings]
-idiomatic_version_file_enable_tools = []
