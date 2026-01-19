@@ -234,6 +234,9 @@ function setup_dotfiles() {
 		git clone https://github.com/savente93/dotfiles.git ~/dotfiles
 		pushd ~/dotfiles || exit 1
 		git remote set-url origin git@github.com:savente93/dotfiles.git
+		# stow will stumble if these already exist which they probably will
+		rm -f ~/.bashrc
+
 		if [ -d ~/.config/sway ]; then
 		    rm -rf ~/.config/sway
 		fi;
