@@ -216,6 +216,18 @@ function setup_fonts() {
 	curl -Ls -c -o "$HOME/.local/share/fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf" https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/EBGaramond-Italic%5Bwght%5D.ttf
 }
 
+function install_sdd_theme() {
+    # unzip to extract theme, rest are theme dependencies
+    install_tools paru unzip  qt6-svg qt6-declarative qt5-quickcontrols2
+    curl -LsSf https://github.com/catppuccin/sddm/releases/download/v1.1.2/catppuccin-macchiato-mauve-sddm.zip -o catppuccin.zip
+
+    unzip catppuccin.zip
+    sudo mv -v catppuccin-macchiato-mauve /usr/share/sddm/themes
+    rm catppuccin.zip
+
+}
+
+
 function setup_de() {
 	mkdir -p ~/Wallpapers
 	if [ ! -f ~/Wallpapers/wall.webp ]; then
@@ -228,12 +240,16 @@ function setup_de() {
 	sudo rm -f /etc/sddm.conf
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
 
-	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr libqalculate
+	install_sdd_theme
+
+	install_tools paru brightnessctl cronie gammastep grim sddm slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr libqalculate 
+
 	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-providerlist elephant-menus elephant-calc elephant-desktopapplications
 
 	sudo systemctl enable --now cronie.service
 
 }
+
 
 function setup_dotfiles() {
 	install_tools paru stow
