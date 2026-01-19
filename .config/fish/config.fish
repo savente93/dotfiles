@@ -59,4 +59,3 @@ if status is-interactive
     set -g fish_key_bindings fish_vi_key_bindings
 end
 
-/home/sam/.local/bin/mise activate fish | source # added by https://mise.run/fish
