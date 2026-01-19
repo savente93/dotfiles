@@ -168,7 +168,7 @@ function setup_terminal() {
 	setup_wezterm
 
 	install_tools pixi pre-commit
-	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi neovim
+	install_tools paru dust eza fd lazygit ripgrep starship topgrade-bin zoxide tz yazi neovim git-delta
 
 	# don't want fish to start when we install it so it get's handled separately
 	if ! command -v fish &>/dev/null; then
@@ -224,6 +224,7 @@ function setup_de() {
 	if [ ! -f ~/Wallpapers/locked.png ]; then
 	    curl -Ls https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
 	fi
+
 	sudo rm -f /etc/sddm.conf
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
 
@@ -240,7 +241,8 @@ function setup_dotfiles() {
 		git clone https://github.com/savente93/dotfiles.git ~/dotfiles
 		pushd ~/dotfiles || exit 1
 		git remote set-url origin git@github.com:savente93/dotfiles.git
-		# stow will stumble if these already exist which they probably will
+
+		# just let stow assume ownership of everything
 		stow --adopt *
 		git restore .
 
