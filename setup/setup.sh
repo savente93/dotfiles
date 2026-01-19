@@ -217,14 +217,20 @@ function setup_fonts() {
 }
 
 function setup_de() {
-	sudo rm /etc/sddm.conf
+	mkdir -p ~/Wallpapers
+	if [ ! -f ~/Wallpapers/wall.webp ]; then
+	    curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
+	fi 
+	if [ ! -f ~/Wallpapers/locked.png ]; then
+	    curl -Ls https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
+	fi
+	sudo rm -f /etc/sddm.conf
 	sudo ln -s ~/dotfiles/sddm.conf /etc/sddm.conf
+
 	install_tools paru brightnessctl cronie gammastep grim sddm sddm-catppuccin-git slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal thunar xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr libqalculate
 	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-providerlist elephant-menus elephant-calc elephant-desktopapplications
+
 	sudo systemctl enable --now cronie.service
-	mkdir -p ~/Wallpapers
-	curl -Ls https://raw.githubusercontent.com/gh0stzk/dotfiles/master/config/bspwm/rices/andrea/walls/wall-01.webp -o ~/Wallpapers/wall.webp
-	curl -Ls https://wallpapercave.com/wp/wp2639448.png -o ~/Wallpapers/locked.png
 
 }
 
@@ -235,15 +241,9 @@ function setup_dotfiles() {
 		pushd ~/dotfiles || exit 1
 		git remote set-url origin git@github.com:savente93/dotfiles.git
 		# stow will stumble if these already exist which they probably will
-		rm -f ~/.bashrc
+		stow --adopt *
+		git restore .
 
-		if [ -d ~/.config/sway ]; then
-		    rm -rf ~/.config/sway
-		fi;
-		if [ -d ~/.config/espanso ]; then
-		    rm -rf ~/.config/espanso
-		fi;
-		stow . || exit 1
 		popd || exit 1
 	fi
 }
