@@ -183,7 +183,7 @@ function setup_terminal() {
 
 function setup_writing_tools() {
 
-	install_tools paru evince typst zola
+	install_tools paru evince typst zola obsidian
 
 	#set evince as defatul pdf application
 	xdg-mime default org.gnome.Evince.desktop application/pdf
