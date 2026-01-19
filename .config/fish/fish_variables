@@ -1,7 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR EDITOR:helix
-SETUVAR --path HELIX_CONFIG_PATH:/home/sam/Documents/dotfiles/helix/config\x2etoml
+SETUVAR EDITOR:nvim
 SETUVAR TZ_LIST:Europe/Amsterdam\x2cHome\x3bAmerica/Chicago\x2cWrezinsky\x3bAmerica/New_York\x2cKelly\x3bEurope/London\x2cAndy\x3bEurope/London\x2cJess
 SETUVAR __fish_initialized:4300
 SETUVAR fish_greeting:\x1d

@@ -16,9 +16,6 @@ if status is-interactive
     abbr --add up topgrade -y --skip-notify
     abbr --add gp git push
 
-    # root doesn't have my nice helix config
-    abbr --add shx sudo hx --config $HELIX_CONFIG_PATH
-
     #files
     abbr --add ls eza
     abbr --add la eza -lah
@@ -58,8 +55,6 @@ if status is-interactive
     # work
     abbr --add pt pixi run -e default test-lf
     abbr --add ptt pixi run -e default test
-    abbr --add pe pixi run -e default helix .
-    abbr --add pi pixi run -e default ipython
 
     set -g fish_key_bindings fish_vi_key_bindings
 end
