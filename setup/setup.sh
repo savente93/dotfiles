@@ -219,11 +219,13 @@ function setup_fonts() {
 function install_sdd_theme() {
     # unzip to extract theme, rest are theme dependencies
     install_tools paru unzip  qt6-svg qt6-declarative qt5-quickcontrols2
-    curl -LsSf https://github.com/catppuccin/sddm/releases/download/v1.1.2/catppuccin-macchiato-mauve-sddm.zip -o catppuccin.zip
+    if [! -d /usr/share/sddm/themes/catppuccin-macchiato-mauve/ ]; then
+	curl -LsSf https://github.com/catppuccin/sddm/releases/download/v1.1.2/catppuccin-macchiato-mauve-sddm.zip -o catppuccin.zip
 
-    unzip catppuccin.zip
-    sudo mv -v catppuccin-macchiato-mauve /usr/share/sddm/themes
-    rm catppuccin.zip
+	unzip catppuccin.zip
+	sudo mv -v catppuccin-macchiato-mauve /usr/share/sddm/themes
+	rm catppuccin.zip
+    fi 
 
 }
 
