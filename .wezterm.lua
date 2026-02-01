@@ -74,13 +74,7 @@ function Spawn_with_title(win, cwd, name, setup_workspace_layout)
   tab:set_title(name)
   if setup_workspace_layout then
     local editor_pane = nil
-    if Is_pixi_project(cwd) then
-      editor_pane = pane:split { args = { Pixi, 'run', Editor }, cwd = cwd, direction = 'Left' }
-    elseif Is_UV_project(cwd) then
-      editor_pane = pane:split { args = { Uv, 'run', Editor }, cwd = cwd, direction = 'Left' }
-    else
-      editor_pane = pane:split { args = { Editor }, cwd = cwd, direction = 'Left' }
-    end
+    editor_pane = pane:split { args = { Editor }, cwd = cwd, direction = 'Left' }
 
     win:gui_window():perform_action(act.ActivatePaneDirection 'Left', editor_pane)
     win:gui_window():perform_action(act.SetPaneZoomState(true), editor_pane)
