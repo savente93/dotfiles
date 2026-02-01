@@ -17,14 +17,7 @@ return {
       tabline = {
 
         lualine_b = {
-          {
-            'buffers',
-            show_filename_only = false,
-            symbols = {
-              alternate_file = '',
-              directory = '',
-            },
-          },
+          { 'filename', path = 1 },
         },
       },
     }
