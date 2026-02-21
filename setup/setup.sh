@@ -246,7 +246,7 @@ function setup_de() {
 
 	install_tools paru brightnessctl cronie gammastep grim sddm slurp swappy swaybg swayidle swaylock waybar webp-pixbuf-loader xdg-desktop-portal xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal-wlr libqalculate 
 
-	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-providerlist elephant-menus elephant-calc elephant-desktopapplications
+	install_tools paru walker elephant elephant-symbols elephant-unicode elephant-providerlist elephant-menus elephant-calc elephant-desktopapplications mako
 
 	sudo systemctl enable --now cronie.service
 
