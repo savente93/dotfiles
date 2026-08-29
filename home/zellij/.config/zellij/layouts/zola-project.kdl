@@ -11,7 +11,7 @@ layout {
 	}
 	pane name="zola"{
 	    command "zola" 
-	    args "serve"
+	    args "serve" "--drafts"
 	}
     }
 
