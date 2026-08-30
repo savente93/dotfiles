@@ -161,15 +161,21 @@ function setup_streaming_tools() {
 	install_tools paru firebot
 	xdg-open https://olmewe.itch.io/veadotube-mini
 	read -r -p "download veadotube mini then press enter" -s -n1 </dev/tty
-	mkdir -p "$HOME"/projects/streaming/{assets,plugins}
+	mkdir -p "$HOME"/projects/streaming/{assets,plugins,vods}
 	unzip "$HOME/Downloads/veadotube-mini-linux-x64.zip" -d "$HOME/projects/streaming/plugins/veadotube-mini"
 	pushd /usr/bin/
-	sudo ln -s "$HOME/projects/streaming/plugins/veadotube-mini/veadotube-mini" veadotube-mini
+	sudo ln -s "$HOME/projects/streaming/plugins/veadotube/veadotube-mini" veadotube-mini
 	popd || 1
 
 	xdg-open https://vgen.co/mielzy/product/slime2-angled-user-rectangle-chat-/272f29c8-7388-4df9-b0e5-b6ea20e40842
 	read -r -p "download slime2 then press enter" -s -n1 </dev/tty
 
+	pushd ~/projects/streaming/
+	git clone https://gitlab.com/savente93/streaming-configs.git configs
+	pushd configs 
+	stow * -t ~ --adopt
+	popd 
+	popd
 }
 
 function setup_writing_tools() {
